@@ -1,0 +1,36 @@
+{
+  "name": "python-parser-ts",
+  "version": "1.0.0",
+  "description": "A Parser written in TypeScript built to handle Python 3.11 grammar and all strict subsets",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samfolo/python-parser-ts.git"
+  },
+  "keywords": [
+    "parser",
+    "python",
+    "typescript",
+    "tokeniser",
+    "ast",
+    "please",
+    "bazel",
+    "blaze"
+  ],
+  "author": "Sam Folorunsho",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/samfolo/python-parser-ts/issues"
+  },
+  "homepage": "https://github.com/samfolo/python-parser-ts#readme",
+  "dependencies": {
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.4",
+    "jest": "^29.6.4"
+  }
+}
