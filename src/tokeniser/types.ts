@@ -1,21 +1,13 @@
+import {ValuesOf} from '../types';
 import {AUGASSIGN, BOOLEANS, DELIMITERS, KEYWORDS, MISCELLANEOUS, OPERATORS} from './tokens';
 
 export namespace Token {
   export type KnownType =
-    // Keywords
     | keyof typeof KEYWORDS
-
-    // Operators
     | keyof typeof OPERATORS
     | keyof typeof AUGASSIGN
-
-    // Delimiters
     | keyof typeof DELIMITERS
-
-    // Miscellaneous
     | keyof typeof MISCELLANEOUS
-
-    // Booleans
     | keyof typeof BOOLEANS;
 
   export type LiteralType =
@@ -44,12 +36,12 @@ export namespace Token {
   export type Type = KnownType | LiteralType;
 
   export namespace KnownValue {
-    export type AugAssign = (typeof AUGASSIGN)[keyof typeof AUGASSIGN];
-    export type Boolean = (typeof BOOLEANS)[keyof typeof BOOLEANS];
-    export type Delimiter = (typeof DELIMITERS)[keyof typeof DELIMITERS];
-    export type Keyword = (typeof KEYWORDS)[keyof typeof KEYWORDS];
-    export type Miscellaneous = (typeof MISCELLANEOUS)[keyof typeof MISCELLANEOUS];
-    export type Operator = (typeof OPERATORS)[keyof typeof OPERATORS];
+    export type AugAssign = ValuesOf<typeof AUGASSIGN>;
+    export type Boolean = ValuesOf<typeof BOOLEANS>;
+    export type Delimiter = ValuesOf<typeof DELIMITERS>;
+    export type Keyword = ValuesOf<typeof KEYWORDS>;
+    export type Miscellaneous = ValuesOf<typeof MISCELLANEOUS>;
+    export type Operator = ValuesOf<typeof OPERATORS>;
   }
 
   export type KnownValue =
@@ -71,8 +63,6 @@ export namespace Token {
 }
 
 interface TokenBase {
-  type: Token.Type;
-  value: string | Token.KnownValue;
   startPosition: Token.Position;
   endPosition: Token.Position;
   columnOffset: number;
@@ -81,12 +71,12 @@ interface TokenBase {
 
 interface KnownToken extends TokenBase {
   type: Token.KnownType;
-  value: string | Token.KnownValue;
+  value: Token.KnownValue;
 }
 
 interface LiteralToken extends TokenBase {
   type: Token.LiteralType;
-  value: string | Token.LiteralValue;
+  value: Token.LiteralValue;
 }
 
 export type Token = KnownToken | LiteralToken;
