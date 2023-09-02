@@ -1,3 +1,3 @@
 export * from './tokens';
-export * from './types';
-export {} from './tokenise';
+export type {Token} from './types';
+export {tokenise} from './tokenise';
