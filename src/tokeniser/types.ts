@@ -62,21 +62,11 @@ export namespace Token {
   }
 }
 
-interface TokenBase {
-  startPosition: Token.Position;
-  endPosition: Token.Position;
-  columnOffset: number;
-  lineNumber: number;
+export interface Token {
+  type: Token.Type;
+  value: Token.Value;
+  startPos: Token.Position;
+  endPos: Token.Position;
+  colOffset: number;
+  lineNo: number;
 }
-
-interface KnownToken extends TokenBase {
-  type: Token.KnownType;
-  value: Token.KnownValue;
-}
-
-interface LiteralToken extends TokenBase {
-  type: Token.LiteralType;
-  value: Token.LiteralValue;
-}
-
-export type Token = KnownToken | LiteralToken;

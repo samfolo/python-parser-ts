@@ -1,3 +1,5 @@
+import {Token} from './types';
+
 export const KEYWORDS = {
   FALSE: 'False',
   NONE: 'None',
@@ -82,6 +84,9 @@ export const DELIMITERS = {
   DOT: '.',
   SEMICOLON: ';',
   ASSIGN: '=',
+  SINGLE_QUOTE: "'",
+  DOUBLE_QUOTE: '"',
+  TRIPLE_QUOTE: "'''",
 } as const;
 
 export const AUGASSIGN = {
@@ -103,8 +108,9 @@ export const MISCELLANEOUS = {
   ELLIPSIS: '...',
   ARROW: '->',
   NEWLINE: '\n',
+  ESCAPE: '\\',
   EOF: Symbol('EOF'),
-  INVALID_CHARACTER: Symbol('INVALID_CHARACTER'),
+  INVALID: Symbol('INVALID'),
 } as const;
 
 export const TOKENS = {
@@ -115,3 +121,17 @@ export const TOKENS = {
   ...MISCELLANEOUS,
   ...OPERATORS,
 } as const;
+
+export const createToken = (
+  type: Token.Type,
+  value: Token.Value,
+  startPos: Token.Position,
+  endPos: Token.Position
+): Token => ({
+  type,
+  value,
+  startPos,
+  endPos,
+  lineNo: startPos.line,
+  colOffset: startPos.column,
+});
