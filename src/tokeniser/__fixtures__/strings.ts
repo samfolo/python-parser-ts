@@ -318,4 +318,46 @@ export const STRING_FIXTURES: TestCase[] = [
       },
     ],
   },
+  {
+    input: '""""""',
+    expected: [
+      {
+        type: 'STRING',
+        value: '',
+        startPos: {line: 1, column: 0},
+        endPos: {line: 1, column: 6},
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'EOF',
+        value: TOKENS.EOF,
+        startPos: {line: 1, column: 6},
+        endPos: {line: 1, column: 6},
+        lineNo: 1,
+        colOffset: 6,
+      },
+    ],
+  },
+  {
+    input: "''''''",
+    expected: [
+      {
+        type: 'STRING',
+        value: '',
+        startPos: {line: 1, column: 0},
+        endPos: {line: 1, column: 6},
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'EOF',
+        value: TOKENS.EOF,
+        startPos: {line: 1, column: 6},
+        endPos: {line: 1, column: 6},
+        lineNo: 1,
+        colOffset: 6,
+      },
+    ],
+  },
 ];

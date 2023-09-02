@@ -56,7 +56,7 @@ export const handleString: Cursor.Action<Token> = (cursor) => {
   return createToken('STRING', value, startPos, cursor.endPos());
 };
 
-const isEndOfDocstringValue =
+const isStillWithinDocstringValue =
   (quoteType: Token.Value): Cursor.Action<boolean> =>
   (cursor) =>
     (cursor.peekBack() === TOKENS.ESCAPE && cursor.peek() === quoteType) ||
@@ -72,6 +72,13 @@ const handleDocString: Cursor.Action<Token> = (cursor) => {
   cursor.consume();
   cursor.consume();
 
+  if (cursor.current() === quoteType && cursor.current() === cursor.peek() && cursor.peek() === cursor.peek(2)) {
+    cursor.consume();
+    cursor.consume();
+
+    return createToken('STRING', '', startPos, cursor.endPos());
+  }
+
   if (cursor.current() === TOKENS.ESCAPE) {
     if (cursor.isEndOfFile()) {
       return createToken('INVALID', cursor.value(), startPos, cursor.endPos());
@@ -79,7 +86,7 @@ const handleDocString: Cursor.Action<Token> = (cursor) => {
     cursor.push();
   }
 
-  while (cursor.act(isEndOfDocstringValue(quoteType))) {
+  while (cursor.act(isStillWithinDocstringValue(quoteType))) {
     if (cursor.isEndOfFile()) {
       return createToken('INVALID', cursor.value(), startPos, cursor.endPos());
     }
