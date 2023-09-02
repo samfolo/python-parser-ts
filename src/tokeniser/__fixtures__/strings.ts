@@ -8,7 +8,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: 'Hello',
+        value: '"Hello"',
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 7},
         lineNo: 1,
@@ -29,7 +29,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: 'Hello world',
+        value: '"Hello world"',
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 13},
         lineNo: 1,
@@ -50,7 +50,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: 'Hi',
+        value: "'Hi'",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 4},
         lineNo: 1,
@@ -71,7 +71,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: 'Quick brown fox',
+        value: "'Quick brown fox'",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 17},
         lineNo: 1,
@@ -92,7 +92,49 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '\\"',
+        value: '"\\""',
+        startPos: {line: 1, column: 0},
+        endPos: {line: 1, column: 4},
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'EOF',
+        value: TOKENS.EOF,
+        startPos: {line: 1, column: 4},
+        endPos: {line: 1, column: 4},
+        lineNo: 1,
+        colOffset: 4,
+      },
+    ],
+  },
+  {
+    input: '"\\\\"',
+    expected: [
+      {
+        type: 'STRING',
+        value: '"\\\\"',
+        startPos: {line: 1, column: 0},
+        endPos: {line: 1, column: 4},
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'EOF',
+        value: TOKENS.EOF,
+        startPos: {line: 1, column: 4},
+        endPos: {line: 1, column: 4},
+        lineNo: 1,
+        colOffset: 4,
+      },
+    ],
+  },
+  {
+    input: "'\\\\'",
+    expected: [
+      {
+        type: 'STRING',
+        value: "'\\\\'",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 4},
         lineNo: 1,
@@ -113,7 +155,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: "\\'",
+        value: "'\\''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 4},
         lineNo: 1,
@@ -134,7 +176,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '\\t\\r',
+        value: '"\\t\\r"',
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 6},
         lineNo: 1,
@@ -155,7 +197,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '\\t\\"\\\0xa',
+        value: "'\\t\\\"\\\0xa'",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -176,7 +218,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: "\\'\\'\\'",
+        value: "'\\'\\'\\''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 8},
         lineNo: 1,
@@ -197,7 +239,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: 'doctsring',
+        value: "'''doctsring'''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 15},
         lineNo: 1,
@@ -218,7 +260,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '\\t\\b',
+        value: "'''\\t\\b'''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -239,7 +281,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: "\\'",
+        value: "'''\\''''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 8},
         lineNo: 1,
@@ -260,7 +302,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: "\\t\\'",
+        value: "'''\\t\\''''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -281,7 +323,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '\\t\\"',
+        value: '"""\\t\\""""',
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -302,7 +344,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: 'Hi " there "" stranger \' :) \'\'""\'',
+        value: '"""Hi " there "" stranger \' :) \'\'""\'"""',
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 39},
         lineNo: 1,
@@ -323,7 +365,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '',
+        value: '""""""',
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 6},
         lineNo: 1,
@@ -344,7 +386,7 @@ export const STRING_FIXTURES: TestCase[] = [
     expected: [
       {
         type: 'STRING',
-        value: '',
+        value: "''''''",
         startPos: {line: 1, column: 0},
         endPos: {line: 1, column: 6},
         lineNo: 1,
@@ -357,6 +399,58 @@ export const STRING_FIXTURES: TestCase[] = [
         endPos: {line: 1, column: 6},
         lineNo: 1,
         colOffset: 6,
+      },
+    ],
+  },
+  {
+    input: `'''
+This is a multiline string
+'''`,
+    expected: [
+      {
+        type: 'STRING',
+        value: `'''
+This is a multiline string
+'''`,
+        startPos: {line: 1, column: 0},
+        endPos: {line: 1, column: 34},
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'EOF',
+        value: TOKENS.EOF,
+        startPos: {line: 1, column: 34},
+        endPos: {line: 1, column: 34},
+        lineNo: 1,
+        colOffset: 34,
+      },
+    ],
+  },
+  {
+    input: `"""
+
+
+"""`,
+    expected: [
+      {
+        type: 'STRING',
+        value: `"""
+
+
+"""`,
+        startPos: {line: 1, column: 0},
+        endPos: {line: 1, column: 9},
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'EOF',
+        value: TOKENS.EOF,
+        startPos: {line: 1, column: 9},
+        endPos: {line: 1, column: 9},
+        lineNo: 1,
+        colOffset: 9,
       },
     ],
   },

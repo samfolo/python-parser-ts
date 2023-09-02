@@ -10,7 +10,7 @@ export interface Cursor {
   peek: (offset?: number) => Token.Value;
   peekBack: (offset?: number) => Token.Value;
   consume: () => void;
-  value: () => Token.Value;
+  value: () => string;
   done: () => boolean;
   isEndOfFile: () => boolean;
   startPos: () => Token.Position;

@@ -25,7 +25,7 @@ export const createCursor = (input: string): Cursor => {
     startColumn = endColumn;
     push();
   };
-  const value = (): Token.Value => input.slice(currentPosition, readPosition);
+  const value = (): string => input.slice(currentPosition, readPosition);
   const done = () => current() === undefined;
   const isEndOfFile = () => peek() === undefined;
   const startPos = (): Token.Position => ({line: startLine, column: startColumn});

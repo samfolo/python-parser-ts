@@ -1,4 +1,13 @@
-import {createCursor, handleIdent, handleNumber, handleString, isDigit, isLetter, isMaybeTaggedString} from './cursor';
+import {
+  createCursor,
+  handleIdent,
+  handleNumber,
+  handleString,
+  handleTaggedString,
+  isDigit,
+  isLetter,
+  isMaybeTaggedString,
+} from './cursor';
 import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
 
@@ -82,8 +91,6 @@ export const tokenise = (input: string): Token[] => {
       case TOKENS.DOT:
       case TOKENS.SEMICOLON:
       case TOKENS.SINGLE_QUOTE:
-        tokens.push(cursor.act(handleString));
-        break;
       case TOKENS.DOUBLE_QUOTE:
         tokens.push(cursor.act(handleString));
         break;
@@ -112,7 +119,10 @@ export const tokenise = (input: string): Token[] => {
       default: {
         if (isLetter(cursor.current())) {
           if (isMaybeTaggedString(cursor.current())) {
-            break;
+            if (cursor.peek() === TOKENS.SINGLE_QUOTE || cursor.peek() === TOKENS.DOUBLE_QUOTE) {
+              tokens.push(cursor.act(handleTaggedString));
+              break;
+            }
           }
 
           tokens.push(cursor.act(handleIdent));

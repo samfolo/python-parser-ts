@@ -1,6 +1,6 @@
 import {tokenise} from './tokenise';
 import {TOKENS} from './tokens';
-import {IDENT_FIXTURES, NUMBER_FIXTURES, STRING_FIXTURES, TestCase} from './__fixtures__';
+import {IDENT_FIXTURES, NUMBER_FIXTURES, STRING_FIXTURES, TAGGED_STRING_FIXTURES, TestCase} from './__fixtures__';
 
 describe('tokenise', () => {
   it.each<TestCase>([
@@ -20,6 +20,7 @@ describe('tokenise', () => {
     ...IDENT_FIXTURES,
     ...NUMBER_FIXTURES,
     ...STRING_FIXTURES,
+    ...TAGGED_STRING_FIXTURES,
     // {input: '{}', expected: []},
     // {input: '[]', expected: []},
     // {input: '', expected: []},
