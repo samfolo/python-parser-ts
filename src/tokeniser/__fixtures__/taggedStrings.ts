@@ -203,23 +203,33 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     ],
   },
   {
-    input: 'f"I weigh {weight.to_kg() * 7} kilograms"',
+    input: `f"""I weigh 
+{weight.to_kg() * 7} kilograms as
+
+\nof {
+    date.now().minus(hours=2).to_iso_string()
+}"""`,
     expected: [
       {
         type: 'STRING',
-        value: 'f"I weigh {weight.to_kg() * 7} kilograms"',
+        value: `f"""I weigh 
+{weight.to_kg() * 7} kilograms as
+
+\nof {
+    date.now().minus(hours=2).to_iso_string()
+}"""`,
         startPos: {line: 1, column: 0},
-        endPos: {line: 1, column: 41},
+        endPos: {line: 1, column: 104},
         lineNo: 1,
         colOffset: 0,
       },
       {
         type: 'EOF',
         value: TOKENS.EOF,
-        startPos: {line: 1, column: 41},
-        endPos: {line: 1, column: 41},
+        startPos: {line: 1, column: 104},
+        endPos: {line: 1, column: 104},
         lineNo: 1,
-        colOffset: 41,
+        colOffset: 104,
       },
     ],
   },
