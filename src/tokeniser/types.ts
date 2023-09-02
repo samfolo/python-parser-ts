@@ -12,7 +12,7 @@ export namespace Token {
 
   export type LiteralType =
     // Literals
-    | 'INTEGER'
+    | 'NUMBER'
     | 'FLOAT'
     | 'COMPLEX'
     | 'STRING'

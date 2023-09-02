@@ -90,9 +90,9 @@ export const DELIMITERS = {
 } as const;
 
 export const AUGASSIGN = {
-  PLUS_ASSIGN: '+=',
-  MINUS_ASSIGN: '-=',
-  MULT_ASSIGN: '*=',
+  SUM_ASSIGN: '+=',
+  SUB_ASSIGN: '-=',
+  MUL_ASSIGN: '*=',
   DIV_ASSIGN: '/=',
   MOD_ASSIGN: '%=',
   AND_ASSIGN: '&=',
@@ -105,12 +105,14 @@ export const AUGASSIGN = {
 } as const;
 
 export const MISCELLANEOUS = {
+  WHITESPACE: ' ',
   ELLIPSIS: '...',
   ARROW: '->',
+  UNDERSCORE: '_',
   NEWLINE: '\n',
   ESCAPE: '\\',
-  EOF: Symbol('EOF'),
-  INVALID: Symbol('INVALID'),
+  EOF: '<EOF>',
+  INVALID: '<INVALID>',
 } as const;
 
 export const TOKENS = {

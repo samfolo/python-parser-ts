@@ -1,13 +1,5 @@
-import {
-  createCursor,
-  handleIdent,
-  handleNumber,
-  handleString,
-  handleTaggedString,
-  isDigit,
-  isLetter,
-  isMaybeTaggedString,
-} from './cursor';
+import {createCursor, handleLiteral, handleOperator, handleString} from './cursor';
+import {handleWhitespace} from './cursor/actions/whitespace';
 import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
 
@@ -17,69 +9,63 @@ export const tokenise = (input: string): Token[] => {
 
   while (!cursor.done()) {
     switch (cursor.current()) {
-      case TOKENS.FALSE:
-      case TOKENS.NONE:
-      case TOKENS.TRUE:
-      case TOKENS.AND:
-      case TOKENS.AS:
-      case TOKENS.ASSERT:
-      case TOKENS.BREAK:
-      case TOKENS.CLASS:
-      case TOKENS.CONTINUE:
-      case TOKENS.DEF:
-      case TOKENS.DEL:
-      case TOKENS.ELIF:
-      case TOKENS.ELSE:
-      case TOKENS.EXCEPT:
-      case TOKENS.FINALLY:
-      case TOKENS.FOR:
-      case TOKENS.FROM:
-      case TOKENS.GLOBAL:
-      case TOKENS.IF:
-      case TOKENS.IMPORT:
-      case TOKENS.IN:
-      case TOKENS.IS:
-      case TOKENS.LAMBDA:
-      case TOKENS.NONLOCAL:
-      case TOKENS.NOT:
-      case TOKENS.OR:
-      case TOKENS.PASS:
-      case TOKENS.RAISE:
-      case TOKENS.RETURN:
-      case TOKENS.TRY:
-      case TOKENS.WHILE:
-      case TOKENS.WITH:
-      case TOKENS.YIELD:
-      case TOKENS.ASYNC:
-      case TOKENS.AWAIT:
-      case TOKENS.TRUE:
-      case TOKENS.FALSE:
-      case TOKENS.NONE:
+      case TOKENS.FALSE: // compound token
+      case TOKENS.NONE: // compound token
+      case TOKENS.TRUE: // compound token
+      case TOKENS.AND: // compound token
+      case TOKENS.AS: // compound token
+      case TOKENS.ASSERT: // compound token
+      case TOKENS.BREAK: // compound token
+      case TOKENS.CLASS: // compound token
+      case TOKENS.CONTINUE: // compound token
+      case TOKENS.DEF: // compound token
+      case TOKENS.DEL: // compound token
+      case TOKENS.ELIF: // compound token
+      case TOKENS.ELSE: // compound token
+      case TOKENS.EXCEPT: // compound token
+      case TOKENS.FINALLY: // compound token
+      case TOKENS.FOR: // compound token
+      case TOKENS.FROM: // compound token
+      case TOKENS.GLOBAL: // compound token
+      case TOKENS.IF: // compound token
+      case TOKENS.IMPORT: // compound token
+      case TOKENS.IN: // compound token
+      case TOKENS.IS: // compound token
+      case TOKENS.LAMBDA: // compound token
+      case TOKENS.NONLOCAL: // compound token
+      case TOKENS.NOT: // compound token
+      case TOKENS.OR: // compound token
+      case TOKENS.PASS: // compound token
+      case TOKENS.RAISE: // compound token
+      case TOKENS.RETURN: // compound token
+      case TOKENS.TRY: // compound token
+      case TOKENS.WHILE: // compound token
+      case TOKENS.WITH: // compound token
+      case TOKENS.YIELD: // compound token
+      case TOKENS.ASYNC: // compound token
+      case TOKENS.AWAIT: // compound token
+        break;
       case TOKENS.SUM:
       case TOKENS.SUB:
       case TOKENS.MUL:
       case TOKENS.DIV:
-      case TOKENS.FLOOR_DIV:
       case TOKENS.MOD:
       case TOKENS.MATMUL:
+        tokens.push(cursor.act(handleOperator));
+        break;
       case TOKENS.BIT_AND:
       case TOKENS.BIT_OR:
       case TOKENS.BIT_XOR:
-      case TOKENS.LSHIFT:
-      case TOKENS.RSHIFT:
-      case TOKENS.POWER:
-      case TOKENS.EQ:
-      case TOKENS.NOT_EQ:
-      case TOKENS.LEGACY_NOT_EQ:
+      case TOKENS.LSHIFT: // compound token
+      case TOKENS.RSHIFT: // compound token
+      case TOKENS.POWER: // compound token
+      case TOKENS.EQ: // compound token
+      case TOKENS.NOT_EQ: // compound token
+      case TOKENS.LEGACY_NOT_EQ: // compound token
       case TOKENS.LT:
-      case TOKENS.LTE:
+      case TOKENS.LTE: // compound token
       case TOKENS.GT:
-      case TOKENS.GTE:
-      case TOKENS.AND:
-      case TOKENS.OR:
-      case TOKENS.NOT:
-      case TOKENS.IS:
-      case TOKENS.IN:
+      case TOKENS.GTE: // compound token
       case TOKENS.LPAREN:
       case TOKENS.RPAREN:
       case TOKENS.LBRACKET:
@@ -94,49 +80,34 @@ export const tokenise = (input: string): Token[] => {
       case TOKENS.DOUBLE_QUOTE:
         tokens.push(cursor.act(handleString));
         break;
-      case TOKENS.TRIPLE_QUOTE:
-        tokens.push(createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos()));
-        break;
       case TOKENS.ASSIGN:
-      case TOKENS.PLUS_ASSIGN:
-      case TOKENS.MINUS_ASSIGN:
-      case TOKENS.MULT_ASSIGN:
-      case TOKENS.DIV_ASSIGN:
-      case TOKENS.MOD_ASSIGN:
-      case TOKENS.AND_ASSIGN:
-      case TOKENS.OR_ASSIGN:
-      case TOKENS.XOR_ASSIGN:
-      case TOKENS.LSHIFT_ASSIGN:
-      case TOKENS.RSHIFT_ASSIGN:
-      case TOKENS.POWER_ASSIGN:
-      case TOKENS.FLOOR_DIV_ASSIGN:
-      case TOKENS.ELLIPSIS:
-      case TOKENS.ARROW:
+      case TOKENS.SUM_ASSIGN: // compound token
+      case TOKENS.SUB_ASSIGN: // compound token
+      case TOKENS.MUL_ASSIGN: // compound token
+      case TOKENS.DIV_ASSIGN: // compound token
+      case TOKENS.MOD_ASSIGN: // compound token
+      case TOKENS.AND_ASSIGN: // compound token
+      case TOKENS.OR_ASSIGN: // compound token
+      case TOKENS.XOR_ASSIGN: // compound token
+      case TOKENS.LSHIFT_ASSIGN: // compound token
+      case TOKENS.RSHIFT_ASSIGN: // compound token
+      case TOKENS.POWER_ASSIGN: // compound token
+      case TOKENS.FLOOR_DIV_ASSIGN: // compound token
+      case TOKENS.ELLIPSIS: // compound token
+      case TOKENS.ARROW: // compound token
       case TOKENS.NEWLINE:
+      case TOKENS.WHITESPACE:
+        const token = cursor.act(handleWhitespace);
+        if (token) {
+          tokens.push(token);
+        }
+        break;
       case TOKENS.EOF:
       case TOKENS.INVALID:
         break;
-      default: {
-        if (isLetter(cursor.current())) {
-          if (isMaybeTaggedString(cursor.current())) {
-            if (cursor.peek() === TOKENS.SINGLE_QUOTE || cursor.peek() === TOKENS.DOUBLE_QUOTE) {
-              tokens.push(cursor.act(handleTaggedString));
-              break;
-            }
-          }
-
-          tokens.push(cursor.act(handleIdent));
-          break;
-        }
-
-        if (isDigit(cursor.current())) {
-          tokens.push(cursor.act(handleNumber));
-          break;
-        }
-
-        tokens.push(createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos()));
+      default:
+        tokens.push(cursor.act(handleLiteral));
         break;
-      }
     }
 
     cursor.consume();
