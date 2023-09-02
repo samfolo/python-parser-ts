@@ -1,3 +1,4 @@
+import {TOKENS} from '../tokens';
 import {Token} from '../types';
 
 import {Cursor} from './types';
@@ -7,13 +8,17 @@ export const createCursor = (input: string): Cursor => {
   let readPosition = 1;
 
   let startLine = 1;
-  let startColumn = 0;
+  let startColumn = 1;
 
   let endLine = 1;
-  let endColumn = 1;
+  let endColumn = 2;
 
   const current = (): Token.Value => input[currentPosition];
   const push = () => {
+    if (peek() === TOKENS.NEWLINE) {
+      endLine++;
+      endColumn = 0;
+    }
     readPosition++;
     endColumn++;
   };

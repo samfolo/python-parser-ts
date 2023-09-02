@@ -10,10 +10,10 @@ describe('tokenise', () => {
         {
           type: 'EOF',
           value: TOKENS.EOF,
-          startPos: {line: 1, column: 0},
-          endPos: {line: 1, column: 0},
+          startPos: {line: 1, column: 1},
+          endPos: {line: 1, column: 1},
           lineNo: 1,
-          colOffset: 0,
+          colOffset: 1,
         },
       ],
     },
