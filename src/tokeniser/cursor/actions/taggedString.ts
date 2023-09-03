@@ -5,47 +5,29 @@ import {Cursor} from '../types';
 
 import {handleTaggedDocString} from './taggedDocstring';
 
+// Assumes tag is already covered; cursor.peek is set to first quote:
 export const handleTaggedString: Cursor.Action<Token> = (cursor) => {
-  const startPos = cursor.startPos();
-  const tag = String(cursor.current());
-  const quoteType = String(cursor.peek());
+  const quoteType = cursor.peek();
+  cursor.push();
 
-  if (
-    (cursor.peek() === TOKENS.SINGLE_QUOTE || cursor.peek() === TOKENS.DOUBLE_QUOTE) &&
-    cursor.peek() === cursor.peek(2)
-  ) {
-    if (cursor.peek(2) === cursor.peek(3)) {
+  if (cursor.peek() === quoteType) {
+    if (cursor.peek() === cursor.peek(2)) {
       return cursor.act(handleTaggedDocString);
     }
 
-    const token = createToken('STRING', 'STRING', tag + quoteType + quoteType, startPos, cursor.endPos());
-    cursor.consume();
-    return token;
-  }
-
-  cursor.consume();
-  cursor.consume();
-  if (cursor.current() === TOKENS.ESCAPE) {
-    if (cursor.isEndOfFile()) {
-      return createToken('ERRORTOKEN', 'ERRORTOKEN', tag + quoteType + cursor.value(), startPos, cursor.endPos());
-    }
     cursor.push();
+    return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  while (cursor.peek() !== quoteType) {
-    if (cursor.isEndOfFile()) {
-      return createToken('ERRORTOKEN', 'ERRORTOKEN', tag + quoteType + cursor.value(), startPos, cursor.endPos());
-    }
+  while (cursor.peek() !== quoteType || (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE)) {
     cursor.push();
-    if (cursor.current() === TOKENS.ESCAPE) {
-      if (cursor.isEndOfFile()) {
-        return createToken('ERRORTOKEN', 'ERRORTOKEN', tag + quoteType + cursor.value(), startPos, cursor.endPos());
-      }
-      cursor.push();
+
+    if (cursor.isEndOfFile()) {
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
     }
   }
-  const value = cursor.value();
-  cursor.consume();
 
-  return createToken('STRING', 'STRING', tag + quoteType + value + quoteType, startPos, cursor.endPos());
+  cursor.push();
+
+  return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
 };

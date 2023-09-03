@@ -6,9 +6,6 @@ import {Cursor} from '../types';
 import {handleDocString} from './docstring';
 
 export const handleString: Cursor.Action<Token> = (cursor) => {
-  const quoteType = String(cursor.current());
-  const startPos = cursor.startPos();
-
   if (
     (cursor.current() === TOKENS.SINGLE_QUOTE || cursor.current() === TOKENS.DOUBLE_QUOTE) &&
     cursor.current() === cursor.peek()
@@ -17,32 +14,22 @@ export const handleString: Cursor.Action<Token> = (cursor) => {
       return cursor.act(handleDocString);
     }
 
-    cursor.consume();
-    return createToken('STRING', 'STRING', quoteType + quoteType, startPos, cursor.endPos());
-  }
-
-  cursor.consume();
-  if (cursor.current() === TOKENS.ESCAPE) {
-    if (cursor.isEndOfFile()) {
-      return createToken('ERRORTOKEN', 'ERRORTOKEN', quoteType + cursor.value(), startPos, cursor.endPos());
-    }
     cursor.push();
+    return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  while (cursor.peek() !== quoteType) {
-    if (cursor.isEndOfFile()) {
-      return createToken('ERRORTOKEN', 'ERRORTOKEN', quoteType + cursor.value(), startPos, cursor.endPos());
-    }
+  while (
+    cursor.peek() !== cursor.current() ||
+    (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE)
+  ) {
     cursor.push();
-    if (cursor.current() === TOKENS.ESCAPE) {
-      if (cursor.isEndOfFile()) {
-        return createToken('ERRORTOKEN', 'ERRORTOKEN', quoteType + cursor.value(), startPos, cursor.endPos());
-      }
-      cursor.push();
+
+    if (cursor.isEndOfFile()) {
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
     }
   }
-  const value = cursor.value();
-  cursor.consume();
 
-  return createToken('STRING', 'STRING', quoteType + value + quoteType, startPos, cursor.endPos());
+  cursor.push();
+
+  return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
 };
