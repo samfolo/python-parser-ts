@@ -81,7 +81,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '1',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -99,7 +99,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '1',
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 6},
@@ -131,7 +131,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '3',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -149,7 +149,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'FLOAT',
+        kind: 'NUMBER',
         value: '2.5',
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 8},
@@ -181,7 +181,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'FLOAT',
+        kind: 'NUMBER',
         value: '10.',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 4},
@@ -199,7 +199,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '6',
         startPos: {line: 1, column: 7},
         endPos: {line: 1, column: 8},
@@ -217,7 +217,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '12',
         startPos: {line: 1, column: 11},
         endPos: {line: 1, column: 13},
@@ -235,7 +235,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '4',
         startPos: {line: 1, column: 16},
         endPos: {line: 1, column: 17},
@@ -267,7 +267,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '12',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 3},
@@ -294,7 +294,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '1000',
         startPos: {line: 1, column: 9},
         endPos: {line: 1, column: 13},
@@ -312,7 +312,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '6',
         startPos: {line: 1, column: 21},
         endPos: {line: 1, column: 22},

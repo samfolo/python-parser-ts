@@ -17,7 +17,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '0',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -49,7 +49,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '55',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 3},
@@ -81,7 +81,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'FLOAT',
+        kind: 'NUMBER',
         value: '0.',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 3},
@@ -113,7 +113,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'FLOAT',
+        kind: 'NUMBER',
         value: '20.234',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 7},
@@ -145,7 +145,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'BINARY',
+        kind: 'NUMBER',
         value: '0b01101',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 8},
@@ -177,7 +177,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'BINARY',
+        kind: 'NUMBER',
         value: '0B110001',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 9},
@@ -209,7 +209,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'OCTAL',
+        kind: 'NUMBER',
         value: '0o10735251',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -241,7 +241,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'OCTAL',
+        kind: 'NUMBER',
         value: '0O01662',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 8},
@@ -273,7 +273,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'DECIMAL',
+        kind: 'NUMBER',
         value: '1_000_000_000',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 14},
@@ -305,7 +305,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'FLOAT',
+        kind: 'NUMBER',
         value: '1_000.000',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 10},
@@ -337,7 +337,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'FLOAT',
+        kind: 'NUMBER',
         value: '1_0_00.00_0_0_13_1',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 19},
@@ -369,7 +369,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'HEXADECIMAL',
+        kind: 'NUMBER',
         value: '0xFF_AA_bc',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -401,7 +401,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'BINARY',
+        kind: 'NUMBER',
         value: '0B0_1_100_1011',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 15},
@@ -433,7 +433,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'OCTAL',
+        kind: 'NUMBER',
         value: '0o0_7_3456',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -465,7 +465,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'COMPLEX',
+        kind: 'NUMBER',
         value: '1234.567j',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 10},
@@ -497,7 +497,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'COMPLEX',
+        kind: 'NUMBER',
         value: '9004_5_67J',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -529,7 +529,7 @@ export const NUMBER_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
-        kind: 'COMPLEX',
+        kind: 'NUMBER',
         value: '12j',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 4},

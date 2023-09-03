@@ -64,13 +64,13 @@ const handleDecimalNumber: Cursor.Action<Token> = (cursor) => {
     const complexToken = cursor.act(handleComplex);
     return complexToken
       ? complexToken
-      : createToken('NUMBER', 'FLOAT', cursor.value(), cursor.startPos(), cursor.endPos());
+      : createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
   const complexToken = cursor.act(handleComplex);
   return complexToken
     ? complexToken
-    : createToken('NUMBER', 'DECIMAL', cursor.value(), cursor.startPos(), cursor.endPos());
+    : createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
 };
 
 const isBinaryNumber: Cursor.Action<boolean> = (cursor) =>
@@ -95,7 +95,7 @@ const handleBinaryNumber: Cursor.Action<Token> = (cursor) => {
     }
   }
 
-  return createToken('NUMBER', 'BINARY', cursor.value(), cursor.startPos(), cursor.endPos());
+  return createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
 };
 
 const isOctalNumber: Cursor.Action<boolean> = (cursor) =>
@@ -120,7 +120,7 @@ const handleOctalNumber: Cursor.Action<Token> = (cursor) => {
     }
   }
 
-  return createToken('NUMBER', 'OCTAL', cursor.value(), cursor.startPos(), cursor.endPos());
+  return createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
 };
 
 const isHexadecimalNumber: Cursor.Action<boolean> = (cursor) =>
@@ -145,13 +145,13 @@ const handleHexadecimalNumber: Cursor.Action<Token> = (cursor) => {
     }
   }
 
-  return createToken('NUMBER', 'HEXADECIMAL', cursor.value(), cursor.startPos(), cursor.endPos());
+  return createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
 };
 
 const handleComplex: Cursor.Action<Token | null> = (cursor) => {
   if (cursor.peek()?.toLowerCase() === COMPLEX_SUFFIX) {
     cursor.push();
-    return createToken('NUMBER', 'COMPLEX', cursor.value(), cursor.startPos(), cursor.endPos());
+    return createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
   return null;
