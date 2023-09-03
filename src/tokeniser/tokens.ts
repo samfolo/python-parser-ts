@@ -114,6 +114,7 @@ export const MISCELLANEOUS = {
   UNDERSCORE: '_',
   NEWLINE: '\n',
   ESCAPE: '\\',
+  BANG: '!',
   ENDMARKER: '<ENDMARKER>',
   ERRORTOKEN: '<ERRORTOKEN>',
 } as const;

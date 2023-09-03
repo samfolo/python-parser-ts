@@ -99,4 +99,36 @@ export const NAME_FIXTURES: TestCase[] = [
       },
     ],
   },
+  {
+    input: '__main__',
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: '__main__',
+        startPos: {line: 1, column: 1},
+        endPos: {line: 1, column: 9},
+        lineNo: 1,
+        colOffset: 1,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
+        startPos: {line: 1, column: 9},
+        endPos: {line: 1, column: 9},
+        lineNo: 1,
+        colOffset: 9,
+      },
+    ],
+  },
 ];

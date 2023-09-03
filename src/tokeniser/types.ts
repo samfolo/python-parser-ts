@@ -27,6 +27,7 @@ export namespace Token {
     | 'INDENT'
     | 'DEDENT'
     | 'COMMENT'
+    | 'SEMI'
 
     // Errors
     | 'ERRORTOKEN';
