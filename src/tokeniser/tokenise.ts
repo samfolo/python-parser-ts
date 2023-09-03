@@ -1,148 +1,242 @@
-import {
-  createCursor,
-  handleIdent,
-  handleNumber,
-  handleString,
-  handleTaggedString,
-  isDigit,
-  isLetter,
-  isMaybeTaggedString,
-} from './cursor';
+import {createCursor, handleLiteral, handleNumber, handleString, isDigit} from './cursor';
+import {handleWhitespace} from './cursor/actions/whitespace';
 import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
 
 export const tokenise = (input: string): Token[] => {
-  const tokens: Token[] = [];
+  const tokens: Token[] = [
+    {
+      type: 'ENCODING',
+      kind: 'ENCODING',
+      value: 'utf-8',
+      startPos: {line: 0, column: 0},
+      endPos: {line: 0, column: 0},
+      colOffset: 0,
+      lineNo: 0,
+    },
+  ];
   const cursor = createCursor(input);
 
   while (!cursor.done()) {
     switch (cursor.current()) {
-      case TOKENS.FALSE:
-      case TOKENS.NONE:
-      case TOKENS.TRUE:
-      case TOKENS.AND:
-      case TOKENS.AS:
-      case TOKENS.ASSERT:
-      case TOKENS.BREAK:
-      case TOKENS.CLASS:
-      case TOKENS.CONTINUE:
-      case TOKENS.DEF:
-      case TOKENS.DEL:
-      case TOKENS.ELIF:
-      case TOKENS.ELSE:
-      case TOKENS.EXCEPT:
-      case TOKENS.FINALLY:
-      case TOKENS.FOR:
-      case TOKENS.FROM:
-      case TOKENS.GLOBAL:
-      case TOKENS.IF:
-      case TOKENS.IMPORT:
-      case TOKENS.IN:
-      case TOKENS.IS:
-      case TOKENS.LAMBDA:
-      case TOKENS.NONLOCAL:
-      case TOKENS.NOT:
-      case TOKENS.OR:
-      case TOKENS.PASS:
-      case TOKENS.RAISE:
-      case TOKENS.RETURN:
-      case TOKENS.TRY:
-      case TOKENS.WHILE:
-      case TOKENS.WITH:
-      case TOKENS.YIELD:
-      case TOKENS.ASYNC:
-      case TOKENS.AWAIT:
-      case TOKENS.TRUE:
-      case TOKENS.FALSE:
-      case TOKENS.NONE:
-      case TOKENS.SUM:
-      case TOKENS.SUB:
-      case TOKENS.MUL:
-      case TOKENS.DIV:
-      case TOKENS.FLOOR_DIV:
-      case TOKENS.MOD:
-      case TOKENS.MATMUL:
-      case TOKENS.BIT_AND:
-      case TOKENS.BIT_OR:
-      case TOKENS.BIT_XOR:
-      case TOKENS.LSHIFT:
-      case TOKENS.RSHIFT:
-      case TOKENS.POWER:
-      case TOKENS.EQ:
-      case TOKENS.NOT_EQ:
-      case TOKENS.LEGACY_NOT_EQ:
-      case TOKENS.LT:
-      case TOKENS.LTE:
-      case TOKENS.GT:
-      case TOKENS.GTE:
-      case TOKENS.AND:
-      case TOKENS.OR:
-      case TOKENS.NOT:
-      case TOKENS.IS:
-      case TOKENS.IN:
-      case TOKENS.LPAREN:
-      case TOKENS.RPAREN:
-      case TOKENS.LBRACKET:
-      case TOKENS.RBRACKET:
+      case TOKENS.AMPER:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'AMPEREQUAL', TOKENS.AMPEREQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'AMPER', TOKENS.AMPER, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.VBAR:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'VBAREQUAL', TOKENS.VBAREQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'VBAR', TOKENS.VBAR, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.CIRCUMFLEX:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'CIRCUMFLEXEQUAL', TOKENS.CIRCUMFLEXEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'CIRCUMFLEX', TOKENS.CIRCUMFLEX, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.SLASH:
+        if (cursor.peek() === TOKENS.SLASH) {
+          cursor.push();
+          if (cursor.peek() === TOKENS.EQUAL) {
+            cursor.push();
+            tokens.push(
+              createToken('OP', 'DOUBLESLASHEQUAL', TOKENS.DOUBLESLASHEQUAL, cursor.startPos(), cursor.endPos())
+            );
+            break;
+          }
+          tokens.push(createToken('OP', 'DOUBLESLASH', TOKENS.DOUBLESLASH, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'SLASHEQUAL', TOKENS.SLASHEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'SLASH', cursor.current(), cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.GREATER:
+        if (cursor.peek() === TOKENS.GREATER) {
+          cursor.push();
+          if (cursor.peek() === TOKENS.EQUAL) {
+            cursor.push();
+            tokens.push(
+              createToken('OP', 'RIGHTSHIFTEQUAL', TOKENS.RIGHTSHIFTEQUAL, cursor.startPos(), cursor.endPos())
+            );
+            break;
+          }
+          tokens.push(createToken('OP', 'RIGHTSHIFT', TOKENS.RIGHTSHIFT, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'GREATEREQUAL', TOKENS.GREATEREQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'GREATER', TOKENS.GREATER, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.LESS:
+        if (cursor.peek() === TOKENS.LESS) {
+          cursor.push();
+          if (cursor.peek() === TOKENS.EQUAL) {
+            cursor.push();
+            tokens.push(createToken('OP', 'LEFTSHIFTEQUAL', TOKENS.LEFTSHIFTEQUAL, cursor.startPos(), cursor.endPos()));
+            break;
+          }
+          tokens.push(createToken('OP', 'LEFTSHIFT', TOKENS.LEFTSHIFT, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'LESSEQUAL', TOKENS.LESSEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        if (cursor.peek() === TOKENS.GREATER) {
+          cursor.push();
+          tokens.push(createToken('OP', 'LEGACY_NOTEQUAL', TOKENS.LEGACY_NOTEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'LESS', TOKENS.LESS, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.AT:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'ATEQUAL', TOKENS.ATEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'AT', TOKENS.AT, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.PERCENT:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'PERCENTEQUAL', TOKENS.PERCENTEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'PERCENT', TOKENS.PERCENT, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.STAR:
+        if (cursor.peek() === TOKENS.STAR) {
+          cursor.push();
+          if (cursor.peek() === TOKENS.EQUAL) {
+            cursor.push();
+            tokens.push(
+              createToken('OP', 'DOUBLESTAREQUAL', TOKENS.DOUBLESTAREQUAL, cursor.startPos(), cursor.endPos())
+            );
+            break;
+          }
+          tokens.push(createToken('OP', 'DOUBLESTAR', TOKENS.DOUBLESTAR, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'STAREQUAL', TOKENS.STAREQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'STAR', TOKENS.STAR, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.MINUS:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'MINEQUAL', TOKENS.MINEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'MINUS', cursor.current(), cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.PLUS:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'PLUSEQUAL', TOKENS.PLUSEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'PLUS', cursor.current(), cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.BANG:
+        if (cursor.peek() !== TOKENS.EQUAL) {
+          tokens.push(createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        cursor.push();
+        tokens.push(createToken('OP', 'NOTEQUAL', TOKENS.NOTEQUAL, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.LPAR:
+        tokens.push(createToken('OP', 'LPAR', TOKENS.LPAR, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.RPAR:
+        tokens.push(createToken('OP', 'RPAR', TOKENS.RPAR, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.LSQB:
+        tokens.push(createToken('OP', 'LSQB', TOKENS.LSQB, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.RSQB:
+        tokens.push(createToken('OP', 'RSQB', TOKENS.RSQB, cursor.startPos(), cursor.endPos()));
+        break;
       case TOKENS.LBRACE:
+        tokens.push(createToken('OP', 'LBRACE', TOKENS.LBRACE, cursor.startPos(), cursor.endPos()));
+        break;
       case TOKENS.RBRACE:
+        tokens.push(createToken('OP', 'RBRACE', TOKENS.RBRACE, cursor.startPos(), cursor.endPos()));
+        break;
       case TOKENS.COMMA:
+        tokens.push(createToken('OP', 'COMMA', TOKENS.COMMA, cursor.startPos(), cursor.endPos()));
+        break;
       case TOKENS.COLON:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'COLONEQUAL', TOKENS.COLONEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.TILDE:
+        tokens.push(createToken('OP', 'TILDE', TOKENS.TILDE, cursor.startPos(), cursor.endPos()));
+        break;
       case TOKENS.DOT:
-      case TOKENS.SEMICOLON:
+        if (isDigit(cursor.peek())) {
+          cursor.push();
+          tokens.push(cursor.act(handleNumber));
+          break;
+        }
+        tokens.push(createToken('OP', 'DOT', TOKENS.DOT, cursor.startPos(), cursor.endPos()));
+        break;
+      case TOKENS.SEMI:
+        tokens.push(createToken('SEMI', 'SEMI', TOKENS.SEMI, cursor.startPos(), cursor.endPos()));
+        break;
       case TOKENS.SINGLE_QUOTE:
       case TOKENS.DOUBLE_QUOTE:
         tokens.push(cursor.act(handleString));
         break;
-      case TOKENS.TRIPLE_QUOTE:
-        tokens.push(createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos()));
+      case TOKENS.EQUAL:
+        if (cursor.peek() === TOKENS.EQUAL) {
+          cursor.push();
+          tokens.push(createToken('OP', 'EQEQUAL', TOKENS.EQEQUAL, cursor.startPos(), cursor.endPos()));
+          break;
+        }
+        tokens.push(createToken('OP', 'EQUAL', TOKENS.EQUAL, cursor.startPos(), cursor.endPos()));
         break;
-      case TOKENS.ASSIGN:
-      case TOKENS.PLUS_ASSIGN:
-      case TOKENS.MINUS_ASSIGN:
-      case TOKENS.MULT_ASSIGN:
-      case TOKENS.DIV_ASSIGN:
-      case TOKENS.MOD_ASSIGN:
-      case TOKENS.AND_ASSIGN:
-      case TOKENS.OR_ASSIGN:
-      case TOKENS.XOR_ASSIGN:
-      case TOKENS.LSHIFT_ASSIGN:
-      case TOKENS.RSHIFT_ASSIGN:
-      case TOKENS.POWER_ASSIGN:
-      case TOKENS.FLOOR_DIV_ASSIGN:
-      case TOKENS.ELLIPSIS:
-      case TOKENS.ARROW:
       case TOKENS.NEWLINE:
-      case TOKENS.EOF:
-      case TOKENS.INVALID:
-        break;
-      default: {
-        if (isLetter(cursor.current())) {
-          if (isMaybeTaggedString(cursor.current())) {
-            if (cursor.peek() === TOKENS.SINGLE_QUOTE || cursor.peek() === TOKENS.DOUBLE_QUOTE) {
-              tokens.push(cursor.act(handleTaggedString));
-              break;
-            }
-          }
-
-          tokens.push(cursor.act(handleIdent));
-          break;
+      case TOKENS.WHITESPACE:
+        const token = cursor.act(handleWhitespace);
+        if (token) {
+          tokens.push(token);
         }
-
-        if (isDigit(cursor.current())) {
-          tokens.push(cursor.act(handleNumber));
-          break;
-        }
-
-        tokens.push(createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos()));
         break;
-      }
+      default:
+        tokens.push(cursor.act(handleLiteral));
+        break;
     }
 
     cursor.consume();
   }
 
-  tokens.push(createToken('EOF', TOKENS.EOF, cursor.startPos(), cursor.startPos()));
+  tokens.push(createToken('ENDMARKER', 'ENDMARKER', TOKENS.ENDMARKER, cursor.startPos(), cursor.startPos()));
 
   return tokens;
 };

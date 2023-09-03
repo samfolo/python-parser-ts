@@ -1,6 +1,7 @@
 import {Token} from '../types';
 
 export namespace Cursor {
+  export type CurrentScope = 'indented' | 'dedented' | 'stable';
   export type Action<Return = void> = (cursor: Cursor) => Return;
 }
 
@@ -16,4 +17,6 @@ export interface Cursor {
   startPos: () => Token.Position;
   endPos: () => Token.Position;
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
+  cacheScope: (newScope: number) => void;
+  currentScope: (newScope: number) => Cursor.CurrentScope;
 }

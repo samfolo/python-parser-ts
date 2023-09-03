@@ -18,7 +18,7 @@ export const handleTaggedString: Cursor.Action<Token> = (cursor) => {
       return cursor.act(handleTaggedDocString);
     }
 
-    const token = createToken('STRING', tag + quoteType + quoteType, startPos, cursor.endPos());
+    const token = createToken('STRING', 'STRING', tag + quoteType + quoteType, startPos, cursor.endPos());
     cursor.consume();
     return token;
   }
@@ -27,19 +27,19 @@ export const handleTaggedString: Cursor.Action<Token> = (cursor) => {
   cursor.consume();
   if (cursor.current() === TOKENS.ESCAPE) {
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', tag + quoteType + cursor.value(), startPos, cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', tag + quoteType + cursor.value(), startPos, cursor.endPos());
     }
     cursor.push();
   }
 
   while (cursor.peek() !== quoteType) {
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', tag + quoteType + cursor.value(), startPos, cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', tag + quoteType + cursor.value(), startPos, cursor.endPos());
     }
     cursor.push();
     if (cursor.current() === TOKENS.ESCAPE) {
       if (cursor.isEndOfFile()) {
-        return createToken('INVALID', tag + quoteType + cursor.value(), startPos, cursor.endPos());
+        return createToken('ERRORTOKEN', 'ERRORTOKEN', tag + quoteType + cursor.value(), startPos, cursor.endPos());
       }
       cursor.push();
     }
@@ -47,5 +47,5 @@ export const handleTaggedString: Cursor.Action<Token> = (cursor) => {
   const value = cursor.value();
   cursor.consume();
 
-  return createToken('STRING', tag + quoteType + value + quoteType, startPos, cursor.endPos());
+  return createToken('STRING', 'STRING', tag + quoteType + value + quoteType, startPos, cursor.endPos());
 };

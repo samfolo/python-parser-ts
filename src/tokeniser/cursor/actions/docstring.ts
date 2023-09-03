@@ -24,31 +24,31 @@ export const handleDocString: Cursor.Action<Token> = (cursor) => {
     cursor.consume();
     cursor.consume();
 
-    return createToken('STRING', tripleQuote + tripleQuote, startPos, cursor.endPos());
+    return createToken('STRING', 'STRING', tripleQuote + tripleQuote, startPos, cursor.endPos());
   }
 
   if (cursor.current() === TOKENS.ESCAPE) {
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', tripleQuote + cursor.value(), startPos, cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', tripleQuote + cursor.value(), startPos, cursor.endPos());
     }
     cursor.push();
   }
 
   while (cursor.act(isStillWithinDocstringValue(quoteType))) {
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', tripleQuote + cursor.value(), startPos, cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', tripleQuote + cursor.value(), startPos, cursor.endPos());
     }
     cursor.push();
     if (cursor.peek() === TOKENS.ESCAPE) {
       cursor.push();
       if (cursor.isEndOfFile()) {
-        return createToken('INVALID', tripleQuote + cursor.value(), startPos, cursor.endPos());
+        return createToken('ERRORTOKEN', 'ERRORTOKEN', tripleQuote + cursor.value(), startPos, cursor.endPos());
       }
 
       if (cursor.peek() === quoteType) {
         cursor.push();
         if (cursor.isEndOfFile()) {
-          return createToken('INVALID', tripleQuote + cursor.value(), startPos, cursor.endPos());
+          return createToken('ERRORTOKEN', 'ERRORTOKEN', tripleQuote + cursor.value(), startPos, cursor.endPos());
         }
       }
     }
@@ -60,5 +60,5 @@ export const handleDocString: Cursor.Action<Token> = (cursor) => {
   cursor.consume();
   cursor.consume();
 
-  return createToken('STRING', tripleQuote + value + tripleQuote, startPos, cursor.endPos());
+  return createToken('STRING', 'STRING', tripleQuote + value + tripleQuote, startPos, cursor.endPos());
 };

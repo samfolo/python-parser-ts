@@ -7,7 +7,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"Hello"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"Hello"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 8},
@@ -15,8 +25,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 8},
         endPos: {line: 1, column: 8},
         lineNo: 1,
@@ -28,7 +39,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"Hello world"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"Hello world"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 14},
@@ -36,8 +57,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 14},
         endPos: {line: 1, column: 14},
         lineNo: 1,
@@ -49,7 +71,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'Hi'",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'Hi'",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 5},
@@ -57,8 +89,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 5},
         lineNo: 1,
@@ -70,7 +103,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'Quick brown fox'",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'Quick brown fox'",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 18},
@@ -78,8 +121,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 18},
         endPos: {line: 1, column: 18},
         lineNo: 1,
@@ -91,7 +135,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"\\""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"\\""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 5},
@@ -99,8 +153,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 5},
         lineNo: 1,
@@ -112,7 +167,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"\\\\"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"\\\\"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 5},
@@ -120,8 +185,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 5},
         lineNo: 1,
@@ -133,7 +199,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'\\\\'",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'\\\\'",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 5},
@@ -141,8 +217,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 5},
         lineNo: 1,
@@ -154,7 +231,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'\\''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'\\''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 5},
@@ -162,8 +249,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 5},
         lineNo: 1,
@@ -175,7 +263,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"\\t\\r"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"\\t\\r"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 7},
@@ -183,8 +281,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 7},
         endPos: {line: 1, column: 7},
         lineNo: 1,
@@ -196,7 +295,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'\\t\\\"\\\0xa'",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'\\t\\\"\\\0xa'",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -204,8 +313,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 11},
         endPos: {line: 1, column: 11},
         lineNo: 1,
@@ -217,7 +327,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'\\'\\'\\''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'\\'\\'\\''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 9},
@@ -225,8 +345,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 9},
         endPos: {line: 1, column: 9},
         lineNo: 1,
@@ -238,7 +359,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'''doctsring'''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'''doctsring'''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 16},
@@ -246,8 +377,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 16},
         endPos: {line: 1, column: 16},
         lineNo: 1,
@@ -259,7 +391,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'''\\t\\b'''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'''\\t\\b'''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -267,8 +409,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 11},
         endPos: {line: 1, column: 11},
         lineNo: 1,
@@ -280,7 +423,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'''\\''''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'''\\''''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 9},
@@ -288,8 +441,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 9},
         endPos: {line: 1, column: 9},
         lineNo: 1,
@@ -301,7 +455,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "'''\\t\\''''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "'''\\t\\''''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -309,8 +473,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 11},
         endPos: {line: 1, column: 11},
         lineNo: 1,
@@ -322,7 +487,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"""\\t\\""""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"""\\t\\""""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 11},
@@ -330,8 +505,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 11},
         endPos: {line: 1, column: 11},
         lineNo: 1,
@@ -343,7 +519,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '"""Hi " there "" stranger \' :) \'\'""\'"""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '"""Hi " there "" stranger \' :) \'\'""\'"""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 40},
@@ -351,8 +537,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 40},
         endPos: {line: 1, column: 40},
         lineNo: 1,
@@ -364,7 +551,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: '""""""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: '""""""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 7},
@@ -372,8 +569,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 7},
         endPos: {line: 1, column: 7},
         lineNo: 1,
@@ -385,7 +583,17 @@ export const STRING_FIXTURES: TestCase[] = [
     input: "''''''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "''''''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 7},
@@ -393,8 +601,9 @@ export const STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 7},
         endPos: {line: 1, column: 7},
         lineNo: 1,
@@ -408,7 +617,17 @@ This is a multiline string
 '''`,
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: `'''
 This is a multiline string
 '''`,
@@ -418,8 +637,9 @@ This is a multiline string
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 3, column: 4},
         endPos: {line: 3, column: 4},
         lineNo: 3,
@@ -434,7 +654,17 @@ This is a multiline string
 """`,
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: `"""
 
 
@@ -445,8 +675,9 @@ This is a multiline string
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 4, column: 4},
         endPos: {line: 4, column: 4},
         lineNo: 4,

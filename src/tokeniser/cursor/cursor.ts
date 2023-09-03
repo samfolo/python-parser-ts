@@ -13,6 +13,8 @@ export const createCursor = (input: string): Cursor => {
   let endLine = 1;
   let endColumn = 2;
 
+  let prevScope = 0;
+
   const current = (): Token.Value => input[currentPosition];
   const push = () => {
     if (peek() === TOKENS.NEWLINE) {
@@ -35,7 +37,18 @@ export const createCursor = (input: string): Cursor => {
   const isEndOfFile = () => peek() === undefined;
   const startPos = (): Token.Position => ({line: startLine, column: startColumn});
   const endPos = (): Token.Position => ({line: endLine, column: endColumn});
+  const cacheScope = (newScope: number) => (prevScope = newScope);
+  const currentScope = (newScope: number): Cursor.CurrentScope => {
+    if (prevScope > newScope) {
+      return 'dedented';
+    }
 
+    if (prevScope < newScope) {
+      return 'indented';
+    }
+
+    return 'stable';
+  };
   return {
     current,
     push,
@@ -47,6 +60,8 @@ export const createCursor = (input: string): Cursor => {
     isEndOfFile,
     startPos,
     endPos,
+    cacheScope,
+    currentScope,
     act<Return = void>(cb: Cursor.Action<Return>) {
       return cb({...this, act: this.act});
     },
