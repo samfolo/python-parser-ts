@@ -1,10 +1,23 @@
 import {Token} from './types';
 
+const reverseLookup = (lookup: Record<string, string>) =>
+  Object.entries(lookup).reduce<Record<string, string>>((acc, [key, value]) => {
+    acc[value] = key;
+    return acc;
+  }, {});
+
+const KEYWORD_OPERATORS = {
+  AND: 'and',
+  OR: 'or',
+  NOT: 'not',
+  IS: 'is',
+  IN: 'in',
+} as const;
+
 export const KEYWORDS = {
   FALSE: 'False',
   NONE: 'None',
   TRUE: 'True',
-  AND: 'and',
   AS: 'as',
   ASSERT: 'assert',
   BREAK: 'break',
@@ -21,12 +34,8 @@ export const KEYWORDS = {
   GLOBAL: 'global',
   IF: 'if',
   IMPORT: 'import',
-  IN: 'in',
-  IS: 'is',
   LAMBDA: 'lambda',
   NONLOCAL: 'nonlocal',
-  NOT: 'not',
-  OR: 'or',
   PASS: 'pass',
   RAISE: 'raise',
   RETURN: 'return',
@@ -36,6 +45,7 @@ export const KEYWORDS = {
   YIELD: 'yield',
   ASYNC: 'async',
   AWAIT: 'await',
+  ...KEYWORD_OPERATORS,
 } as const;
 
 export const BOOLEANS = {
@@ -66,11 +76,7 @@ export const OPERATORS = {
   LESSEQUAL: '<=',
   GREATER: '>',
   GREATEREQUAL: '>=',
-  AND: 'and',
-  OR: 'or',
-  NOT: 'not',
-  IS: 'is',
-  IN: 'in',
+  ...KEYWORD_OPERATORS,
 } as const;
 
 export const DELIMITERS = {
@@ -115,8 +121,8 @@ export const MISCELLANEOUS = {
   NEWLINE: '\n',
   ESCAPE: '\\',
   BANG: '!',
-  ENDMARKER: '<ENDMARKER>',
-  ERRORTOKEN: '<ERRORTOKEN>',
+  ENDMARKER: '!ENDMARKER',
+  ERRORTOKEN: '!ERRORTOKEN',
 } as const;
 
 export const TOKENS = {
@@ -143,3 +149,10 @@ export const createToken = (
   lineNo: startPos.line,
   colOffset: startPos.column,
 });
+
+const KEYWORD_LOOKUP = reverseLookup(KEYWORDS);
+export const getKeywordKind = (value: string) => (KEYWORD_LOOKUP[value] as Token.Kind) ?? null;
+
+const KEYWORD_OPERATOR_LOOKUP = reverseLookup(KEYWORD_OPERATORS);
+export const getKeywordOperatorKind = (value: string): Token.Kind =>
+  (KEYWORD_OPERATOR_LOOKUP[value] as Token.Kind) ?? null;

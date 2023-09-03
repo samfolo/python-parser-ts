@@ -17,8 +17,10 @@ export namespace Token {
     | 'TYPE_IGNORE'
     | 'N_TOKENS'
     | 'NT_OFFSET'
+    | 'SOFT_KEYWORD'
     | 'OP'
     | 'ENDMARKER'
+    | 'SEMI'
 
     // Whitespace and Comments
     | 'WHITESPACE'
@@ -27,7 +29,6 @@ export namespace Token {
     | 'INDENT'
     | 'DEDENT'
     | 'COMMENT'
-    | 'SEMI'
 
     // Errors
     | 'ERRORTOKEN';
