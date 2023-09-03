@@ -1,4 +1,4 @@
-import {createToken, getKeywordKind, getKeywordOperatorKind, OPERATORS} from '../../tokens';
+import {createToken, getKeywordOperatorKind} from '../../tokens';
 import {Token} from '../../types';
 
 import {Cursor} from '../types';
