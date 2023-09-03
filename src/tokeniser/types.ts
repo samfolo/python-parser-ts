@@ -22,6 +22,7 @@ export namespace Token {
     | 'ENDMARKER'
     | 'SEMI'
     | 'COMMA'
+    | 'ELLIPSIS'
 
     // Whitespace and Comments
     | 'WHITESPACE'

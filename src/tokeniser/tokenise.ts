@@ -148,6 +148,11 @@ export const tokenise = (input: string): Token[] => {
           tokens.push(createToken('OP', 'MINEQUAL', TOKENS.MINEQUAL, cursor.startPos(), cursor.endPos()));
           break;
         }
+        if (cursor.peek() === TOKENS.GREATER) {
+          cursor.push();
+          tokens.push(createToken('OP', 'RARROW', TOKENS.RARROW, cursor.startPos(), cursor.endPos()));
+          break;
+        }
         tokens.push(createToken('OP', 'MINUS', cursor.current(), cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.PLUS:
@@ -202,6 +207,12 @@ export const tokenise = (input: string): Token[] => {
         if (isDigit(cursor.peek())) {
           cursor.push();
           tokens.push(cursor.act(handleNumber));
+          break;
+        }
+        if (cursor.peek() === TOKENS.DOT && cursor.peek(2) === TOKENS.DOT) {
+          cursor.push();
+          cursor.push();
+          tokens.push(createToken('ELLIPSIS', 'ELLIPSIS', TOKENS.ELLIPSIS, cursor.startPos(), cursor.endPos()));
           break;
         }
         tokens.push(createToken('OP', 'DOT', TOKENS.DOT, cursor.startPos(), cursor.endPos()));
