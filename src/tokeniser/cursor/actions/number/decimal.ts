@@ -18,6 +18,11 @@ export const handleDecimalNumber: Cursor.Action<Token> = (cursor) => {
   if (errorToken) return errorToken;
 
   if (cursor.peek() === TOKENS.DOT) {
+    // Guard against numbers beginning with fractional part, e.g. `.5`
+    if (cursor.current() === TOKENS.DOT) {
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+    }
+
     cursor.push();
 
     // Omitted fractional part exponent, e.g. `1.e4`, if exists:

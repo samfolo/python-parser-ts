@@ -11,13 +11,13 @@ export const isHexadecimalNumber: Cursor.Action<boolean> = (cursor) =>
   cursor.value() === NON_DECIMAL_PREFIX && cursor.peek()?.toLowerCase() === HEXADECIMAL_PREFIX;
 
 export const handleHexadecimalNumber: Cursor.Action<Token> = (cursor) => {
-  cursor.push();
-
   if (cursor.peek() === TOKENS.UNDERSCORE) {
     return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  const errorToken = cursor.act(handleHexadecimalPart);
+  let errorToken: Token | null;
+
+  errorToken = cursor.act(handleHexadecimalPart);
   if (errorToken) return errorToken;
 
   if (cursor.peek() === TOKENS.DOT) {
@@ -27,14 +27,12 @@ export const handleHexadecimalNumber: Cursor.Action<Token> = (cursor) => {
       return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
     }
 
-    const errorToken = cursor.act(handleHexadecimalPart);
+    errorToken = cursor.act(handleHexadecimalPart);
     if (errorToken) return errorToken;
-
-    if (cursor.peek()?.toLowerCase() === HEXADECIMAL_POWER) {
-      const errorToken = cursor.act(handleHexadecimalPower);
-      if (errorToken) return errorToken;
-    }
   }
+
+  errorToken = cursor.act(handleHexadecimalPower);
+  if (errorToken) return errorToken;
 
   return createToken('NUMBER', 'NUMBER', cursor.value(), cursor.startPos(), cursor.endPos());
 };
@@ -56,18 +54,20 @@ const handleHexadecimalPart: Cursor.Action<Token | null> = (cursor) => {
 };
 
 const handleHexadecimalPower: Cursor.Action<Token | null> = (cursor) => {
-  cursor.push();
-
-  if (cursor.peek() === TOKENS.PLUS || cursor.peek() === TOKENS.MINUS) {
+  if (cursor.peek()?.toLowerCase() === HEXADECIMAL_POWER) {
     cursor.push();
-  }
 
-  if (!isDigit(cursor.peek())) {
-    return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
-  }
+    if (cursor.peek() === TOKENS.PLUS || cursor.peek() === TOKENS.MINUS) {
+      cursor.push();
+    }
 
-  const errorToken = cursor.act(handleDecimalPart);
-  if (errorToken) return errorToken;
+    if (!isDigit(cursor.peek())) {
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+    }
+
+    const errorToken = cursor.act(handleDecimalPart);
+    if (errorToken) return errorToken;
+  }
 
   return null;
 };

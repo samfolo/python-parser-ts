@@ -44,15 +44,6 @@ export const BOOLEANS = {
   NONE: 'None',
 } as const;
 
-export const NUMERIC_LITERALS = {
-  DECIMAL: '<DECIMAL>',
-  FLOAT: '<FLOAT>',
-  COMPLEX: '<COMPLEX>',
-  BINARY: '<BINARY>',
-  OCTAL: '<OCTAL>',
-  HEXADECIMAL: '<HEXADECIMAL>',
-} as const;
-
 export const OPERATORS = {
   PLUS: '+',
   MINUS: '-',

@@ -10,8 +10,6 @@ export const isBinaryNumber: Cursor.Action<boolean> = (cursor) =>
   cursor.value() === NON_DECIMAL_PREFIX && cursor.peek()?.toLowerCase() === BINARY_PREFIX;
 
 export const handleBinaryNumber: Cursor.Action<Token> = (cursor) => {
-  cursor.push();
-
   if (cursor.peek() === TOKENS.UNDERSCORE) {
     return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
   }

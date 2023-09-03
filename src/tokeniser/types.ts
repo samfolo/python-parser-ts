@@ -1,5 +1,5 @@
 import {ValuesOf} from '../types';
-import {AUGASSIGN, BOOLEANS, DELIMITERS, KEYWORDS, MISCELLANEOUS, NUMERIC_LITERALS, OPERATORS} from './tokens';
+import {AUGASSIGN, BOOLEANS, DELIMITERS, KEYWORDS, MISCELLANEOUS, OPERATORS} from './tokens';
 
 export namespace Token {
   export type Type =
@@ -38,8 +38,7 @@ export namespace Token {
     | keyof typeof AUGASSIGN
     | keyof typeof DELIMITERS
     | keyof typeof MISCELLANEOUS
-    | keyof typeof BOOLEANS
-    | keyof typeof NUMERIC_LITERALS;
+    | keyof typeof BOOLEANS;
 
   export namespace KnownValue {
     export type AugAssign = ValuesOf<typeof AUGASSIGN>;

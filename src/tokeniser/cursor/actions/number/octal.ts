@@ -10,8 +10,6 @@ export const isOctalNumber: Cursor.Action<boolean> = (cursor) =>
   cursor.value() === NON_DECIMAL_PREFIX && cursor.peek()?.toLowerCase() === OCTAL_PREFIX;
 
 export const handleOctalNumber: Cursor.Action<Token> = (cursor) => {
-  cursor.push();
-
   if (cursor.peek() === TOKENS.UNDERSCORE) {
     return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
   }
