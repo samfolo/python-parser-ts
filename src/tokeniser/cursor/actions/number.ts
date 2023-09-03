@@ -8,6 +8,7 @@ const COMPLEX_SUFFIX = 'j';
 const BINARY_PREFIX = 'b';
 const OCTAL_PREFIX = 'o';
 const HEXADECIMAL_PREFIX = 'x';
+const EXPONENT = 'e';
 
 export const handleNumber: Cursor.Action<Token> = (cursor) => {
   if (cursor.act(isBinaryNumber)) {
@@ -46,8 +47,16 @@ const handleDecimalNumber: Cursor.Action<Token> = (cursor) => {
     }
   }
 
-  if (cursor.peek() === TOKENS.DOT) {
+  if (cursor.peek()?.toLowerCase() === EXPONENT) {
     cursor.push();
+
+    if (cursor.peek() === TOKENS.PLUS || cursor.peek() === TOKENS.MINUS) {
+      cursor.push();
+    }
+
+    if (!isDigit(cursor.peek())) {
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+    }
 
     while (isDigit(cursor.peek())) {
       cursor.push();
@@ -57,6 +66,74 @@ const handleDecimalNumber: Cursor.Action<Token> = (cursor) => {
 
         if (!isDigit(cursor.peek())) {
           return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+        }
+      }
+    }
+
+    if (cursor.peek() === TOKENS.DOT) {
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+    }
+  }
+
+  if (cursor.peek() === TOKENS.DOT) {
+    cursor.push();
+
+    if (cursor.peek()?.toLowerCase() === EXPONENT) {
+      cursor.push();
+
+      if (cursor.peek() === TOKENS.PLUS || cursor.peek() === TOKENS.MINUS) {
+        cursor.push();
+      }
+
+      if (!isDigit(cursor.peek())) {
+        return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+      }
+
+      while (isDigit(cursor.peek())) {
+        cursor.push();
+
+        if (cursor.peek() === TOKENS.UNDERSCORE) {
+          cursor.push();
+
+          if (!isDigit(cursor.peek())) {
+            return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+          }
+        }
+      }
+    } else {
+      while (isDigit(cursor.peek())) {
+        cursor.push();
+
+        if (cursor.peek() === TOKENS.UNDERSCORE) {
+          cursor.push();
+
+          if (!isDigit(cursor.peek())) {
+            return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+          }
+        }
+      }
+
+      if (cursor.peek()?.toLowerCase() === EXPONENT) {
+        cursor.push();
+
+        if (cursor.peek() === TOKENS.PLUS || cursor.peek() === TOKENS.MINUS) {
+          cursor.push();
+        }
+
+        if (!isDigit(cursor.peek())) {
+          return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+        }
+
+        while (isDigit(cursor.peek())) {
+          cursor.push();
+
+          if (cursor.peek() === TOKENS.UNDERSCORE) {
+            cursor.push();
+
+            if (!isDigit(cursor.peek())) {
+              return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
+            }
+          }
         }
       }
     }
