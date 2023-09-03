@@ -4,7 +4,17 @@ import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
 
 export const tokenise = (input: string): Token[] => {
-  const tokens: Token[] = [];
+  const tokens: Token[] = [
+    {
+      type: 'ENCODING',
+      kind: 'ENCODING',
+      value: 'utf-8',
+      startPos: {line: 0, column: 0},
+      endPos: {line: 0, column: 0},
+      colOffset: 0,
+      lineNo: 0,
+    },
+  ];
   const cursor = createCursor(input);
 
   while (!cursor.done()) {
@@ -45,56 +55,56 @@ export const tokenise = (input: string): Token[] => {
       case TOKENS.ASYNC: // compound token
       case TOKENS.AWAIT: // compound token
         break;
-      case TOKENS.SUM:
-      case TOKENS.SUB:
-      case TOKENS.MUL:
-      case TOKENS.DIV:
-      case TOKENS.MOD:
-      case TOKENS.MATMUL:
+      case TOKENS.PLUS:
+      case TOKENS.MINUS:
+      case TOKENS.STAR:
+      case TOKENS.SLASH:
+      case TOKENS.PERCENT:
+      case TOKENS.AT:
         tokens.push(cursor.act(handleOperator));
         break;
-      case TOKENS.BIT_AND:
-      case TOKENS.BIT_OR:
-      case TOKENS.BIT_XOR:
-      case TOKENS.LSHIFT: // compound token
-      case TOKENS.RSHIFT: // compound token
-      case TOKENS.POWER: // compound token
-      case TOKENS.EQ: // compound token
-      case TOKENS.NOT_EQ: // compound token
-      case TOKENS.LEGACY_NOT_EQ: // compound token
-      case TOKENS.LT:
-      case TOKENS.LTE: // compound token
-      case TOKENS.GT:
-      case TOKENS.GTE: // compound token
-      case TOKENS.LPAREN:
-      case TOKENS.RPAREN:
-      case TOKENS.LBRACKET:
-      case TOKENS.RBRACKET:
+      case TOKENS.AMPER:
+      case TOKENS.VBAR:
+      case TOKENS.CIRCUMFLEX:
+      case TOKENS.LEFTSHIFT: // compound token
+      case TOKENS.RIGHTSHIFT: // compound token
+      case TOKENS.DOUBLESTAR: // compound token
+      case TOKENS.EQEQUAL: // compound token
+      case TOKENS.NOTEQUAL: // compound token
+      case TOKENS.LEGACY_NOTEQUAL: // compound token
+      case TOKENS.LESS:
+      case TOKENS.LESSEQUAL: // compound token
+      case TOKENS.GREATER:
+      case TOKENS.GREATEREQUAL: // compound token
+      case TOKENS.LPAR:
+      case TOKENS.RPAR:
+      case TOKENS.LSQB:
+      case TOKENS.RSQB:
       case TOKENS.LBRACE:
       case TOKENS.RBRACE:
       case TOKENS.COMMA:
       case TOKENS.COLON:
       case TOKENS.DOT:
-      case TOKENS.SEMICOLON:
+      case TOKENS.SEMI:
       case TOKENS.SINGLE_QUOTE:
       case TOKENS.DOUBLE_QUOTE:
         tokens.push(cursor.act(handleString));
         break;
-      case TOKENS.ASSIGN:
-      case TOKENS.SUM_ASSIGN: // compound token
-      case TOKENS.SUB_ASSIGN: // compound token
-      case TOKENS.MUL_ASSIGN: // compound token
-      case TOKENS.DIV_ASSIGN: // compound token
-      case TOKENS.MOD_ASSIGN: // compound token
-      case TOKENS.AND_ASSIGN: // compound token
-      case TOKENS.OR_ASSIGN: // compound token
-      case TOKENS.XOR_ASSIGN: // compound token
-      case TOKENS.LSHIFT_ASSIGN: // compound token
-      case TOKENS.RSHIFT_ASSIGN: // compound token
-      case TOKENS.POWER_ASSIGN: // compound token
-      case TOKENS.FLOOR_DIV_ASSIGN: // compound token
+      case TOKENS.EQUAL:
+      case TOKENS.PLUSEQUAL: // compound token
+      case TOKENS.MINEQUAL: // compound token
+      case TOKENS.STAREQUAL: // compound token
+      case TOKENS.SLASHEQUAL: // compound token
+      case TOKENS.PERCENTEQUAL: // compound token
+      case TOKENS.AMPEREQUAL: // compound token
+      case TOKENS.VBAREQUAL: // compound token
+      case TOKENS.CIRCUMFLEXEQUAL: // compound token
+      case TOKENS.LEFTSHIFTEQUAL: // compound token
+      case TOKENS.RIGHTSHIFTEQUAL: // compound token
+      case TOKENS.DOUBLESTAREQUAL: // compound token
+      case TOKENS.DOUBLESLASHEQUAL: // compound token
       case TOKENS.ELLIPSIS: // compound token
-      case TOKENS.ARROW: // compound token
+      case TOKENS.RARROW: // compound token
       case TOKENS.NEWLINE:
       case TOKENS.WHITESPACE:
         const token = cursor.act(handleWhitespace);
@@ -102,8 +112,8 @@ export const tokenise = (input: string): Token[] => {
           tokens.push(token);
         }
         break;
-      case TOKENS.EOF:
-      case TOKENS.INVALID:
+      case TOKENS.ENDMARKER:
+      case TOKENS.ERRORTOKEN:
         break;
       default:
         tokens.push(cursor.act(handleLiteral));
@@ -113,7 +123,7 @@ export const tokenise = (input: string): Token[] => {
     cursor.consume();
   }
 
-  tokens.push(createToken('EOF', TOKENS.EOF, cursor.startPos(), cursor.startPos()));
+  tokens.push(createToken('ENDMARKER', 'ENDMARKER', TOKENS.ENDMARKER, cursor.startPos(), cursor.startPos()));
 
   return tokens;
 };

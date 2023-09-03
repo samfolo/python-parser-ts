@@ -1,4 +1,4 @@
-export * from './ident';
+export * from './name';
 export * from './literal';
 export * from './number';
 export * from './operator';

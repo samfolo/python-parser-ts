@@ -1,4 +1,4 @@
-export * from './idents';
+export * from './names';
 export * from './numbers';
 export * from './strings';
 export * from './taggedStrings';

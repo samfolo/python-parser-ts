@@ -7,7 +7,17 @@ export const OPERATOR_FIXTURES: TestCase[] = [
     input: '+',
     expected: [
       {
-        type: 'SUM',
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
+        type: 'OP',
+        kind: 'PLUS',
         value: '+',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -15,8 +25,9 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 2},
         endPos: {line: 1, column: 2},
         lineNo: 1,
@@ -28,7 +39,17 @@ export const OPERATOR_FIXTURES: TestCase[] = [
     input: '-',
     expected: [
       {
-        type: 'SUB',
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
+        type: 'OP',
+        kind: 'MINUS',
         value: '-',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -36,8 +57,9 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 2},
         endPos: {line: 1, column: 2},
         lineNo: 1,
@@ -49,7 +71,17 @@ export const OPERATOR_FIXTURES: TestCase[] = [
     input: '1 + 1',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '1',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -57,7 +89,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'SUM',
+        type: 'OP',
+        kind: 'PLUS',
         value: '+',
         startPos: {line: 1, column: 3},
         endPos: {line: 1, column: 4},
@@ -66,6 +99,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '1',
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 6},
@@ -73,8 +107,9 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 5,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 6},
         endPos: {line: 1, column: 6},
         lineNo: 1,
@@ -86,7 +121,17 @@ export const OPERATOR_FIXTURES: TestCase[] = [
     input: '3 - 2.5',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '3',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 2},
@@ -94,7 +139,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'SUB',
+        type: 'OP',
+        kind: 'MINUS',
         value: '-',
         startPos: {line: 1, column: 3},
         endPos: {line: 1, column: 4},
@@ -102,7 +148,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 3,
       },
       {
-        type: 'FLOAT',
+        type: 'NUMBER',
+        kind: 'FLOAT',
         value: '2.5',
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 8},
@@ -110,8 +157,9 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 5,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 8},
         endPos: {line: 1, column: 8},
         lineNo: 1,
@@ -123,7 +171,17 @@ export const OPERATOR_FIXTURES: TestCase[] = [
     input: '10. + 6 + 12 - 4',
     expected: [
       {
-        type: 'FLOAT',
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'FLOAT',
         value: '10.',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 4},
@@ -131,7 +189,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'SUM',
+        type: 'OP',
+        kind: 'PLUS',
         value: '+',
         startPos: {line: 1, column: 5},
         endPos: {line: 1, column: 6},
@@ -140,6 +199,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '6',
         startPos: {line: 1, column: 7},
         endPos: {line: 1, column: 8},
@@ -147,7 +207,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 7,
       },
       {
-        type: 'SUM',
+        type: 'OP',
+        kind: 'PLUS',
         value: '+',
         startPos: {line: 1, column: 9},
         endPos: {line: 1, column: 10},
@@ -156,6 +217,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '12',
         startPos: {line: 1, column: 11},
         endPos: {line: 1, column: 13},
@@ -163,7 +225,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 11,
       },
       {
-        type: 'SUB',
+        type: 'OP',
+        kind: 'MINUS',
         value: '-',
         startPos: {line: 1, column: 14},
         endPos: {line: 1, column: 15},
@@ -172,6 +235,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '4',
         startPos: {line: 1, column: 16},
         endPos: {line: 1, column: 17},
@@ -179,8 +243,9 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 16,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 17},
         endPos: {line: 1, column: 17},
         lineNo: 1,
@@ -192,7 +257,17 @@ export const OPERATOR_FIXTURES: TestCase[] = [
     input: '12   * -1000 /      6',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '12',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 3},
@@ -200,7 +275,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'MUL',
+        type: 'OP',
+        kind: 'STAR',
         value: '*',
         startPos: {line: 1, column: 6},
         endPos: {line: 1, column: 7},
@@ -208,7 +284,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 6,
       },
       {
-        type: 'SUB',
+        type: 'OP',
+        kind: 'MINUS',
         value: '-',
         startPos: {line: 1, column: 8},
         endPos: {line: 1, column: 9},
@@ -217,6 +294,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '1000',
         startPos: {line: 1, column: 9},
         endPos: {line: 1, column: 13},
@@ -224,7 +302,8 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 9,
       },
       {
-        type: 'DIV',
+        type: 'OP',
+        kind: 'SLASH',
         value: '/',
         startPos: {line: 1, column: 14},
         endPos: {line: 1, column: 15},
@@ -233,6 +312,7 @@ export const OPERATOR_FIXTURES: TestCase[] = [
       },
       {
         type: 'NUMBER',
+        kind: 'DECIMAL',
         value: '6',
         startPos: {line: 1, column: 21},
         endPos: {line: 1, column: 22},
@@ -240,8 +320,9 @@ export const OPERATOR_FIXTURES: TestCase[] = [
         colOffset: 21,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 22},
         endPos: {line: 1, column: 22},
         lineNo: 1,

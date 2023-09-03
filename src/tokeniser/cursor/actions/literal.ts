@@ -3,7 +3,7 @@ import {Token} from '../../types';
 
 import {Cursor} from '../types';
 import {isDigit, isLetter, isMaybeTaggedString} from '../utils';
-import {handleIdent} from './ident';
+import {handleName} from './name';
 import {handleNumber} from './number';
 import {handleTaggedString} from './taggedString';
 
@@ -15,12 +15,12 @@ export const handleLiteral: Cursor.Action<Token> = (cursor) => {
       }
     }
 
-    return cursor.act(handleIdent);
+    return cursor.act(handleName);
   }
 
   if (isDigit(cursor.current())) {
     return cursor.act(handleNumber);
   }
 
-  return createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos());
+  return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
 };

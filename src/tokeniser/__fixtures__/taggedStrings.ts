@@ -7,7 +7,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'f"Hi there!"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'f"Hi there!"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 13},
@@ -15,8 +25,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 13},
         endPos: {line: 1, column: 13},
         lineNo: 1,
@@ -28,7 +39,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'f"""Hi there!"""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'f"""Hi there!"""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 17},
@@ -36,8 +57,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 17},
         endPos: {line: 1, column: 17},
         lineNo: 1,
@@ -49,7 +71,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'r"""\\""""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'r"""\\""""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 10},
@@ -57,8 +89,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 10},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -70,7 +103,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'b"""\\\\"""',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'b"""\\\\"""',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 10},
@@ -78,8 +121,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 10},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -91,7 +135,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: "u'''\\\\'''",
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: "u'''\\\\'''",
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 10},
@@ -99,8 +153,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 10},
         endPos: {line: 1, column: 10},
         lineNo: 1,
@@ -117,7 +172,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
 ..."Hi."\n'''`,
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: `u'''\\
 \n\\
 
@@ -130,8 +195,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 8, column: 4},
         endPos: {line: 8, column: 4},
         lineNo: 8,
@@ -143,7 +209,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'f"I am {age} years old"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'f"I am {age} years old"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 24},
@@ -151,8 +227,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 24},
         endPos: {line: 1, column: 24},
         lineNo: 1,
@@ -164,7 +241,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'f"I am {height} and {\'a half\'} feet tall"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'f"I am {height} and {\'a half\'} feet tall"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 42},
@@ -172,8 +259,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 42},
         endPos: {line: 1, column: 42},
         lineNo: 1,
@@ -185,7 +273,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
     input: 'f"I weigh {weight.to_stone()} stone"',
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: 'f"I weigh {weight.to_stone()} stone"',
         startPos: {line: 1, column: 1},
         endPos: {line: 1, column: 37},
@@ -193,8 +291,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 1, column: 37},
         endPos: {line: 1, column: 37},
         lineNo: 1,
@@ -211,7 +310,17 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
 }"""`,
     expected: [
       {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {line: 0, column: 0},
+        endPos: {line: 0, column: 0},
+        colOffset: 0,
+        lineNo: 0,
+      },
+      {
         type: 'STRING',
+        kind: 'STRING',
         value: `f"""I weigh
 {weight.to_kg() * 7} kilograms as
 
@@ -224,8 +333,9 @@ export const TAGGED_STRING_FIXTURES: TestCase[] = [
         colOffset: 1,
       },
       {
-        type: 'EOF',
-        value: TOKENS.EOF,
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: TOKENS.ENDMARKER,
         startPos: {line: 7, column: 5},
         endPos: {line: 7, column: 5},
         lineNo: 7,

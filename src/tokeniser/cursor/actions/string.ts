@@ -18,25 +18,25 @@ export const handleString: Cursor.Action<Token> = (cursor) => {
     }
 
     cursor.consume();
-    return createToken('STRING', quoteType + quoteType, startPos, cursor.endPos());
+    return createToken('STRING', 'STRING', quoteType + quoteType, startPos, cursor.endPos());
   }
 
   cursor.consume();
   if (cursor.current() === TOKENS.ESCAPE) {
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', quoteType + cursor.value(), startPos, cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', quoteType + cursor.value(), startPos, cursor.endPos());
     }
     cursor.push();
   }
 
   while (cursor.peek() !== quoteType) {
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', quoteType + cursor.value(), startPos, cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', quoteType + cursor.value(), startPos, cursor.endPos());
     }
     cursor.push();
     if (cursor.current() === TOKENS.ESCAPE) {
       if (cursor.isEndOfFile()) {
-        return createToken('INVALID', quoteType + cursor.value(), startPos, cursor.endPos());
+        return createToken('ERRORTOKEN', 'ERRORTOKEN', quoteType + cursor.value(), startPos, cursor.endPos());
       }
       cursor.push();
     }
@@ -44,5 +44,5 @@ export const handleString: Cursor.Action<Token> = (cursor) => {
   const value = cursor.value();
   cursor.consume();
 
-  return createToken('STRING', quoteType + value + quoteType, startPos, cursor.endPos());
+  return createToken('STRING', 'STRING', quoteType + value + quoteType, startPos, cursor.endPos());
 };

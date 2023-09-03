@@ -10,7 +10,7 @@ export const handleWhitespace: Cursor.Action<Token | null> = (cursor) => {
     while (cursor.peek() === TOKENS.WHITESPACE) {
       cursor.push();
       if (cursor.isEndOfFile()) {
-        return createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos());
+        return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
       }
       nextScope++;
     }
@@ -19,9 +19,9 @@ export const handleWhitespace: Cursor.Action<Token | null> = (cursor) => {
     cursor.cacheScope(nextScope);
     switch (currentScope) {
       case 'dedented':
-        return createToken('DEDENT', cursor.value(), cursor.startPos(), cursor.endPos());
+        return createToken('DEDENT', 'DEDENT', cursor.value(), cursor.startPos(), cursor.endPos());
       case 'indented':
-        return createToken('INDENT', cursor.value(), cursor.startPos(), cursor.endPos());
+        return createToken('INDENT', 'INDENT', cursor.value(), cursor.startPos(), cursor.endPos());
       case 'stable':
       default:
         return null;
@@ -31,7 +31,7 @@ export const handleWhitespace: Cursor.Action<Token | null> = (cursor) => {
   while (cursor.peek() === TOKENS.WHITESPACE) {
     cursor.push();
     if (cursor.isEndOfFile()) {
-      return createToken('INVALID', cursor.value(), cursor.startPos(), cursor.endPos());
+      return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
     }
   }
 

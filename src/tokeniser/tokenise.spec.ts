@@ -1,6 +1,6 @@
 import {tokenise} from './tokenise';
 import {TOKENS} from './tokens';
-import {IDENT_FIXTURES, NUMBER_FIXTURES, STRING_FIXTURES, TAGGED_STRING_FIXTURES, TestCase} from './__fixtures__';
+import {NAME_FIXTURES, NUMBER_FIXTURES, STRING_FIXTURES, TAGGED_STRING_FIXTURES, TestCase} from './__fixtures__';
 import {OPERATOR_FIXTURES} from './__fixtures__/operators';
 
 describe('tokenise', () => {
@@ -9,8 +9,18 @@ describe('tokenise', () => {
       input: '',
       expected: [
         {
-          type: 'EOF',
-          value: TOKENS.EOF,
+          type: 'ENCODING',
+          kind: 'ENCODING',
+          value: 'utf-8',
+          startPos: {line: 0, column: 0},
+          endPos: {line: 0, column: 0},
+          colOffset: 0,
+          lineNo: 0,
+        },
+        {
+          type: 'ENDMARKER',
+          kind: 'ENDMARKER',
+          value: TOKENS.ENDMARKER,
           startPos: {line: 1, column: 1},
           endPos: {line: 1, column: 1},
           lineNo: 1,
@@ -18,7 +28,7 @@ describe('tokenise', () => {
         },
       ],
     },
-    ...IDENT_FIXTURES,
+    ...NAME_FIXTURES,
     ...NUMBER_FIXTURES,
     ...STRING_FIXTURES,
     ...TAGGED_STRING_FIXTURES,

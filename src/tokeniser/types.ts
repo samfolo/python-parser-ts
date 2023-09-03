@@ -1,39 +1,45 @@
 import {ValuesOf} from '../types';
-import {AUGASSIGN, BOOLEANS, DELIMITERS, KEYWORDS, MISCELLANEOUS, OPERATORS} from './tokens';
+import {AUGASSIGN, BOOLEANS, DELIMITERS, KEYWORDS, MISCELLANEOUS, NUMERIC_LITERALS, OPERATORS} from './tokens';
 
 export namespace Token {
-  export type KnownType =
+  export type Type =
+    // Literals
+    | 'NUMBER'
+    | 'STRING'
+    | 'BYTES'
+
+    // Identifiers
+    | 'NAME'
+
+    // Miscellaneous
+    | 'ENCODING'
+    | 'TYPE_COMMENT'
+    | 'TYPE_IGNORE'
+    | 'N_TOKENS'
+    | 'NT_OFFSET'
+    | 'OP'
+    | 'ENDMARKER'
+
+    // Whitespace and Comments
+    | 'WHITESPACE'
+    | 'NEWLINE'
+    | 'NL' // https://docs.python.org/3/library/token.html#token.NL
+    | 'INDENT'
+    | 'DEDENT'
+    | 'COMMENT'
+
+    // Errors
+    | 'ERRORTOKEN';
+
+  export type Kind =
+    | Type
     | keyof typeof KEYWORDS
     | keyof typeof OPERATORS
     | keyof typeof AUGASSIGN
     | keyof typeof DELIMITERS
     | keyof typeof MISCELLANEOUS
-    | keyof typeof BOOLEANS;
-
-  export type LiteralType =
-    // Literals
-    | 'NUMBER'
-    | 'FLOAT'
-    | 'COMPLEX'
-    | 'STRING'
-    | 'BYTES'
-
-    // Identifiers
-    | 'IDENT'
-
-    // Miscellaneous
-    | 'TYPE_COMMENT'
-
-    // Whitespace and Comments
-    | 'WHITESPACE'
-    | 'COMMENT'
-    | 'INDENT'
-    | 'DEDENT'
-
-    // Errors
-    | 'ERROR';
-
-  export type Type = KnownType | LiteralType;
+    | keyof typeof BOOLEANS
+    | keyof typeof NUMERIC_LITERALS;
 
   export namespace KnownValue {
     export type AugAssign = ValuesOf<typeof AUGASSIGN>;
@@ -52,9 +58,7 @@ export namespace Token {
     | KnownValue.Miscellaneous
     | KnownValue.Operator;
 
-  export type LiteralValue = string;
-
-  export type Value = KnownValue | LiteralValue;
+  export type Value = KnownValue | string;
 
   export interface Position {
     line: number;
@@ -64,6 +68,7 @@ export namespace Token {
 
 export interface Token {
   type: Token.Type;
+  kind: Token.Kind;
   value: Token.Value;
   startPos: Token.Position;
   endPos: Token.Position;
