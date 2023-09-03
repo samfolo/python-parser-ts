@@ -1,6 +1,13 @@
 import {tokenise} from './tokenise';
 import {TOKENS} from './tokens';
-import {NAME_FIXTURES, NUMBER_FIXTURES, STRING_FIXTURES, TAGGED_STRING_FIXTURES, TestCase} from './__fixtures__';
+import {
+  COLLECTION_FIXTURES,
+  NAME_FIXTURES,
+  NUMBER_FIXTURES,
+  STRING_FIXTURES,
+  TAGGED_STRING_FIXTURES,
+  TestCase,
+} from './__fixtures__';
 import {OPERATOR_FIXTURES} from './__fixtures__/operators';
 
 describe('tokenise', () => {
@@ -33,6 +40,7 @@ describe('tokenise', () => {
     ...STRING_FIXTURES,
     ...TAGGED_STRING_FIXTURES,
     ...OPERATOR_FIXTURES,
+    ...COLLECTION_FIXTURES,
     // {input: '{}', expected: []},
     // {input: '[]', expected: []},
     // {input: '', expected: []},

@@ -185,7 +185,7 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'RBRACE', TOKENS.RBRACE, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.COMMA:
-        tokens.push(createToken('OP', 'COMMA', TOKENS.COMMA, cursor.startPos(), cursor.endPos()));
+        tokens.push(createToken('COMMA', 'COMMA', TOKENS.COMMA, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.COLON:
         if (cursor.peek() === TOKENS.EQUAL) {
