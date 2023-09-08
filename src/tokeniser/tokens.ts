@@ -119,10 +119,10 @@ export const MISCELLANEOUS = {
   RARROW: '->',
   UNDERSCORE: '_',
   NEWLINE: '\n',
-  ESCAPE: '\\',
+  BACKSLASH: '\\',
   BANG: '!',
-  ENDMARKER: '!ENDMARKER',
-  ERRORTOKEN: '!ERRORTOKEN',
+  ENDMARKER: '',
+  ERRORTOKEN: '',
 } as const;
 
 export const TOKENS = {

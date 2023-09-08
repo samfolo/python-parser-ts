@@ -21,7 +21,7 @@ export const handleTaggedDocString: Cursor.Action<Token> = (cursor) => {
     cursor.peek() !== quoteType ||
     cursor.peek(2) !== quoteType ||
     cursor.peek(3) !== quoteType ||
-    (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE)
+    (cursor.peekBack() === TOKENS.BACKSLASH && cursor.peekBack(2) !== TOKENS.BACKSLASH)
   ) {
     cursor.push();
 

@@ -19,7 +19,10 @@ export const handleTaggedString: Cursor.Action<Token> = (cursor) => {
     return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  while (cursor.peek() !== quoteType || (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE)) {
+  while (
+    cursor.peek() !== quoteType ||
+    (cursor.peekBack() === TOKENS.BACKSLASH && cursor.peekBack(2) !== TOKENS.BACKSLASH)
+  ) {
     cursor.push();
 
     if (cursor.isEndOfFile()) {

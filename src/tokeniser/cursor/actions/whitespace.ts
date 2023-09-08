@@ -15,9 +15,9 @@ export const handleWhitespace: Cursor.Action<Token | null> = (cursor) => {
       nextScope++;
     }
 
-    const currentScope = cursor.currentScope(nextScope);
-    cursor.cacheScope(nextScope);
-    switch (currentScope) {
+    const whitespaceJuxtaposition = cursor.compareCachedWhitespaceWith(nextScope);
+    cursor.cacheWhitespace(nextScope);
+    switch (whitespaceJuxtaposition) {
       case 'dedented':
         return createToken('DEDENT', 'DEDENT', cursor.value(), cursor.startPos(), cursor.endPos());
       case 'indented':

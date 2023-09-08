@@ -20,7 +20,7 @@ export const handleString: Cursor.Action<Token> = (cursor) => {
 
   while (
     cursor.peek() !== cursor.current() ||
-    (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE)
+    (cursor.peekBack() === TOKENS.BACKSLASH && cursor.peekBack(2) !== TOKENS.BACKSLASH)
   ) {
     cursor.push();
 

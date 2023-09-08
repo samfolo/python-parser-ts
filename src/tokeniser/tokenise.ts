@@ -1,4 +1,4 @@
-import {createCursor, handleLiteral, handleNumber, handleString, isDigit} from './cursor';
+import {createCursor, handleLiteral, handleNewline, handleNumber, handleString, isDigit} from './cursor';
 import {handleWhitespace} from './cursor/actions/whitespace';
 import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
@@ -172,21 +172,27 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'NOTEQUAL', TOKENS.NOTEQUAL, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.LPAR:
+        cursor.enterCollection();
         tokens.push(createToken('OP', 'LPAR', TOKENS.LPAR, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.RPAR:
+        cursor.exitCollection();
         tokens.push(createToken('OP', 'RPAR', TOKENS.RPAR, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.LSQB:
+        cursor.enterCollection();
         tokens.push(createToken('OP', 'LSQB', TOKENS.LSQB, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.RSQB:
+        cursor.exitCollection();
         tokens.push(createToken('OP', 'RSQB', TOKENS.RSQB, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.LBRACE:
+        cursor.enterCollection();
         tokens.push(createToken('OP', 'LBRACE', TOKENS.LBRACE, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.RBRACE:
+        cursor.exitCollection();
         tokens.push(createToken('OP', 'RBRACE', TOKENS.RBRACE, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.COMMA:
@@ -233,6 +239,11 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'EQUAL', TOKENS.EQUAL, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.NEWLINE:
+        tokens.push(cursor.act(handleNewline));
+        if (cursor.peek() !== TOKENS.WHITESPACE) {
+          tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
+        }
+        break;
       case TOKENS.WHITESPACE:
         const token = cursor.act(handleWhitespace);
         if (token) {
@@ -244,6 +255,14 @@ export const tokenise = (input: string): Token[] => {
         break;
     }
 
+    cursor.consume();
+  }
+
+  if (tokens.length > 1) {
+    if (tokens.at(-1)?.value !== TOKENS.NEWLINE) {
+      tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
+    }
+    cursor.newLine();
     cursor.consume();
   }
 

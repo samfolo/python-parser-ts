@@ -4,7 +4,7 @@ import {Token} from '../../types';
 import {Cursor} from '../types';
 
 const isStillWithinDocstringValue: Cursor.Action<boolean> = (cursor) =>
-  (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE) ||
+  (cursor.peekBack() === TOKENS.BACKSLASH && cursor.peekBack(2) !== TOKENS.BACKSLASH) ||
   cursor.peek() !== cursor.current() ||
   cursor.peek(2) !== cursor.current() ||
   cursor.peek(3) !== cursor.current();
