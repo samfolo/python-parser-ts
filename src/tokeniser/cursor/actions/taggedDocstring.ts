@@ -17,12 +17,9 @@ export const handleTaggedDocString: Cursor.Action<Token> = (cursor) => {
     return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  while (
-    cursor.peek() !== quoteType ||
-    cursor.peek(2) !== quoteType ||
-    cursor.peek(3) !== quoteType ||
-    (cursor.peekBack() === TOKENS.BACKSLASH && cursor.peekBack(2) !== TOKENS.BACKSLASH)
-  ) {
+  let escaped = false;
+  while (cursor.peek() !== quoteType || cursor.peek(2) !== quoteType || cursor.peek(3) !== quoteType || escaped) {
+    escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
     cursor.push();
 
     if (cursor.isEndOfFile()) {

@@ -16,6 +16,8 @@ export const createCursor = (input: string): Cursor => {
   let prevScope = 0;
   let collectionScope = 0;
 
+  console.log(input);
+
   const current = (): Token.Value => input[currentPosition];
   const push = () => {
     readPosition++;

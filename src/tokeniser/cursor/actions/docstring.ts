@@ -3,12 +3,6 @@ import {Token} from '../../types';
 
 import {Cursor} from '../types';
 
-const isStillWithinDocstringValue: Cursor.Action<boolean> = (cursor) =>
-  (cursor.peekBack() === TOKENS.BACKSLASH && cursor.peekBack(2) !== TOKENS.BACKSLASH) ||
-  cursor.peek() !== cursor.current() ||
-  cursor.peek(2) !== cursor.current() ||
-  cursor.peek(3) !== cursor.current();
-
 export const handleDocString: Cursor.Action<Token> = (cursor) => {
   cursor.push();
   cursor.push();
@@ -21,7 +15,14 @@ export const handleDocString: Cursor.Action<Token> = (cursor) => {
     return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  while (cursor.act(isStillWithinDocstringValue)) {
+  let escaped = false;
+  while (
+    cursor.peek() !== cursor.current() ||
+    cursor.peek(2) !== cursor.current() ||
+    cursor.peek(3) !== cursor.current() ||
+    escaped
+  ) {
+    escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
     cursor.push();
 
     if (cursor.isEndOfFile()) {

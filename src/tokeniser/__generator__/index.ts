@@ -54,7 +54,14 @@ for (let lineIndex in lines) {
 }
 
 try {
-  fs.writeFileSync(`${__dirname}/output.ts`, `const FIXTURE = ${JSON.stringify(result, null, 2)}`);
+  const file = fs.readFileSync(`${__dirname}/input.py`).toString();
+  fs.writeFileSync(
+    `${__dirname}/output.ts`,
+    `const FIXTURE = {
+  input: \`${file}\`,
+  expected: ${JSON.stringify(result, null, 2)}
+}`
+  );
 } catch (e) {
   console.error(e);
 }
