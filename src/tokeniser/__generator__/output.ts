@@ -1,5 +1,10 @@
 const FIXTURE = {
-  input: `0x.1p10`,
+  input: `f"""I weigh
+{weight.to_kg() * 7} kilograms as
+
+\nof {
+  date.now().minus(hours=2).to_iso_string()
+}"""`,
   expected: [
   {
     "type": "ENCODING",
@@ -17,93 +22,48 @@ const FIXTURE = {
     "colOffset": 0
   },
   {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": "0",
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "f\"\"\"I weigh\\n{weight.to_kg() * 7} kilograms as\\n\\n\\\\nof {\\n  date.now().minus(hours=2).to_iso_string()\\n}\"\"\"",
     "startPos": {
       "line": 1,
       "column": 0
     },
     "endPos": {
-      "line": 1,
-      "column": 1
+      "line": 6,
+      "column": 4
     },
     "lineNo": 1,
     "colOffset": 0
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "x",
-    "startPos": {
-      "line": 1,
-      "column": 1
-    },
-    "endPos": {
-      "line": 1,
-      "column": 2
-    },
-    "lineNo": 1,
-    "colOffset": 1
-  },
-  {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": ".1",
-    "startPos": {
-      "line": 1,
-      "column": 2
-    },
-    "endPos": {
-      "line": 1,
-      "column": 4
-    },
-    "lineNo": 1,
-    "colOffset": 2
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "p10",
-    "startPos": {
-      "line": 1,
-      "column": 4
-    },
-    "endPos": {
-      "line": 1,
-      "column": 7
-    },
-    "lineNo": 1,
-    "colOffset": 4
   },
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
     "value": "",
     "startPos": {
-      "line": 1,
-      "column": 7
+      "line": 6,
+      "column": 4
     },
     "endPos": {
-      "line": 1,
-      "column": 8
+      "line": 6,
+      "column": 5
     },
-    "lineNo": 1,
-    "colOffset": 7
+    "lineNo": 6,
+    "colOffset": 4
   },
   {
     "type": "ENDMARKER",
     "kind": "ENDMARKER",
     "value": "",
     "startPos": {
-      "line": 2,
+      "line": 7,
       "column": 0
     },
     "endPos": {
-      "line": 2,
+      "line": 7,
       "column": 0
     },
-    "lineNo": 2,
+    "lineNo": 7,
     "colOffset": 0
   }
 ]

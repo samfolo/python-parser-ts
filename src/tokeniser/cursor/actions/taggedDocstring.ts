@@ -9,7 +9,7 @@ export const handleTaggedDocString: Cursor.Action<Token> = (cursor) => {
   cursor.push();
   cursor.push();
 
-  if (cursor.peek() === cursor.peek(2) && cursor.peek(2) === cursor.peek(3)) {
+  if (cursor.peek() === quoteType && cursor.peek(2) === quoteType && cursor.peek(3) === quoteType) {
     cursor.push();
     cursor.push();
     cursor.push();
@@ -20,7 +20,11 @@ export const handleTaggedDocString: Cursor.Action<Token> = (cursor) => {
   let escaped = false;
   while (cursor.peek() !== quoteType || cursor.peek(2) !== quoteType || cursor.peek(3) !== quoteType || escaped) {
     escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
-    cursor.push();
+    if (cursor.peek() === TOKENS.NEWLINE) {
+      cursor.newLine();
+    } else {
+      cursor.push();
+    }
 
     if (cursor.isEndOfFile()) {
       return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
