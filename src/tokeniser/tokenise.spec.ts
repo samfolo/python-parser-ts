@@ -87,7 +87,6 @@ describe('tokenise', () => {
     ].filter(({skip}) => !skip)
   )('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {
-      console.log(tokenise(input));
       expect(tokenise(input)).toEqual(expected);
     });
   });
