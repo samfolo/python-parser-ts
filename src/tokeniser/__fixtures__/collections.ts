@@ -1,5 +1,3 @@
-import {TOKENS} from '../tokens';
-
 import {TestCase} from './types';
 
 export const COLLECTION_FIXTURES: TestCase[] = [
