@@ -1,5 +1,5 @@
 const FIXTURE = {
-  input: "'\\\\\\''",
+  input: `__main__`,
   expected: [
     {
       type: 'ENCODING',
@@ -17,16 +17,16 @@ const FIXTURE = {
       colOffset: 0,
     },
     {
-      type: 'STRING',
-      kind: 'STRING',
-      value: "'\\\\\\''",
+      type: 'NAME',
+      kind: 'NAME',
+      value: '__main__',
       startPos: {
         line: 1,
         column: 0,
       },
       endPos: {
         line: 1,
-        column: 6,
+        column: 8,
       },
       lineNo: 1,
       colOffset: 0,
@@ -37,14 +37,14 @@ const FIXTURE = {
       value: '',
       startPos: {
         line: 1,
-        column: 6,
+        column: 8,
       },
       endPos: {
         line: 1,
-        column: 7,
+        column: 9,
       },
       lineNo: 1,
-      colOffset: 6,
+      colOffset: 8,
     },
     {
       type: 'ENDMARKER',

@@ -23,7 +23,11 @@ export const handleDocString: Cursor.Action<Token> = (cursor) => {
     escaped
   ) {
     escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
-    cursor.push();
+    if (cursor.peek() === TOKENS.NEWLINE) {
+      cursor.newLine();
+    } else {
+      cursor.push();
+    }
 
     if (cursor.isEndOfFile()) {
       return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());

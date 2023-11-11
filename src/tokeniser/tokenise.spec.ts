@@ -53,7 +53,7 @@ describe('tokenise', () => {
   });
 
   describe.each([
-    // {description: 'names', cases: NAME_FIXTURES},
+    {description: 'names', cases: NAME_FIXTURES},
     // {description: 'numbers', cases: NUMBER_FIXTURES},
     {description: 'strings', cases: STRING_FIXTURES},
     // {description: 'tagged strings', cases: TAGGED_STRING_FIXTURES},
@@ -61,9 +61,6 @@ describe('tokenise', () => {
     // {description: 'collections', cases: COLLECTION_FIXTURES},
   ])('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {
-      if (JSON.stringify(tokenise(input)) !== JSON.stringify(expected)) {
-        console.log(tokenise(input));
-      }
       expect(tokenise(input)).toEqual(expected);
     });
   });
