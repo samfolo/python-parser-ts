@@ -75,7 +75,7 @@ describe('tokenise', () => {
       {skip: false, description: 'booleans', cases: BOOLEAN_FIXTURES},
       {skip: true, description: 'classes', cases: CLASS_FIXTURES},
       {skip: true, description: 'comments', cases: COMMENT_FIXTURES},
-      {skip: true, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},
+      {skip: false, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},
       {skip: true, description: 'control flows', cases: CONTROL_FLOW_FIXTURES},
       {skip: true, description: 'encodings', cases: ENCODING_FIXTURES},
       {skip: true, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
