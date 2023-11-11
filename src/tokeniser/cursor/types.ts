@@ -17,6 +17,11 @@ export interface Cursor {
   startPos: () => Token.Position;
   endPos: () => Token.Position;
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
-  cacheScope: (newScope: number) => void;
-  currentScope: (newScope: number) => Cursor.CurrentScope;
+  cacheWhitespace: (whitespace: number) => void;
+  compareCachedWhitespaceWith: (whitespace: number) => Cursor.CurrentScope;
+  pushWithNewLine: () => void;
+  newLine: () => void;
+  enterCollection: () => void;
+  exitCollection: () => void;
+  isInCollection: () => boolean;
 }

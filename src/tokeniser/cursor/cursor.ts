@@ -8,22 +8,28 @@ export const createCursor = (input: string): Cursor => {
   let readPosition = 1;
 
   let startLine = 1;
-  let startColumn = 1;
+  let startColumn = 0;
 
   let endLine = 1;
-  let endColumn = 2;
+  let endColumn = 1;
 
   let prevScope = 0;
+  let collectionScope = 0;
 
   const current = (): Token.Value => input[currentPosition];
+  const newLine = () => {
+    endLine++;
+    endColumn = 0;
+  };
   const push = () => {
-    if (peek() === TOKENS.NEWLINE) {
-      endLine++;
-      endColumn = 0;
-    }
     readPosition++;
     endColumn++;
   };
+  const pushWithNewLine = () => {
+    readPosition++;
+    newLine();
+  };
+
   const peek = (offset: number = 1): Token.Value => input[readPosition + (offset - 1)];
   const peekBack = (offset: number = 1): Token.Value => input[readPosition - offset];
   const consume = () => {
@@ -37,18 +43,22 @@ export const createCursor = (input: string): Cursor => {
   const isEndOfFile = () => peek() === undefined;
   const startPos = (): Token.Position => ({line: startLine, column: startColumn});
   const endPos = (): Token.Position => ({line: endLine, column: endColumn});
-  const cacheScope = (newScope: number) => (prevScope = newScope);
-  const currentScope = (newScope: number): Cursor.CurrentScope => {
-    if (prevScope > newScope) {
+  const enterCollection = () => collectionScope++;
+  const exitCollection = () => (collectionScope = collectionScope > 0 ? collectionScope - 1 : 0);
+  const isInCollection = () => collectionScope > 0;
+  const cacheWhitespace = (whitespace: number) => (prevScope = whitespace);
+  const compareCachedWhitespaceWith = (whitespace: number): Cursor.CurrentScope => {
+    if (prevScope > whitespace) {
       return 'dedented';
     }
 
-    if (prevScope < newScope) {
+    if (prevScope < whitespace) {
       return 'indented';
     }
 
     return 'stable';
   };
+
   return {
     current,
     push,
@@ -60,8 +70,13 @@ export const createCursor = (input: string): Cursor => {
     isEndOfFile,
     startPos,
     endPos,
-    cacheScope,
-    currentScope,
+    cacheWhitespace,
+    compareCachedWhitespaceWith,
+    newLine,
+    pushWithNewLine,
+    enterCollection,
+    exitCollection,
+    isInCollection,
     act<Return = void>(cb: Cursor.Action<Return>) {
       return cb({...this, act: this.act});
     },

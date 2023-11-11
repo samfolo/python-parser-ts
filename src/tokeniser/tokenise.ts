@@ -1,4 +1,4 @@
-import {createCursor, handleLiteral, handleNumber, handleString, isDigit} from './cursor';
+import {createCursor, handleLiteral, handleNewline, handleNumber, handleString, isDigit} from './cursor';
 import {handleWhitespace} from './cursor/actions/whitespace';
 import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
@@ -148,6 +148,11 @@ export const tokenise = (input: string): Token[] => {
           tokens.push(createToken('OP', 'MINEQUAL', TOKENS.MINEQUAL, cursor.startPos(), cursor.endPos()));
           break;
         }
+        if (cursor.peek() === TOKENS.GREATER) {
+          cursor.push();
+          tokens.push(createToken('OP', 'RARROW', TOKENS.RARROW, cursor.startPos(), cursor.endPos()));
+          break;
+        }
         tokens.push(createToken('OP', 'MINUS', cursor.current(), cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.PLUS:
@@ -167,21 +172,27 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'NOTEQUAL', TOKENS.NOTEQUAL, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.LPAR:
+        cursor.enterCollection();
         tokens.push(createToken('OP', 'LPAR', TOKENS.LPAR, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.RPAR:
+        cursor.exitCollection();
         tokens.push(createToken('OP', 'RPAR', TOKENS.RPAR, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.LSQB:
+        cursor.enterCollection();
         tokens.push(createToken('OP', 'LSQB', TOKENS.LSQB, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.RSQB:
+        cursor.exitCollection();
         tokens.push(createToken('OP', 'RSQB', TOKENS.RSQB, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.LBRACE:
+        cursor.enterCollection();
         tokens.push(createToken('OP', 'LBRACE', TOKENS.LBRACE, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.RBRACE:
+        cursor.exitCollection();
         tokens.push(createToken('OP', 'RBRACE', TOKENS.RBRACE, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.COMMA:
@@ -204,10 +215,16 @@ export const tokenise = (input: string): Token[] => {
           tokens.push(cursor.act(handleNumber));
           break;
         }
+        if (cursor.peek() === TOKENS.DOT && cursor.peek(2) === TOKENS.DOT) {
+          cursor.push();
+          cursor.push();
+          tokens.push(createToken('ELLIPSIS', 'ELLIPSIS', TOKENS.ELLIPSIS, cursor.startPos(), cursor.endPos()));
+          break;
+        }
         tokens.push(createToken('OP', 'DOT', TOKENS.DOT, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.SEMI:
-        tokens.push(createToken('SEMI', 'SEMI', TOKENS.SEMI, cursor.startPos(), cursor.endPos()));
+        tokens.push(createToken('OP', 'SEMI', TOKENS.SEMI, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.SINGLE_QUOTE:
       case TOKENS.DOUBLE_QUOTE:
@@ -222,17 +239,24 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'EQUAL', TOKENS.EQUAL, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.NEWLINE:
+        tokens.push(cursor.act(handleNewline));
+        break;
       case TOKENS.WHITESPACE:
-        const token = cursor.act(handleWhitespace);
-        if (token) {
-          tokens.push(token);
-        }
+        cursor.act(handleWhitespace);
         break;
       default:
         tokens.push(cursor.act(handleLiteral));
         break;
     }
 
+    cursor.consume();
+  }
+
+  if (tokens.length > 1) {
+    if (tokens.at(-1)?.value !== TOKENS.NEWLINE) {
+      tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
+    }
+    cursor.pushWithNewLine();
     cursor.consume();
   }
 

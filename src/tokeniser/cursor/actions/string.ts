@@ -18,10 +18,9 @@ export const handleString: Cursor.Action<Token> = (cursor) => {
     return createToken('STRING', 'STRING', cursor.value(), cursor.startPos(), cursor.endPos());
   }
 
-  while (
-    cursor.peek() !== cursor.current() ||
-    (cursor.peekBack() === TOKENS.ESCAPE && cursor.peekBack(2) !== TOKENS.ESCAPE)
-  ) {
+  let escaped = false;
+  while (cursor.peek() !== cursor.current() || escaped) {
+    escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
     cursor.push();
 
     if (cursor.isEndOfFile()) {
