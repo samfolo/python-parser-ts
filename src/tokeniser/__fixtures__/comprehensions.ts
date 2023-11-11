@@ -2644,4 +2644,788 @@ b = (x for x in iterable if condition)`,
       },
     ],
   },
+  {
+    input: `[func(x) for x in iterable]
+`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'OP',
+        kind: 'LSQB',
+        value: '[',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 1,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'func',
+        startPos: {
+          line: 1,
+          column: 1,
+        },
+        endPos: {
+          line: 1,
+          column: 5,
+        },
+        lineNo: 1,
+        colOffset: 1,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 1,
+          column: 5,
+        },
+        endPos: {
+          line: 1,
+          column: 6,
+        },
+        lineNo: 1,
+        colOffset: 5,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 6,
+        },
+        endPos: {
+          line: 1,
+          column: 7,
+        },
+        lineNo: 1,
+        colOffset: 6,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 1,
+          column: 7,
+        },
+        endPos: {
+          line: 1,
+          column: 8,
+        },
+        lineNo: 1,
+        colOffset: 7,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'for',
+        startPos: {
+          line: 1,
+          column: 9,
+        },
+        endPos: {
+          line: 1,
+          column: 12,
+        },
+        lineNo: 1,
+        colOffset: 9,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 13,
+        },
+        endPos: {
+          line: 1,
+          column: 14,
+        },
+        lineNo: 1,
+        colOffset: 13,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'in',
+        startPos: {
+          line: 1,
+          column: 15,
+        },
+        endPos: {
+          line: 1,
+          column: 17,
+        },
+        lineNo: 1,
+        colOffset: 15,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'iterable',
+        startPos: {
+          line: 1,
+          column: 18,
+        },
+        endPos: {
+          line: 1,
+          column: 26,
+        },
+        lineNo: 1,
+        colOffset: 18,
+      },
+      {
+        type: 'OP',
+        kind: 'RSQB',
+        value: ']',
+        startPos: {
+          line: 1,
+          column: 26,
+        },
+        endPos: {
+          line: 1,
+          column: 27,
+        },
+        lineNo: 1,
+        colOffset: 26,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 27,
+        },
+        endPos: {
+          line: 1,
+          column: 28,
+        },
+        lineNo: 1,
+        colOffset: 27,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: `[x for x in range(10) if x % 2 == 0 and x % 3 == 0]`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'OP',
+        kind: 'LSQB',
+        value: '[',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 1,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 1,
+        },
+        endPos: {
+          line: 1,
+          column: 2,
+        },
+        lineNo: 1,
+        colOffset: 1,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'for',
+        startPos: {
+          line: 1,
+          column: 3,
+        },
+        endPos: {
+          line: 1,
+          column: 6,
+        },
+        lineNo: 1,
+        colOffset: 3,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 7,
+        },
+        endPos: {
+          line: 1,
+          column: 8,
+        },
+        lineNo: 1,
+        colOffset: 7,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'in',
+        startPos: {
+          line: 1,
+          column: 9,
+        },
+        endPos: {
+          line: 1,
+          column: 11,
+        },
+        lineNo: 1,
+        colOffset: 9,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'range',
+        startPos: {
+          line: 1,
+          column: 12,
+        },
+        endPos: {
+          line: 1,
+          column: 17,
+        },
+        lineNo: 1,
+        colOffset: 12,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 1,
+          column: 17,
+        },
+        endPos: {
+          line: 1,
+          column: 18,
+        },
+        lineNo: 1,
+        colOffset: 17,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '10',
+        startPos: {
+          line: 1,
+          column: 18,
+        },
+        endPos: {
+          line: 1,
+          column: 20,
+        },
+        lineNo: 1,
+        colOffset: 18,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 1,
+          column: 20,
+        },
+        endPos: {
+          line: 1,
+          column: 21,
+        },
+        lineNo: 1,
+        colOffset: 20,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'if',
+        startPos: {
+          line: 1,
+          column: 22,
+        },
+        endPos: {
+          line: 1,
+          column: 24,
+        },
+        lineNo: 1,
+        colOffset: 22,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 25,
+        },
+        endPos: {
+          line: 1,
+          column: 26,
+        },
+        lineNo: 1,
+        colOffset: 25,
+      },
+      {
+        type: 'OP',
+        kind: 'PERCENT',
+        value: '%',
+        startPos: {
+          line: 1,
+          column: 27,
+        },
+        endPos: {
+          line: 1,
+          column: 28,
+        },
+        lineNo: 1,
+        colOffset: 27,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '2',
+        startPos: {
+          line: 1,
+          column: 29,
+        },
+        endPos: {
+          line: 1,
+          column: 30,
+        },
+        lineNo: 1,
+        colOffset: 29,
+      },
+      {
+        type: 'OP',
+        kind: 'EQEQUAL',
+        value: '==',
+        startPos: {
+          line: 1,
+          column: 31,
+        },
+        endPos: {
+          line: 1,
+          column: 33,
+        },
+        lineNo: 1,
+        colOffset: 31,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '0',
+        startPos: {
+          line: 1,
+          column: 34,
+        },
+        endPos: {
+          line: 1,
+          column: 35,
+        },
+        lineNo: 1,
+        colOffset: 34,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'and',
+        startPos: {
+          line: 1,
+          column: 36,
+        },
+        endPos: {
+          line: 1,
+          column: 39,
+        },
+        lineNo: 1,
+        colOffset: 36,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 40,
+        },
+        endPos: {
+          line: 1,
+          column: 41,
+        },
+        lineNo: 1,
+        colOffset: 40,
+      },
+      {
+        type: 'OP',
+        kind: 'PERCENT',
+        value: '%',
+        startPos: {
+          line: 1,
+          column: 42,
+        },
+        endPos: {
+          line: 1,
+          column: 43,
+        },
+        lineNo: 1,
+        colOffset: 42,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '3',
+        startPos: {
+          line: 1,
+          column: 44,
+        },
+        endPos: {
+          line: 1,
+          column: 45,
+        },
+        lineNo: 1,
+        colOffset: 44,
+      },
+      {
+        type: 'OP',
+        kind: 'EQEQUAL',
+        value: '==',
+        startPos: {
+          line: 1,
+          column: 46,
+        },
+        endPos: {
+          line: 1,
+          column: 48,
+        },
+        lineNo: 1,
+        colOffset: 46,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '0',
+        startPos: {
+          line: 1,
+          column: 49,
+        },
+        endPos: {
+          line: 1,
+          column: 50,
+        },
+        lineNo: 1,
+        colOffset: 49,
+      },
+      {
+        type: 'OP',
+        kind: 'RSQB',
+        value: ']',
+        startPos: {
+          line: 1,
+          column: 50,
+        },
+        endPos: {
+          line: 1,
+          column: 51,
+        },
+        lineNo: 1,
+        colOffset: 50,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '',
+        startPos: {
+          line: 1,
+          column: 51,
+        },
+        endPos: {
+          line: 1,
+          column: 52,
+        },
+        lineNo: 1,
+        colOffset: 51,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: `func(x for x in iterable)
+
+
+`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'func',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 4,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 1,
+          column: 4,
+        },
+        endPos: {
+          line: 1,
+          column: 5,
+        },
+        lineNo: 1,
+        colOffset: 4,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 5,
+        },
+        endPos: {
+          line: 1,
+          column: 6,
+        },
+        lineNo: 1,
+        colOffset: 5,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'for',
+        startPos: {
+          line: 1,
+          column: 7,
+        },
+        endPos: {
+          line: 1,
+          column: 10,
+        },
+        lineNo: 1,
+        colOffset: 7,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'x',
+        startPos: {
+          line: 1,
+          column: 11,
+        },
+        endPos: {
+          line: 1,
+          column: 12,
+        },
+        lineNo: 1,
+        colOffset: 11,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'in',
+        startPos: {
+          line: 1,
+          column: 13,
+        },
+        endPos: {
+          line: 1,
+          column: 15,
+        },
+        lineNo: 1,
+        colOffset: 13,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'iterable',
+        startPos: {
+          line: 1,
+          column: 16,
+        },
+        endPos: {
+          line: 1,
+          column: 24,
+        },
+        lineNo: 1,
+        colOffset: 16,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 1,
+          column: 24,
+        },
+        endPos: {
+          line: 1,
+          column: 25,
+        },
+        lineNo: 1,
+        colOffset: 24,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 25,
+        },
+        endPos: {
+          line: 1,
+          column: 26,
+        },
+        lineNo: 1,
+        colOffset: 25,
+      },
+      {
+        type: 'NL',
+        kind: 'NL',
+        value: '\n',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 1,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+      {
+        type: 'NL',
+        kind: 'NL',
+        value: '\n',
+        startPos: {
+          line: 3,
+          column: 0,
+        },
+        endPos: {
+          line: 3,
+          column: 1,
+        },
+        lineNo: 3,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 4,
+          column: 0,
+        },
+        endPos: {
+          line: 4,
+          column: 0,
+        },
+        lineNo: 4,
+        colOffset: 0,
+      },
+    ],
+  },
 ];

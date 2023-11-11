@@ -1,1 +1,3 @@
-[func(x) for x in iterable]
+func(x for x in iterable)
+
+
