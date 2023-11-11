@@ -252,11 +252,9 @@ export const tokenise = (input: string): Token[] => {
     cursor.consume();
   }
 
-  if (tokens.length > 1) {
-    if (tokens.at(-1)?.value !== TOKENS.NEWLINE) {
-      tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
-    }
-    cursor.pushWithNewLine();
+  if (tokens.length > 1 && tokens.at(-1)?.value !== TOKENS.NEWLINE) {
+    tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
+    cursor.newLine();
     cursor.consume();
   }
 
