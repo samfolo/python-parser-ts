@@ -1,5 +1,5 @@
 const FIXTURE = {
-  input: `print(len([1, 3][0:1:2]))`,
+  input: `bool("True") or bool(int('''0'''))`,
   expected: [
   {
     "type": "ENCODING",
@@ -19,14 +19,14 @@ const FIXTURE = {
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "print",
+    "value": "bool",
     "startPos": {
       "line": 1,
       "column": 0
     },
     "endPos": {
       "line": 1,
-      "column": 5
+      "column": 4
     },
     "lineNo": 1,
     "colOffset": 0
@@ -37,64 +37,34 @@ const FIXTURE = {
     "value": "(",
     "startPos": {
       "line": 1,
+      "column": 4
+    },
+    "endPos": {
+      "line": 1,
       "column": 5
     },
-    "endPos": {
-      "line": 1,
-      "column": 6
-    },
     "lineNo": 1,
-    "colOffset": 5
+    "colOffset": 4
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "len",
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"True\"",
     "startPos": {
       "line": 1,
-      "column": 6
-    },
-    "endPos": {
-      "line": 1,
-      "column": 9
-    },
-    "lineNo": 1,
-    "colOffset": 6
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 1,
-      "column": 9
-    },
-    "endPos": {
-      "line": 1,
-      "column": 10
-    },
-    "lineNo": 1,
-    "colOffset": 9
-  },
-  {
-    "type": "OP",
-    "kind": "LSQB",
-    "value": "[",
-    "startPos": {
-      "line": 1,
-      "column": 10
+      "column": 5
     },
     "endPos": {
       "line": 1,
       "column": 11
     },
     "lineNo": 1,
-    "colOffset": 10
+    "colOffset": 5
   },
   {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": "1",
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
     "startPos": {
       "line": 1,
       "column": 11
@@ -107,114 +77,39 @@ const FIXTURE = {
     "colOffset": 11
   },
   {
-    "type": "OP",
-    "kind": "COMMA",
-    "value": ",",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "or",
     "startPos": {
-      "line": 1,
-      "column": 12
-    },
-    "endPos": {
       "line": 1,
       "column": 13
     },
-    "lineNo": 1,
-    "colOffset": 12
-  },
-  {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": "3",
-    "startPos": {
-      "line": 1,
-      "column": 14
-    },
     "endPos": {
       "line": 1,
       "column": 15
     },
     "lineNo": 1,
-    "colOffset": 14
+    "colOffset": 13
   },
   {
-    "type": "OP",
-    "kind": "RSQB",
-    "value": "]",
-    "startPos": {
-      "line": 1,
-      "column": 15
-    },
-    "endPos": {
-      "line": 1,
-      "column": 16
-    },
-    "lineNo": 1,
-    "colOffset": 15
-  },
-  {
-    "type": "OP",
-    "kind": "LSQB",
-    "value": "[",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "bool",
     "startPos": {
       "line": 1,
       "column": 16
-    },
-    "endPos": {
-      "line": 1,
-      "column": 17
-    },
-    "lineNo": 1,
-    "colOffset": 16
-  },
-  {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": "0",
-    "startPos": {
-      "line": 1,
-      "column": 17
-    },
-    "endPos": {
-      "line": 1,
-      "column": 18
-    },
-    "lineNo": 1,
-    "colOffset": 17
-  },
-  {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
-    "startPos": {
-      "line": 1,
-      "column": 18
-    },
-    "endPos": {
-      "line": 1,
-      "column": 19
-    },
-    "lineNo": 1,
-    "colOffset": 18
-  },
-  {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": "1",
-    "startPos": {
-      "line": 1,
-      "column": 19
     },
     "endPos": {
       "line": 1,
       "column": 20
     },
     "lineNo": 1,
-    "colOffset": 19
+    "colOffset": 16
   },
   {
     "type": "OP",
-    "kind": "COLON",
-    "value": ":",
+    "kind": "LPAR",
+    "value": "(",
     "startPos": {
       "line": 1,
       "column": 20
@@ -227,54 +122,24 @@ const FIXTURE = {
     "colOffset": 20
   },
   {
-    "type": "NUMBER",
-    "kind": "NUMBER",
-    "value": "2",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "int",
     "startPos": {
       "line": 1,
       "column": 21
     },
     "endPos": {
       "line": 1,
-      "column": 22
+      "column": 24
     },
     "lineNo": 1,
     "colOffset": 21
   },
   {
     "type": "OP",
-    "kind": "RSQB",
-    "value": "]",
-    "startPos": {
-      "line": 1,
-      "column": 22
-    },
-    "endPos": {
-      "line": 1,
-      "column": 23
-    },
-    "lineNo": 1,
-    "colOffset": 22
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 1,
-      "column": 23
-    },
-    "endPos": {
-      "line": 1,
-      "column": 24
-    },
-    "lineNo": 1,
-    "colOffset": 23
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
+    "kind": "LPAR",
+    "value": "(",
     "startPos": {
       "line": 1,
       "column": 24
@@ -287,19 +152,64 @@ const FIXTURE = {
     "colOffset": 24
   },
   {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "",
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "'''0'''",
     "startPos": {
       "line": 1,
       "column": 25
     },
     "endPos": {
       "line": 1,
-      "column": 26
+      "column": 32
     },
     "lineNo": 1,
     "colOffset": 25
+  },
+  {
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
+    "startPos": {
+      "line": 1,
+      "column": 32
+    },
+    "endPos": {
+      "line": 1,
+      "column": 33
+    },
+    "lineNo": 1,
+    "colOffset": 32
+  },
+  {
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
+    "startPos": {
+      "line": 1,
+      "column": 33
+    },
+    "endPos": {
+      "line": 1,
+      "column": 34
+    },
+    "lineNo": 1,
+    "colOffset": 33
+  },
+  {
+    "type": "NEWLINE",
+    "kind": "NEWLINE",
+    "value": "",
+    "startPos": {
+      "line": 1,
+      "column": 34
+    },
+    "endPos": {
+      "line": 1,
+      "column": 35
+    },
+    "lineNo": 1,
+    "colOffset": 34
   },
   {
     "type": "ENDMARKER",

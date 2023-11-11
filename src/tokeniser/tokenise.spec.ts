@@ -72,7 +72,7 @@ describe('tokenise', () => {
       {skip: false, description: 'tagged strings', cases: TAGGED_STRING_FIXTURES},
       {skip: false, description: 'operators', cases: OPERATOR_FIXTURES},
       {skip: false, description: 'collections', cases: COLLECTION_FIXTURES},
-      {skip: true, description: 'booleans', cases: BOOLEAN_FIXTURES},
+      {skip: false, description: 'booleans', cases: BOOLEAN_FIXTURES},
       {skip: true, description: 'classes', cases: CLASS_FIXTURES},
       {skip: true, description: 'comments', cases: COMMENT_FIXTURES},
       {skip: true, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},

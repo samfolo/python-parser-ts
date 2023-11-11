@@ -1,1 +1,1 @@
-print(len([1, 3][0:1:2]))
+bool("True") or bool(int('''0'''))
