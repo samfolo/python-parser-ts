@@ -224,7 +224,7 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'DOT', TOKENS.DOT, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.SEMI:
-        tokens.push(createToken('SEMI', 'SEMI', TOKENS.SEMI, cursor.startPos(), cursor.endPos()));
+        tokens.push(createToken('OP', 'SEMI', TOKENS.SEMI, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.SINGLE_QUOTE:
       case TOKENS.DOUBLE_QUOTE:

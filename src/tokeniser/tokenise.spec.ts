@@ -57,7 +57,7 @@ describe('tokenise', () => {
     {description: 'numbers', cases: NUMBER_FIXTURES},
     {description: 'strings', cases: STRING_FIXTURES},
     {description: 'tagged strings', cases: TAGGED_STRING_FIXTURES},
-    // {description: 'operators', cases: OPERATOR_FIXTURES},
+    {description: 'operators', cases: OPERATOR_FIXTURES},
     // {description: 'collections', cases: COLLECTION_FIXTURES},
   ])('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {

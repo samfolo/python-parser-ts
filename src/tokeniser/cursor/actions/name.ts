@@ -9,10 +9,5 @@ export const handleName: Cursor.Action<Token> = (cursor) => {
     cursor.push();
   }
 
-  const operatorKind = getKeywordOperatorKind(cursor.value());
-  if (operatorKind) {
-    return createToken('OP', operatorKind, cursor.value(), cursor.startPos(), cursor.endPos());
-  }
-
   return createToken('NAME', 'NAME', cursor.value(), cursor.startPos(), cursor.endPos());
 };

@@ -1,10 +1,5 @@
 const FIXTURE = {
-  input: `f"""I weigh
-{weight.to_kg() * 7} kilograms as
-
-\nof {
-  date.now().minus(hours=2).to_iso_string()
-}"""`,
+  input: `12.5 and "hi\nthere!"`,
   expected: [
   {
     "type": "ENCODING",
@@ -22,48 +17,78 @@ const FIXTURE = {
     "colOffset": 0
   },
   {
-    "type": "STRING",
-    "kind": "STRING",
-    "value": "f\"\"\"I weigh\\n{weight.to_kg() * 7} kilograms as\\n\\n\\\\nof {\\n  date.now().minus(hours=2).to_iso_string()\\n}\"\"\"",
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "12.5",
     "startPos": {
       "line": 1,
       "column": 0
     },
     "endPos": {
-      "line": 6,
+      "line": 1,
       "column": 4
     },
     "lineNo": 1,
     "colOffset": 0
   },
   {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "and",
+    "startPos": {
+      "line": 1,
+      "column": 5
+    },
+    "endPos": {
+      "line": 1,
+      "column": 8
+    },
+    "lineNo": 1,
+    "colOffset": 5
+  },
+  {
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"hi\\\\nthere!\"",
+    "startPos": {
+      "line": 1,
+      "column": 9
+    },
+    "endPos": {
+      "line": 1,
+      "column": 21
+    },
+    "lineNo": 1,
+    "colOffset": 9
+  },
+  {
     "type": "NEWLINE",
     "kind": "NEWLINE",
     "value": "",
     "startPos": {
-      "line": 6,
-      "column": 4
+      "line": 1,
+      "column": 21
     },
     "endPos": {
-      "line": 6,
-      "column": 5
+      "line": 1,
+      "column": 22
     },
-    "lineNo": 6,
-    "colOffset": 4
+    "lineNo": 1,
+    "colOffset": 21
   },
   {
     "type": "ENDMARKER",
     "kind": "ENDMARKER",
     "value": "",
     "startPos": {
-      "line": 7,
+      "line": 2,
       "column": 0
     },
     "endPos": {
-      "line": 7,
+      "line": 2,
       "column": 0
     },
-    "lineNo": 7,
+    "lineNo": 2,
     "colOffset": 0
   }
 ]
