@@ -196,7 +196,7 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(createToken('OP', 'RBRACE', TOKENS.RBRACE, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.COMMA:
-        tokens.push(createToken('COMMA', 'COMMA', TOKENS.COMMA, cursor.startPos(), cursor.endPos()));
+        tokens.push(createToken('OP', 'COMMA', TOKENS.COMMA, cursor.startPos(), cursor.endPos()));
         break;
       case TOKENS.COLON:
         if (cursor.peek() === TOKENS.EQUAL) {
@@ -240,15 +240,9 @@ export const tokenise = (input: string): Token[] => {
         break;
       case TOKENS.NEWLINE:
         tokens.push(cursor.act(handleNewline));
-        if (cursor.peek() !== TOKENS.WHITESPACE) {
-          tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
-        }
         break;
       case TOKENS.WHITESPACE:
-        const token = cursor.act(handleWhitespace);
-        if (token) {
-          tokens.push(token);
-        }
+        cursor.act(handleWhitespace);
         break;
       default:
         tokens.push(cursor.act(handleLiteral));
@@ -262,7 +256,7 @@ export const tokenise = (input: string): Token[] => {
     if (tokens.at(-1)?.value !== TOKENS.NEWLINE) {
       tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
     }
-    cursor.newLine();
+    cursor.pushWithNewLine();
     cursor.consume();
   }
 

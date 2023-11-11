@@ -21,7 +21,7 @@ export const handleTaggedDocString: Cursor.Action<Token> = (cursor) => {
   while (cursor.peek() !== quoteType || cursor.peek(2) !== quoteType || cursor.peek(3) !== quoteType || escaped) {
     escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
     if (cursor.peek() === TOKENS.NEWLINE) {
-      cursor.newLine();
+      cursor.pushWithNewLine();
     } else {
       cursor.push();
     }

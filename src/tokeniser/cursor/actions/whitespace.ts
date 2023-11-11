@@ -4,36 +4,18 @@ import {Token} from '../../types';
 import {Cursor} from '../types';
 
 export const handleWhitespace: Cursor.Action<Token | null> = (cursor) => {
-  if (cursor.startPos().column === 1) {
-    let nextScope = 0;
-
-    while (cursor.peek() === TOKENS.WHITESPACE) {
-      cursor.push();
-      if (cursor.isEndOfFile()) {
-        return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
-      }
-      nextScope++;
-    }
-
-    const whitespaceJuxtaposition = cursor.compareCachedWhitespaceWith(nextScope);
-    cursor.cacheWhitespace(nextScope);
-    switch (whitespaceJuxtaposition) {
-      case 'dedented':
-        return createToken('DEDENT', 'DEDENT', cursor.value(), cursor.startPos(), cursor.endPos());
-      case 'indented':
-        return createToken('INDENT', 'INDENT', cursor.value(), cursor.startPos(), cursor.endPos());
-      case 'stable':
-      default:
-        return null;
-    }
-  }
+  let nextScope = 0;
 
   while (cursor.peek() === TOKENS.WHITESPACE) {
     cursor.push();
+    nextScope++;
+
     if (cursor.isEndOfFile()) {
       return createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos());
     }
   }
+
+  cursor.cacheWhitespace(nextScope);
 
   return null;
 };

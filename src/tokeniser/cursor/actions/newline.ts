@@ -9,9 +9,10 @@ export const handleNewline: Cursor.Action<Token> = (cursor) => {
       ? 'NL'
       : 'NEWLINE';
 
-  const token: Token = createToken(tokenType, tokenType, TOKENS.NEWLINE, cursor.startPos(), cursor.endPos());
+  const tokenValue = tokenType === 'NL' && cursor.isInCollection() ? TOKENS.NEWLINE : '';
+
+  const token: Token = createToken(tokenType, tokenType, tokenValue, cursor.startPos(), cursor.endPos());
 
   cursor.newLine();
-
   return token;
 };

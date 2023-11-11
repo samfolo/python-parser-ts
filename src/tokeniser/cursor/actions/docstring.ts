@@ -24,7 +24,7 @@ export const handleDocString: Cursor.Action<Token> = (cursor) => {
   ) {
     escaped = cursor.peek() === TOKENS.BACKSLASH && !escaped;
     if (cursor.peek() === TOKENS.NEWLINE) {
-      cursor.newLine();
+      cursor.pushWithNewLine();
     } else {
       cursor.push();
     }

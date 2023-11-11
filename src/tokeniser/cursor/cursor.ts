@@ -17,15 +17,19 @@ export const createCursor = (input: string): Cursor => {
   let collectionScope = 0;
 
   const current = (): Token.Value => input[currentPosition];
+  const newLine = () => {
+    endLine++;
+    endColumn = 0;
+  };
   const push = () => {
     readPosition++;
     endColumn++;
   };
-  const newLine = () => {
+  const pushWithNewLine = () => {
     readPosition++;
-    endLine++;
-    endColumn = 0;
+    newLine();
   };
+
   const peek = (offset: number = 1): Token.Value => input[readPosition + (offset - 1)];
   const peekBack = (offset: number = 1): Token.Value => input[readPosition - offset];
   const consume = () => {
@@ -69,6 +73,7 @@ export const createCursor = (input: string): Cursor => {
     cacheWhitespace,
     compareCachedWhitespaceWith,
     newLine,
+    pushWithNewLine,
     enterCollection,
     exitCollection,
     isInCollection,

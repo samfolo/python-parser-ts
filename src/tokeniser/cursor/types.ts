@@ -19,6 +19,7 @@ export interface Cursor {
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
   cacheWhitespace: (whitespace: number) => void;
   compareCachedWhitespaceWith: (whitespace: number) => Cursor.CurrentScope;
+  pushWithNewLine: () => void;
   newLine: () => void;
   enterCollection: () => void;
   exitCollection: () => void;
