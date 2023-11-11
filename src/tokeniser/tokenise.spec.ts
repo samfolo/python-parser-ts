@@ -54,7 +54,7 @@ describe('tokenise', () => {
 
   describe.each([
     {description: 'names', cases: NAME_FIXTURES},
-    // {description: 'numbers', cases: NUMBER_FIXTURES},
+    {description: 'numbers', cases: NUMBER_FIXTURES},
     {description: 'strings', cases: STRING_FIXTURES},
     // {description: 'tagged strings', cases: TAGGED_STRING_FIXTURES},
     // {description: 'operators', cases: OPERATOR_FIXTURES},
