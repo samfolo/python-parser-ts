@@ -14,6 +14,20 @@ const KEYWORD_OPERATORS = {
   IN: 'in',
 } as const;
 
+export const BLOCK_KEYWORDS = {
+  CLASS: 'class',
+  DEF: 'def',
+  IF: 'if',
+  ELIF: 'elif',
+  ELSE: 'else',
+  TRY: 'try',
+  EXCEPT: 'except',
+  FINALLY: 'finally',
+  FOR: 'for',
+  WHILE: 'while',
+  WITH: 'with',
+} as const;
+
 export const KEYWORDS = {
   FALSE: 'False',
   NONE: 'None',
@@ -21,30 +35,20 @@ export const KEYWORDS = {
   AS: 'as',
   ASSERT: 'assert',
   BREAK: 'break',
-  CLASS: 'class',
   CONTINUE: 'continue',
-  DEF: 'def',
   DEL: 'del',
-  ELIF: 'elif',
-  ELSE: 'else',
-  EXCEPT: 'except',
-  FINALLY: 'finally',
-  FOR: 'for',
   FROM: 'from',
   GLOBAL: 'global',
-  IF: 'if',
   IMPORT: 'import',
   LAMBDA: 'lambda',
   NONLOCAL: 'nonlocal',
   PASS: 'pass',
   RAISE: 'raise',
   RETURN: 'return',
-  TRY: 'try',
-  WHILE: 'while',
-  WITH: 'with',
   YIELD: 'yield',
   ASYNC: 'async',
   AWAIT: 'await',
+  ...BLOCK_KEYWORDS,
   ...KEYWORD_OPERATORS,
 } as const;
 
@@ -154,5 +158,7 @@ const KEYWORD_LOOKUP = reverseLookup(KEYWORDS);
 export const getKeywordKind = (value: string) => (KEYWORD_LOOKUP[value] as Token.Kind) ?? null;
 
 const KEYWORD_OPERATOR_LOOKUP = reverseLookup(KEYWORD_OPERATORS);
-export const getKeywordOperatorKind = (value: string): Token.Kind =>
-  (KEYWORD_OPERATOR_LOOKUP[value] as Token.Kind) ?? null;
+export const getKeywordOperatorKind = (value: string) => (KEYWORD_OPERATOR_LOOKUP[value] as Token.Kind) ?? null;
+
+const BLOCK_KEYWORD_LOOKUP = reverseLookup(BLOCK_KEYWORDS);
+export const getBlockKeywordKind = (value: string) => (BLOCK_KEYWORD_LOOKUP[value] as Token.Kind) ?? null;

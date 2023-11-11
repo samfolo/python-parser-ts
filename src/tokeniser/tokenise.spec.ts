@@ -66,27 +66,28 @@ describe('tokenise', () => {
 
   describe.each(
     [
-      {skip: false, description: 'names', cases: NAME_FIXTURES},
-      {skip: false, description: 'numbers', cases: NUMBER_FIXTURES},
-      {skip: false, description: 'strings', cases: STRING_FIXTURES},
-      {skip: false, description: 'tagged strings', cases: TAGGED_STRING_FIXTURES},
-      {skip: false, description: 'operators', cases: OPERATOR_FIXTURES},
-      {skip: false, description: 'collections', cases: COLLECTION_FIXTURES},
-      {skip: false, description: 'booleans', cases: BOOLEAN_FIXTURES},
-      {skip: true, description: 'classes', cases: CLASS_FIXTURES},
-      {skip: true, description: 'comments', cases: COMMENT_FIXTURES},
-      {skip: false, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},
-      {skip: true, description: 'control flows', cases: CONTROL_FLOW_FIXTURES},
-      {skip: true, description: 'encodings', cases: ENCODING_FIXTURES},
-      {skip: true, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
-      {skip: true, description: 'functions', cases: FUNCTION_FIXTURES},
-      {skip: true, description: 'imports', cases: IMPORT_FIXTURES},
-      {skip: true, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
-      {skip: true, description: 'special characters', cases: SPECIAL_CHARACTER_FIXTURES},
-      {skip: true, description: 'whitespaces', cases: WHITESPACE_FIXTURES},
+      // {skip: false, description: 'names', cases: NAME_FIXTURES},
+      // {skip: false, description: 'numbers', cases: NUMBER_FIXTURES},
+      // {skip: false, description: 'strings', cases: STRING_FIXTURES},
+      // {skip: false, description: 'tagged strings', cases: TAGGED_STRING_FIXTURES},
+      // {skip: false, description: 'operators', cases: OPERATOR_FIXTURES},
+      // {skip: false, description: 'collections', cases: COLLECTION_FIXTURES},
+      // {skip: false, description: 'booleans', cases: BOOLEAN_FIXTURES},
+      // {skip: true, description: 'classes', cases: CLASS_FIXTURES},
+      // {skip: true, description: 'comments', cases: COMMENT_FIXTURES},
+      // {skip: false, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},
+      {skip: false, description: 'control flows', cases: CONTROL_FLOW_FIXTURES},
+      // {skip: true, description: 'encodings', cases: ENCODING_FIXTURES},
+      // {skip: true, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
+      // {skip: true, description: 'functions', cases: FUNCTION_FIXTURES},
+      // {skip: true, description: 'imports', cases: IMPORT_FIXTURES},
+      // {skip: true, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
+      // {skip: true, description: 'special characters', cases: SPECIAL_CHARACTER_FIXTURES},
+      // {skip: true, description: 'whitespaces', cases: WHITESPACE_FIXTURES},
     ].filter(({skip}) => !skip)
   )('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {
+      console.log(tokenise(input));
       expect(tokenise(input)).toEqual(expected);
     });
   });

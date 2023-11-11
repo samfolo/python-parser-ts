@@ -17,11 +17,16 @@ export interface Cursor {
   startPos: () => Token.Position;
   endPos: () => Token.Position;
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
-  cacheWhitespace: (whitespace: number) => void;
-  compareCachedWhitespaceWith: (whitespace: number) => Cursor.CurrentScope;
+  cacheIndentation: (nextIndentation: number) => void;
+  compareCachedIndentationWith: (nextIndentation: number) => Cursor.CurrentScope;
   pushWithNewLine: () => void;
   newLine: () => void;
   enterCollection: () => void;
   exitCollection: () => void;
   isInCollection: () => boolean;
+  isInBlockStatement: () => boolean;
+  stageBlockStatementEntry: () => void;
+  isBlockStatementEntryStaged: () => boolean;
+  enterBlockStatement: () => void;
+  exitBlockStatement: () => void;
 }

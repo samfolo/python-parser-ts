@@ -205,6 +205,9 @@ export const tokenise = (input: string): Token[] => {
           break;
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
+        if (cursor.isBlockStatementEntryStaged()) {
+          cursor.enterBlockStatement();
+        }
         break;
       case TOKENS.TILDE:
         tokens.push(createToken('OP', 'TILDE', TOKENS.TILDE, cursor.startPos(), cursor.endPos()));
@@ -242,7 +245,10 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(cursor.act(handleNewline));
         break;
       case TOKENS.WHITESPACE:
-        cursor.act(handleWhitespace);
+        const token = cursor.act(handleWhitespace);
+        if (token) {
+          tokens.push(token);
+        }
         break;
       default:
         tokens.push(cursor.act(handleLiteral));
@@ -256,6 +262,11 @@ export const tokenise = (input: string): Token[] => {
     tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
     cursor.newLine();
     cursor.consume();
+  }
+
+  while (cursor.isInBlockStatement()) {
+    cursor.exitBlockStatement();
+    tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.startPos(), cursor.startPos()));
   }
 
   tokens.push(createToken('ENDMARKER', 'ENDMARKER', TOKENS.ENDMARKER, cursor.startPos(), cursor.startPos()));
