@@ -154,11 +154,5 @@ export const createToken = (
   colOffset: startPos.column,
 });
 
-const KEYWORD_LOOKUP = reverseLookup(KEYWORDS);
-export const getKeywordKind = (value: string) => (KEYWORD_LOOKUP[value] as Token.Kind) ?? null;
-
-const KEYWORD_OPERATOR_LOOKUP = reverseLookup(KEYWORD_OPERATORS);
-export const getKeywordOperatorKind = (value: string) => (KEYWORD_OPERATOR_LOOKUP[value] as Token.Kind) ?? null;
-
 const BLOCK_KEYWORD_LOOKUP = reverseLookup(BLOCK_KEYWORDS);
-export const getBlockKeywordKind = (value: string) => (BLOCK_KEYWORD_LOOKUP[value] as Token.Kind) ?? null;
+export const isBlockKeyword = (value: string) => Boolean(BLOCK_KEYWORD_LOOKUP[value]);

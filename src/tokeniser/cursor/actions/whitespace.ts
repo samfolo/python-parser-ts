@@ -15,14 +15,12 @@ export const handleWhitespace: Cursor.Action<Token | null> = (cursor) => {
     }
   }
 
-  if (isStartOfLine) {
+  if (isStartOfLine && cursor.isInBlockStatement() && !cursor.isInCollection()) {
     const indentationJuxtaposition = cursor.compareCachedIndentationWith(nextIndentation);
 
     switch (indentationJuxtaposition) {
       case 'indented':
-        if (cursor.isInBlockStatement()) {
-          return createToken('INDENT', 'INDENT', cursor.value(), cursor.startPos(), cursor.endPos());
-        }
+        return createToken('INDENT', 'INDENT', cursor.value(), cursor.startPos(), cursor.endPos());
       case 'dedented':
         return createToken('DEDENT', 'DEDENT', cursor.value(), cursor.startPos(), cursor.endPos());
     }

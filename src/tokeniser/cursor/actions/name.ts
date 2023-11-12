@@ -1,4 +1,4 @@
-import {createToken, getBlockKeywordKind} from '../../tokens';
+import {createToken, isBlockKeyword} from '../../tokens';
 import {Token} from '../../types';
 
 import {Cursor} from '../types';
@@ -9,7 +9,7 @@ export const handleName: Cursor.Action<Token> = (cursor) => {
     cursor.push();
   }
 
-  if (getBlockKeywordKind(cursor.value()) && !cursor.isInCollection()) {
+  if (isBlockKeyword(cursor.value()) && !cursor.isInCollection()) {
     cursor.stageBlockStatementEntry();
   }
 
