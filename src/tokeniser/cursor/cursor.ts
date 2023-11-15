@@ -13,10 +13,11 @@ export const createCursor = (input: string): Cursor => {
   let endLine = 1;
   let endColumn = 1;
 
-  let prevIndentation = 0;
+  const indentationStack: number[] = [];
+
   let collectionScope = 0;
   let shouldEnterBlockStatement = false;
-  let blockStatementScope = 0;
+  let inBlockStatement = false;
 
   const current = (): Token.Value => input[currentPosition];
 
@@ -59,23 +60,29 @@ export const createCursor = (input: string): Cursor => {
   const stageBlockStatementEntry = () => (shouldEnterBlockStatement = true);
   const isBlockStatementEntryStaged = () => shouldEnterBlockStatement;
   const enterBlockStatement = () => {
-    blockStatementScope++;
+    inBlockStatement = true;
     shouldEnterBlockStatement = false;
   };
-  const exitBlockStatement = () => (blockStatementScope = blockStatementScope > 0 ? blockStatementScope - 1 : 0);
-  const isInBlockStatement = () => blockStatementScope > 0;
+  const exitBlockStatement = () => {
+    indentationStack.pop();
+    inBlockStatement = indentationStack.length > 0;
+  };
+  const isInBlockStatement = (targetIndentation: number = 0) =>
+    inBlockStatement && (indentationStack.at(-1) ?? 0) >= targetIndentation;
 
-  const cacheIndentation = (nextIndentation: number) => (prevIndentation = nextIndentation);
-  const compareCachedIndentationWith = (nextIndentation: number): Cursor.CurrentScope => {
+  const pushIndentation = (nextIndentation: number) => indentationStack.push(nextIndentation);
+  const compareLastIndentationWith = (nextIndentation: number): Cursor.CompareIndentationResult => {
+    const prevIndentation = indentationStack.at(-1) ?? 0;
+
     if (prevIndentation > nextIndentation) {
-      return 'dedented';
+      return {scope: 'dedented', depth: prevIndentation - nextIndentation};
     }
 
     if (prevIndentation < nextIndentation) {
-      return 'indented';
+      return {scope: 'indented', depth: nextIndentation - prevIndentation};
     }
 
-    return 'stable';
+    return {scope: 'stable', depth: 0};
   };
 
   return {
@@ -89,8 +96,8 @@ export const createCursor = (input: string): Cursor => {
     isEndOfFile,
     startPos,
     endPos,
-    cacheIndentation,
-    compareCachedIndentationWith,
+    pushIndentation,
+    compareLastIndentationWith,
     newLine,
     pushWithNewLine,
     enterCollection,

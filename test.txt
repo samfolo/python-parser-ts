@@ -1,25 +1,4 @@
-const FIXTURE = {
-  input: `if bear.is_home():
-    if bear.is_hungry() and cave.has_food():
-        for food in cave.foods():
-            bear.eat(food)
-
-            if bear.is_full():
-                break
-    elif bear.is_hungry() and not cave.has_food():
-        bear.search_for_food()
-
-        if bear.cannot_find_food({"timeout": "1 hour"}):
-            bear.go_home()
-    else:
-        bear.sleep()
-
-        while bear.is_sleeping():
-            bear.dream()
-else:
-    bear.go_home()
-`,
-  expected: [
+[
   {
     "type": "ENCODING",
     "kind": "ENCODING",
@@ -32,8 +11,8 @@ else:
       "line": 0,
       "column": 0
     },
-    "lineNo": 0,
-    "colOffset": 0
+    "colOffset": 0,
+    "lineNo": 0
   },
   {
     "type": "NAME",
@@ -143,7 +122,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 1,
       "column": 18
@@ -368,7 +347,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 2,
       "column": 44
@@ -533,7 +512,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 3,
       "column": 33
@@ -653,7 +632,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 4,
       "column": 26
@@ -668,7 +647,7 @@ else:
   {
     "type": "NL",
     "kind": "NL",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 5,
       "column": 0
@@ -788,7 +767,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 6,
       "column": 30
@@ -833,7 +812,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 7,
       "column": 21
@@ -1103,7 +1082,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 8,
       "column": 50
@@ -1208,7 +1187,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 9,
       "column": 30
@@ -1223,7 +1202,7 @@ else:
   {
     "type": "NL",
     "kind": "NL",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 10,
       "column": 0
@@ -1418,7 +1397,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 11,
       "column": 56
@@ -1523,7 +1502,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 12,
       "column": 26
@@ -1598,7 +1577,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 13,
       "column": 9
@@ -1703,7 +1682,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 14,
       "column": 20
@@ -1718,7 +1697,7 @@ else:
   {
     "type": "NL",
     "kind": "NL",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 15,
       "column": 0
@@ -1838,7 +1817,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 16,
       "column": 33
@@ -1943,7 +1922,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 17,
       "column": 24
@@ -2033,7 +2012,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 18,
       "column": 5
@@ -2138,7 +2117,7 @@ else:
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
-    "value": "\\n",
+    "value": "\n",
     "startPos": {
       "line": 19,
       "column": 18
@@ -2181,4 +2160,3 @@ else:
     "colOffset": 0
   }
 ]
-}
