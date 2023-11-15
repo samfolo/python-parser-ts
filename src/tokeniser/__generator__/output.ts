@@ -1,24 +1,24 @@
 const FIXTURE = {
-  input: `if bear.is_home():
-    if bear.is_hungry() and cave.has_food():
-        for food in cave.foods():
-            bear.eat(food)
+  input: `if x > 5: print("x is greater than 5")
 
-            if bear.is_full():
-                break
-    elif bear.is_hungry() and not cave.has_food():
-        bear.search_for_food()
+"Yes" if x > 5 else "No"
 
-        if bear.cannot_find_food({"timeout": "1 hour"}):
-            bear.go_home()
-    else:
-        bear.sleep()
+if num > 0: return True
 
-        while bear.is_sleeping():
-            bear.dream()
-else:
-    bear.go_home()
-`,
+for i in range(3): print(i, end=' ')
+
+while count > 0: print(count); count -= 1
+
+if x > 5: print("x > 5"); if x > 8: print("x > 8")
+
+squares = [n**2 for n in numbers if n % 2 == 0]
+
+if x < 15: print("x < 15"); x += 5
+
+if x == 20: pass
+
+try: result = 10 / x
+except ZeroDivisionError: print("Division by zero!")`,
   expected: [
   {
     "type": "ENCODING",
@@ -53,22 +53,37 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "bear",
+    "value": "x",
     "startPos": {
       "line": 1,
       "column": 3
     },
     "endPos": {
       "line": 1,
-      "column": 7
+      "column": 4
     },
     "lineNo": 1,
     "colOffset": 3
   },
   {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "GREATER",
+    "value": ">",
+    "startPos": {
+      "line": 1,
+      "column": 5
+    },
+    "endPos": {
+      "line": 1,
+      "column": 6
+    },
+    "lineNo": 1,
+    "colOffset": 5
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "5",
     "startPos": {
       "line": 1,
       "column": 7
@@ -81,19 +96,34 @@ else:
     "colOffset": 7
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "is_home",
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
     "startPos": {
       "line": 1,
       "column": 8
     },
     "endPos": {
       "line": 1,
-      "column": 15
+      "column": 9
     },
     "lineNo": 1,
     "colOffset": 8
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "print",
+    "startPos": {
+      "line": 1,
+      "column": 10
+    },
+    "endPos": {
+      "line": 1,
+      "column": 15
+    },
+    "lineNo": 1,
+    "colOffset": 10
   },
   {
     "type": "OP",
@@ -111,34 +141,34 @@ else:
     "colOffset": 15
   },
   {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"x is greater than 5\"",
     "startPos": {
       "line": 1,
       "column": 16
     },
     "endPos": {
       "line": 1,
-      "column": 17
+      "column": 37
     },
     "lineNo": 1,
     "colOffset": 16
   },
   {
     "type": "OP",
-    "kind": "COLON",
-    "value": ":",
+    "kind": "RPAR",
+    "value": ")",
     "startPos": {
       "line": 1,
-      "column": 17
+      "column": 37
     },
     "endPos": {
       "line": 1,
-      "column": 18
+      "column": 38
     },
     "lineNo": 1,
-    "colOffset": 17
+    "colOffset": 37
   },
   {
     "type": "NEWLINE",
@@ -146,28 +176,43 @@ else:
     "value": "\\n",
     "startPos": {
       "line": 1,
-      "column": 18
+      "column": 38
     },
     "endPos": {
       "line": 1,
-      "column": 19
+      "column": 39
     },
     "lineNo": 1,
-    "colOffset": 18
+    "colOffset": 38
   },
   {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "    ",
+    "type": "NL",
+    "kind": "NL",
+    "value": "\\n",
     "startPos": {
       "line": 2,
       "column": 0
     },
     "endPos": {
       "line": 2,
-      "column": 4
+      "column": 1
     },
     "lineNo": 2,
+    "colOffset": 0
+  },
+  {
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"Yes\"",
+    "startPos": {
+      "line": 3,
+      "column": 0
+    },
+    "endPos": {
+      "line": 3,
+      "column": 5
+    },
+    "lineNo": 3,
     "colOffset": 0
   },
   {
@@ -175,275 +220,80 @@ else:
     "kind": "NAME",
     "value": "if",
     "startPos": {
-      "line": 2,
-      "column": 4
-    },
-    "endPos": {
-      "line": 2,
+      "line": 3,
       "column": 6
     },
-    "lineNo": 2,
-    "colOffset": 4
+    "endPos": {
+      "line": 3,
+      "column": 8
+    },
+    "lineNo": 3,
+    "colOffset": 6
   },
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "bear",
+    "value": "x",
     "startPos": {
-      "line": 2,
-      "column": 7
+      "line": 3,
+      "column": 9
     },
     "endPos": {
-      "line": 2,
-      "column": 11
+      "line": 3,
+      "column": 10
     },
-    "lineNo": 2,
-    "colOffset": 7
+    "lineNo": 3,
+    "colOffset": 9
   },
   {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "GREATER",
+    "value": ">",
     "startPos": {
-      "line": 2,
+      "line": 3,
       "column": 11
     },
     "endPos": {
-      "line": 2,
+      "line": 3,
       "column": 12
     },
-    "lineNo": 2,
+    "lineNo": 3,
     "colOffset": 11
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "is_hungry",
-    "startPos": {
-      "line": 2,
-      "column": 12
-    },
-    "endPos": {
-      "line": 2,
-      "column": 21
-    },
-    "lineNo": 2,
-    "colOffset": 12
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 2,
-      "column": 21
-    },
-    "endPos": {
-      "line": 2,
-      "column": 22
-    },
-    "lineNo": 2,
-    "colOffset": 21
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 2,
-      "column": 22
-    },
-    "endPos": {
-      "line": 2,
-      "column": 23
-    },
-    "lineNo": 2,
-    "colOffset": 22
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "and",
-    "startPos": {
-      "line": 2,
-      "column": 24
-    },
-    "endPos": {
-      "line": 2,
-      "column": 27
-    },
-    "lineNo": 2,
-    "colOffset": 24
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "cave",
-    "startPos": {
-      "line": 2,
-      "column": 28
-    },
-    "endPos": {
-      "line": 2,
-      "column": 32
-    },
-    "lineNo": 2,
-    "colOffset": 28
-  },
-  {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
-    "startPos": {
-      "line": 2,
-      "column": 32
-    },
-    "endPos": {
-      "line": 2,
-      "column": 33
-    },
-    "lineNo": 2,
-    "colOffset": 32
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "has_food",
-    "startPos": {
-      "line": 2,
-      "column": 33
-    },
-    "endPos": {
-      "line": 2,
-      "column": 41
-    },
-    "lineNo": 2,
-    "colOffset": 33
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 2,
-      "column": 41
-    },
-    "endPos": {
-      "line": 2,
-      "column": 42
-    },
-    "lineNo": 2,
-    "colOffset": 41
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 2,
-      "column": 42
-    },
-    "endPos": {
-      "line": 2,
-      "column": 43
-    },
-    "lineNo": 2,
-    "colOffset": 42
-  },
-  {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
-    "startPos": {
-      "line": 2,
-      "column": 43
-    },
-    "endPos": {
-      "line": 2,
-      "column": 44
-    },
-    "lineNo": 2,
-    "colOffset": 43
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 2,
-      "column": 44
-    },
-    "endPos": {
-      "line": 2,
-      "column": 45
-    },
-    "lineNo": 2,
-    "colOffset": 44
-  },
-  {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "        ",
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "5",
     "startPos": {
       "line": 3,
-      "column": 0
+      "column": 13
     },
     "endPos": {
       "line": 3,
-      "column": 8
+      "column": 14
     },
     "lineNo": 3,
-    "colOffset": 0
+    "colOffset": 13
   },
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "for",
+    "value": "else",
     "startPos": {
       "line": 3,
-      "column": 8
-    },
-    "endPos": {
-      "line": 3,
-      "column": 11
-    },
-    "lineNo": 3,
-    "colOffset": 8
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "food",
-    "startPos": {
-      "line": 3,
-      "column": 12
-    },
-    "endPos": {
-      "line": 3,
-      "column": 16
-    },
-    "lineNo": 3,
-    "colOffset": 12
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "in",
-    "startPos": {
-      "line": 3,
-      "column": 17
+      "column": 15
     },
     "endPos": {
       "line": 3,
       "column": 19
     },
     "lineNo": 3,
-    "colOffset": 17
+    "colOffset": 15
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "cave",
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"No\"",
     "startPos": {
       "line": 3,
       "column": 20
@@ -456,9 +306,9 @@ else:
     "colOffset": 20
   },
   {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "type": "NEWLINE",
+    "kind": "NEWLINE",
+    "value": "\\n",
     "startPos": {
       "line": 3,
       "column": 24
@@ -471,91 +321,16 @@ else:
     "colOffset": 24
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "foods",
-    "startPos": {
-      "line": 3,
-      "column": 25
-    },
-    "endPos": {
-      "line": 3,
-      "column": 30
-    },
-    "lineNo": 3,
-    "colOffset": 25
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 3,
-      "column": 30
-    },
-    "endPos": {
-      "line": 3,
-      "column": 31
-    },
-    "lineNo": 3,
-    "colOffset": 30
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 3,
-      "column": 31
-    },
-    "endPos": {
-      "line": 3,
-      "column": 32
-    },
-    "lineNo": 3,
-    "colOffset": 31
-  },
-  {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
-    "startPos": {
-      "line": 3,
-      "column": 32
-    },
-    "endPos": {
-      "line": 3,
-      "column": 33
-    },
-    "lineNo": 3,
-    "colOffset": 32
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
+    "type": "NL",
+    "kind": "NL",
     "value": "\\n",
-    "startPos": {
-      "line": 3,
-      "column": 33
-    },
-    "endPos": {
-      "line": 3,
-      "column": 34
-    },
-    "lineNo": 3,
-    "colOffset": 33
-  },
-  {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "            ",
     "startPos": {
       "line": 4,
       "column": 0
     },
     "endPos": {
       "line": 4,
-      "column": 12
+      "column": 1
     },
     "lineNo": 4,
     "colOffset": 0
@@ -563,119 +338,14 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 4,
-      "column": 12
-    },
-    "endPos": {
-      "line": 4,
-      "column": 16
-    },
-    "lineNo": 4,
-    "colOffset": 12
-  },
-  {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
-    "startPos": {
-      "line": 4,
-      "column": 16
-    },
-    "endPos": {
-      "line": 4,
-      "column": 17
-    },
-    "lineNo": 4,
-    "colOffset": 16
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "eat",
-    "startPos": {
-      "line": 4,
-      "column": 17
-    },
-    "endPos": {
-      "line": 4,
-      "column": 20
-    },
-    "lineNo": 4,
-    "colOffset": 17
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 4,
-      "column": 20
-    },
-    "endPos": {
-      "line": 4,
-      "column": 21
-    },
-    "lineNo": 4,
-    "colOffset": 20
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "food",
-    "startPos": {
-      "line": 4,
-      "column": 21
-    },
-    "endPos": {
-      "line": 4,
-      "column": 25
-    },
-    "lineNo": 4,
-    "colOffset": 21
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 4,
-      "column": 25
-    },
-    "endPos": {
-      "line": 4,
-      "column": 26
-    },
-    "lineNo": 4,
-    "colOffset": 25
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 4,
-      "column": 26
-    },
-    "endPos": {
-      "line": 4,
-      "column": 27
-    },
-    "lineNo": 4,
-    "colOffset": 26
-  },
-  {
-    "type": "NL",
-    "kind": "NL",
-    "value": "\\n",
+    "value": "if",
     "startPos": {
       "line": 5,
       "column": 0
     },
     "endPos": {
       "line": 5,
-      "column": 1
+      "column": 2
     },
     "lineNo": 5,
     "colOffset": 0
@@ -683,134 +353,134 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "if",
+    "value": "num",
     "startPos": {
-      "line": 6,
-      "column": 12
+      "line": 5,
+      "column": 3
     },
     "endPos": {
-      "line": 6,
-      "column": 14
+      "line": 5,
+      "column": 6
     },
-    "lineNo": 6,
-    "colOffset": 12
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 6,
-      "column": 15
-    },
-    "endPos": {
-      "line": 6,
-      "column": 19
-    },
-    "lineNo": 6,
-    "colOffset": 15
+    "lineNo": 5,
+    "colOffset": 3
   },
   {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "GREATER",
+    "value": ">",
     "startPos": {
-      "line": 6,
-      "column": 19
+      "line": 5,
+      "column": 7
     },
     "endPos": {
-      "line": 6,
-      "column": 20
+      "line": 5,
+      "column": 8
     },
-    "lineNo": 6,
-    "colOffset": 19
+    "lineNo": 5,
+    "colOffset": 7
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "is_full",
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "0",
     "startPos": {
-      "line": 6,
-      "column": 20
+      "line": 5,
+      "column": 9
     },
     "endPos": {
-      "line": 6,
-      "column": 27
+      "line": 5,
+      "column": 10
     },
-    "lineNo": 6,
-    "colOffset": 20
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 6,
-      "column": 27
-    },
-    "endPos": {
-      "line": 6,
-      "column": 28
-    },
-    "lineNo": 6,
-    "colOffset": 27
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 6,
-      "column": 28
-    },
-    "endPos": {
-      "line": 6,
-      "column": 29
-    },
-    "lineNo": 6,
-    "colOffset": 28
+    "lineNo": 5,
+    "colOffset": 9
   },
   {
     "type": "OP",
     "kind": "COLON",
     "value": ":",
     "startPos": {
-      "line": 6,
-      "column": 29
+      "line": 5,
+      "column": 10
     },
     "endPos": {
-      "line": 6,
-      "column": 30
+      "line": 5,
+      "column": 11
     },
-    "lineNo": 6,
-    "colOffset": 29
+    "lineNo": 5,
+    "colOffset": 10
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "return",
+    "startPos": {
+      "line": 5,
+      "column": 12
+    },
+    "endPos": {
+      "line": 5,
+      "column": 18
+    },
+    "lineNo": 5,
+    "colOffset": 12
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "True",
+    "startPos": {
+      "line": 5,
+      "column": 19
+    },
+    "endPos": {
+      "line": 5,
+      "column": 23
+    },
+    "lineNo": 5,
+    "colOffset": 19
   },
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
     "value": "\\n",
     "startPos": {
+      "line": 5,
+      "column": 23
+    },
+    "endPos": {
+      "line": 5,
+      "column": 24
+    },
+    "lineNo": 5,
+    "colOffset": 23
+  },
+  {
+    "type": "NL",
+    "kind": "NL",
+    "value": "\\n",
+    "startPos": {
       "line": 6,
-      "column": 30
+      "column": 0
     },
     "endPos": {
       "line": 6,
-      "column": 31
+      "column": 1
     },
     "lineNo": 6,
-    "colOffset": 30
+    "colOffset": 0
   },
   {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "                ",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "for",
     "startPos": {
       "line": 7,
       "column": 0
     },
     "endPos": {
       "line": 7,
-      "column": 16
+      "column": 3
     },
     "lineNo": 7,
     "colOffset": 0
@@ -818,17 +488,227 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "break",
+    "value": "i",
+    "startPos": {
+      "line": 7,
+      "column": 4
+    },
+    "endPos": {
+      "line": 7,
+      "column": 5
+    },
+    "lineNo": 7,
+    "colOffset": 4
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "in",
+    "startPos": {
+      "line": 7,
+      "column": 6
+    },
+    "endPos": {
+      "line": 7,
+      "column": 8
+    },
+    "lineNo": 7,
+    "colOffset": 6
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "range",
+    "startPos": {
+      "line": 7,
+      "column": 9
+    },
+    "endPos": {
+      "line": 7,
+      "column": 14
+    },
+    "lineNo": 7,
+    "colOffset": 9
+  },
+  {
+    "type": "OP",
+    "kind": "LPAR",
+    "value": "(",
+    "startPos": {
+      "line": 7,
+      "column": 14
+    },
+    "endPos": {
+      "line": 7,
+      "column": 15
+    },
+    "lineNo": 7,
+    "colOffset": 14
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "3",
+    "startPos": {
+      "line": 7,
+      "column": 15
+    },
+    "endPos": {
+      "line": 7,
+      "column": 16
+    },
+    "lineNo": 7,
+    "colOffset": 15
+  },
+  {
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
     "startPos": {
       "line": 7,
       "column": 16
     },
     "endPos": {
       "line": 7,
-      "column": 21
+      "column": 17
     },
     "lineNo": 7,
     "colOffset": 16
+  },
+  {
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
+    "startPos": {
+      "line": 7,
+      "column": 17
+    },
+    "endPos": {
+      "line": 7,
+      "column": 18
+    },
+    "lineNo": 7,
+    "colOffset": 17
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "print",
+    "startPos": {
+      "line": 7,
+      "column": 19
+    },
+    "endPos": {
+      "line": 7,
+      "column": 24
+    },
+    "lineNo": 7,
+    "colOffset": 19
+  },
+  {
+    "type": "OP",
+    "kind": "LPAR",
+    "value": "(",
+    "startPos": {
+      "line": 7,
+      "column": 24
+    },
+    "endPos": {
+      "line": 7,
+      "column": 25
+    },
+    "lineNo": 7,
+    "colOffset": 24
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "i",
+    "startPos": {
+      "line": 7,
+      "column": 25
+    },
+    "endPos": {
+      "line": 7,
+      "column": 26
+    },
+    "lineNo": 7,
+    "colOffset": 25
+  },
+  {
+    "type": "OP",
+    "kind": "COMMA",
+    "value": ",",
+    "startPos": {
+      "line": 7,
+      "column": 26
+    },
+    "endPos": {
+      "line": 7,
+      "column": 27
+    },
+    "lineNo": 7,
+    "colOffset": 26
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "end",
+    "startPos": {
+      "line": 7,
+      "column": 28
+    },
+    "endPos": {
+      "line": 7,
+      "column": 31
+    },
+    "lineNo": 7,
+    "colOffset": 28
+  },
+  {
+    "type": "OP",
+    "kind": "EQUAL",
+    "value": "=",
+    "startPos": {
+      "line": 7,
+      "column": 31
+    },
+    "endPos": {
+      "line": 7,
+      "column": 32
+    },
+    "lineNo": 7,
+    "colOffset": 31
+  },
+  {
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "' '",
+    "startPos": {
+      "line": 7,
+      "column": 32
+    },
+    "endPos": {
+      "line": 7,
+      "column": 35
+    },
+    "lineNo": 7,
+    "colOffset": 32
+  },
+  {
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
+    "startPos": {
+      "line": 7,
+      "column": 35
+    },
+    "endPos": {
+      "line": 7,
+      "column": 36
+    },
+    "lineNo": 7,
+    "colOffset": 35
   },
   {
     "type": "NEWLINE",
@@ -836,133 +716,148 @@ else:
     "value": "\\n",
     "startPos": {
       "line": 7,
-      "column": 21
+      "column": 36
     },
     "endPos": {
       "line": 7,
-      "column": 22
+      "column": 37
     },
     "lineNo": 7,
-    "colOffset": 21
+    "colOffset": 36
   },
   {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
+    "type": "NL",
+    "kind": "NL",
+    "value": "\\n",
     "startPos": {
       "line": 8,
-      "column": 4
+      "column": 0
     },
     "endPos": {
       "line": 8,
-      "column": 4
+      "column": 1
     },
     "lineNo": 8,
-    "colOffset": 4
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
-      "line": 8,
-      "column": 4
-    },
-    "endPos": {
-      "line": 8,
-      "column": 4
-    },
-    "lineNo": 8,
-    "colOffset": 4
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
-      "line": 8,
-      "column": 4
-    },
-    "endPos": {
-      "line": 8,
-      "column": 4
-    },
-    "lineNo": 8,
-    "colOffset": 4
+    "colOffset": 0
   },
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "elif",
+    "value": "while",
     "startPos": {
-      "line": 8,
-      "column": 4
+      "line": 9,
+      "column": 0
     },
     "endPos": {
-      "line": 8,
-      "column": 8
+      "line": 9,
+      "column": 5
     },
-    "lineNo": 8,
-    "colOffset": 4
+    "lineNo": 9,
+    "colOffset": 0
   },
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "bear",
+    "value": "count",
     "startPos": {
-      "line": 8,
-      "column": 9
+      "line": 9,
+      "column": 6
     },
     "endPos": {
-      "line": 8,
-      "column": 13
+      "line": 9,
+      "column": 11
     },
-    "lineNo": 8,
-    "colOffset": 9
+    "lineNo": 9,
+    "colOffset": 6
   },
   {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "GREATER",
+    "value": ">",
     "startPos": {
-      "line": 8,
-      "column": 13
+      "line": 9,
+      "column": 12
     },
     "endPos": {
-      "line": 8,
+      "line": 9,
+      "column": 13
+    },
+    "lineNo": 9,
+    "colOffset": 12
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "0",
+    "startPos": {
+      "line": 9,
       "column": 14
     },
-    "lineNo": 8,
-    "colOffset": 13
+    "endPos": {
+      "line": 9,
+      "column": 15
+    },
+    "lineNo": 9,
+    "colOffset": 14
+  },
+  {
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
+    "startPos": {
+      "line": 9,
+      "column": 15
+    },
+    "endPos": {
+      "line": 9,
+      "column": 16
+    },
+    "lineNo": 9,
+    "colOffset": 15
   },
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "is_hungry",
+    "value": "print",
     "startPos": {
-      "line": 8,
-      "column": 14
+      "line": 9,
+      "column": 17
     },
     "endPos": {
-      "line": 8,
-      "column": 23
+      "line": 9,
+      "column": 22
     },
-    "lineNo": 8,
-    "colOffset": 14
+    "lineNo": 9,
+    "colOffset": 17
   },
   {
     "type": "OP",
     "kind": "LPAR",
     "value": "(",
     "startPos": {
-      "line": 8,
+      "line": 9,
+      "column": 22
+    },
+    "endPos": {
+      "line": 9,
+      "column": 23
+    },
+    "lineNo": 9,
+    "colOffset": 22
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "count",
+    "startPos": {
+      "line": 9,
       "column": 23
     },
     "endPos": {
-      "line": 8,
-      "column": 24
+      "line": 9,
+      "column": 28
     },
-    "lineNo": 8,
+    "lineNo": 9,
     "colOffset": 23
   },
   {
@@ -970,216 +865,6 @@ else:
     "kind": "RPAR",
     "value": ")",
     "startPos": {
-      "line": 8,
-      "column": 24
-    },
-    "endPos": {
-      "line": 8,
-      "column": 25
-    },
-    "lineNo": 8,
-    "colOffset": 24
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "and",
-    "startPos": {
-      "line": 8,
-      "column": 26
-    },
-    "endPos": {
-      "line": 8,
-      "column": 29
-    },
-    "lineNo": 8,
-    "colOffset": 26
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "not",
-    "startPos": {
-      "line": 8,
-      "column": 30
-    },
-    "endPos": {
-      "line": 8,
-      "column": 33
-    },
-    "lineNo": 8,
-    "colOffset": 30
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "cave",
-    "startPos": {
-      "line": 8,
-      "column": 34
-    },
-    "endPos": {
-      "line": 8,
-      "column": 38
-    },
-    "lineNo": 8,
-    "colOffset": 34
-  },
-  {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
-    "startPos": {
-      "line": 8,
-      "column": 38
-    },
-    "endPos": {
-      "line": 8,
-      "column": 39
-    },
-    "lineNo": 8,
-    "colOffset": 38
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "has_food",
-    "startPos": {
-      "line": 8,
-      "column": 39
-    },
-    "endPos": {
-      "line": 8,
-      "column": 47
-    },
-    "lineNo": 8,
-    "colOffset": 39
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 8,
-      "column": 47
-    },
-    "endPos": {
-      "line": 8,
-      "column": 48
-    },
-    "lineNo": 8,
-    "colOffset": 47
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 8,
-      "column": 48
-    },
-    "endPos": {
-      "line": 8,
-      "column": 49
-    },
-    "lineNo": 8,
-    "colOffset": 48
-  },
-  {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
-    "startPos": {
-      "line": 8,
-      "column": 49
-    },
-    "endPos": {
-      "line": 8,
-      "column": 50
-    },
-    "lineNo": 8,
-    "colOffset": 49
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 8,
-      "column": 50
-    },
-    "endPos": {
-      "line": 8,
-      "column": 51
-    },
-    "lineNo": 8,
-    "colOffset": 50
-  },
-  {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "        ",
-    "startPos": {
-      "line": 9,
-      "column": 0
-    },
-    "endPos": {
-      "line": 9,
-      "column": 8
-    },
-    "lineNo": 9,
-    "colOffset": 0
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 9,
-      "column": 8
-    },
-    "endPos": {
-      "line": 9,
-      "column": 12
-    },
-    "lineNo": 9,
-    "colOffset": 8
-  },
-  {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
-    "startPos": {
-      "line": 9,
-      "column": 12
-    },
-    "endPos": {
-      "line": 9,
-      "column": 13
-    },
-    "lineNo": 9,
-    "colOffset": 12
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "search_for_food",
-    "startPos": {
-      "line": 9,
-      "column": 13
-    },
-    "endPos": {
-      "line": 9,
-      "column": 28
-    },
-    "lineNo": 9,
-    "colOffset": 13
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
       "line": 9,
       "column": 28
     },
@@ -1192,8 +877,8 @@ else:
   },
   {
     "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
+    "kind": "SEMI",
+    "value": ";",
     "startPos": {
       "line": 9,
       "column": 29
@@ -1206,19 +891,64 @@ else:
     "colOffset": 29
   },
   {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "count",
+    "startPos": {
+      "line": 9,
+      "column": 31
+    },
+    "endPos": {
+      "line": 9,
+      "column": 36
+    },
+    "lineNo": 9,
+    "colOffset": 31
+  },
+  {
+    "type": "OP",
+    "kind": "MINEQUAL",
+    "value": "-=",
+    "startPos": {
+      "line": 9,
+      "column": 37
+    },
+    "endPos": {
+      "line": 9,
+      "column": 39
+    },
+    "lineNo": 9,
+    "colOffset": 37
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "1",
+    "startPos": {
+      "line": 9,
+      "column": 40
+    },
+    "endPos": {
+      "line": 9,
+      "column": 41
+    },
+    "lineNo": 9,
+    "colOffset": 40
+  },
+  {
     "type": "NEWLINE",
     "kind": "NEWLINE",
     "value": "\\n",
     "startPos": {
       "line": 9,
-      "column": 30
+      "column": 41
     },
     "endPos": {
       "line": 9,
-      "column": 31
+      "column": 42
     },
     "lineNo": 9,
-    "colOffset": 30
+    "colOffset": 41
   },
   {
     "type": "NL",
@@ -1241,11 +971,71 @@ else:
     "value": "if",
     "startPos": {
       "line": 11,
+      "column": 0
+    },
+    "endPos": {
+      "line": 11,
+      "column": 2
+    },
+    "lineNo": 11,
+    "colOffset": 0
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "x",
+    "startPos": {
+      "line": 11,
+      "column": 3
+    },
+    "endPos": {
+      "line": 11,
+      "column": 4
+    },
+    "lineNo": 11,
+    "colOffset": 3
+  },
+  {
+    "type": "OP",
+    "kind": "GREATER",
+    "value": ">",
+    "startPos": {
+      "line": 11,
+      "column": 5
+    },
+    "endPos": {
+      "line": 11,
+      "column": 6
+    },
+    "lineNo": 11,
+    "colOffset": 5
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "5",
+    "startPos": {
+      "line": 11,
+      "column": 7
+    },
+    "endPos": {
+      "line": 11,
+      "column": 8
+    },
+    "lineNo": 11,
+    "colOffset": 7
+  },
+  {
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
+    "startPos": {
+      "line": 11,
       "column": 8
     },
     "endPos": {
       "line": 11,
-      "column": 10
+      "column": 9
     },
     "lineNo": 11,
     "colOffset": 8
@@ -1253,22 +1043,22 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "bear",
+    "value": "print",
     "startPos": {
       "line": 11,
-      "column": 11
+      "column": 10
     },
     "endPos": {
       "line": 11,
       "column": 15
     },
     "lineNo": 11,
-    "colOffset": 11
+    "colOffset": 10
   },
   {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "LPAR",
+    "value": "(",
     "startPos": {
       "line": 11,
       "column": 15
@@ -1281,39 +1071,99 @@ else:
     "colOffset": 15
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "cannot_find_food",
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"x > 5\"",
     "startPos": {
       "line": 11,
       "column": 16
     },
     "endPos": {
       "line": 11,
-      "column": 32
+      "column": 23
     },
     "lineNo": 11,
     "colOffset": 16
   },
   {
     "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
+    "kind": "RPAR",
+    "value": ")",
     "startPos": {
       "line": 11,
-      "column": 32
+      "column": 23
     },
     "endPos": {
       "line": 11,
-      "column": 33
+      "column": 24
     },
     "lineNo": 11,
-    "colOffset": 32
+    "colOffset": 23
   },
   {
     "type": "OP",
-    "kind": "LBRACE",
-    "value": "{",
+    "kind": "SEMI",
+    "value": ";",
+    "startPos": {
+      "line": 11,
+      "column": 24
+    },
+    "endPos": {
+      "line": 11,
+      "column": 25
+    },
+    "lineNo": 11,
+    "colOffset": 24
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "if",
+    "startPos": {
+      "line": 11,
+      "column": 26
+    },
+    "endPos": {
+      "line": 11,
+      "column": 28
+    },
+    "lineNo": 11,
+    "colOffset": 26
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "x",
+    "startPos": {
+      "line": 11,
+      "column": 29
+    },
+    "endPos": {
+      "line": 11,
+      "column": 30
+    },
+    "lineNo": 11,
+    "colOffset": 29
+  },
+  {
+    "type": "OP",
+    "kind": "GREATER",
+    "value": ">",
+    "startPos": {
+      "line": 11,
+      "column": 31
+    },
+    "endPos": {
+      "line": 11,
+      "column": 32
+    },
+    "lineNo": 11,
+    "colOffset": 31
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "8",
     "startPos": {
       "line": 11,
       "column": 33
@@ -1326,64 +1176,64 @@ else:
     "colOffset": 33
   },
   {
-    "type": "STRING",
-    "kind": "STRING",
-    "value": "\"timeout\"",
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
     "startPos": {
       "line": 11,
       "column": 34
     },
     "endPos": {
       "line": 11,
-      "column": 43
+      "column": 35
     },
     "lineNo": 11,
     "colOffset": 34
   },
   {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "print",
     "startPos": {
       "line": 11,
-      "column": 43
+      "column": 36
     },
     "endPos": {
       "line": 11,
-      "column": 44
+      "column": 41
     },
     "lineNo": 11,
-    "colOffset": 43
+    "colOffset": 36
+  },
+  {
+    "type": "OP",
+    "kind": "LPAR",
+    "value": "(",
+    "startPos": {
+      "line": 11,
+      "column": 41
+    },
+    "endPos": {
+      "line": 11,
+      "column": 42
+    },
+    "lineNo": 11,
+    "colOffset": 41
   },
   {
     "type": "STRING",
     "kind": "STRING",
-    "value": "\"1 hour\"",
+    "value": "\"x > 8\"",
     "startPos": {
       "line": 11,
-      "column": 45
+      "column": 42
     },
     "endPos": {
       "line": 11,
-      "column": 53
+      "column": 49
     },
     "lineNo": 11,
-    "colOffset": 45
-  },
-  {
-    "type": "OP",
-    "kind": "RBRACE",
-    "value": "}",
-    "startPos": {
-      "line": 11,
-      "column": 53
-    },
-    "endPos": {
-      "line": 11,
-      "column": 54
-    },
-    "lineNo": 11,
-    "colOffset": 53
+    "colOffset": 42
   },
   {
     "type": "OP",
@@ -1391,341 +1241,341 @@ else:
     "value": ")",
     "startPos": {
       "line": 11,
-      "column": 54
+      "column": 49
     },
     "endPos": {
       "line": 11,
-      "column": 55
+      "column": 50
     },
     "lineNo": 11,
-    "colOffset": 54
+    "colOffset": 49
   },
   {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
+    "type": "NEWLINE",
+    "kind": "NEWLINE",
+    "value": "\\n",
     "startPos": {
       "line": 11,
-      "column": 55
+      "column": 50
     },
     "endPos": {
       "line": 11,
-      "column": 56
+      "column": 51
     },
     "lineNo": 11,
-    "colOffset": 55
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 11,
-      "column": 56
-    },
-    "endPos": {
-      "line": 11,
-      "column": 57
-    },
-    "lineNo": 11,
-    "colOffset": 56
-  },
-  {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "            ",
-    "startPos": {
-      "line": 12,
-      "column": 0
-    },
-    "endPos": {
-      "line": 12,
-      "column": 12
-    },
-    "lineNo": 12,
-    "colOffset": 0
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 12,
-      "column": 12
-    },
-    "endPos": {
-      "line": 12,
-      "column": 16
-    },
-    "lineNo": 12,
-    "colOffset": 12
-  },
-  {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
-    "startPos": {
-      "line": 12,
-      "column": 16
-    },
-    "endPos": {
-      "line": 12,
-      "column": 17
-    },
-    "lineNo": 12,
-    "colOffset": 16
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "go_home",
-    "startPos": {
-      "line": 12,
-      "column": 17
-    },
-    "endPos": {
-      "line": 12,
-      "column": 24
-    },
-    "lineNo": 12,
-    "colOffset": 17
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 12,
-      "column": 24
-    },
-    "endPos": {
-      "line": 12,
-      "column": 25
-    },
-    "lineNo": 12,
-    "colOffset": 24
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 12,
-      "column": 25
-    },
-    "endPos": {
-      "line": 12,
-      "column": 26
-    },
-    "lineNo": 12,
-    "colOffset": 25
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 12,
-      "column": 26
-    },
-    "endPos": {
-      "line": 12,
-      "column": 27
-    },
-    "lineNo": 12,
-    "colOffset": 26
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
-      "line": 13,
-      "column": 4
-    },
-    "endPos": {
-      "line": 13,
-      "column": 4
-    },
-    "lineNo": 13,
-    "colOffset": 4
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
-      "line": 13,
-      "column": 4
-    },
-    "endPos": {
-      "line": 13,
-      "column": 4
-    },
-    "lineNo": 13,
-    "colOffset": 4
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "else",
-    "startPos": {
-      "line": 13,
-      "column": 4
-    },
-    "endPos": {
-      "line": 13,
-      "column": 8
-    },
-    "lineNo": 13,
-    "colOffset": 4
-  },
-  {
-    "type": "OP",
-    "kind": "COLON",
-    "value": ":",
-    "startPos": {
-      "line": 13,
-      "column": 8
-    },
-    "endPos": {
-      "line": 13,
-      "column": 9
-    },
-    "lineNo": 13,
-    "colOffset": 8
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 13,
-      "column": 9
-    },
-    "endPos": {
-      "line": 13,
-      "column": 10
-    },
-    "lineNo": 13,
-    "colOffset": 9
-  },
-  {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "        ",
-    "startPos": {
-      "line": 14,
-      "column": 0
-    },
-    "endPos": {
-      "line": 14,
-      "column": 8
-    },
-    "lineNo": 14,
-    "colOffset": 0
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 14,
-      "column": 8
-    },
-    "endPos": {
-      "line": 14,
-      "column": 12
-    },
-    "lineNo": 14,
-    "colOffset": 8
-  },
-  {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
-    "startPos": {
-      "line": 14,
-      "column": 12
-    },
-    "endPos": {
-      "line": 14,
-      "column": 13
-    },
-    "lineNo": 14,
-    "colOffset": 12
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "sleep",
-    "startPos": {
-      "line": 14,
-      "column": 13
-    },
-    "endPos": {
-      "line": 14,
-      "column": 18
-    },
-    "lineNo": 14,
-    "colOffset": 13
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 14,
-      "column": 18
-    },
-    "endPos": {
-      "line": 14,
-      "column": 19
-    },
-    "lineNo": 14,
-    "colOffset": 18
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 14,
-      "column": 19
-    },
-    "endPos": {
-      "line": 14,
-      "column": 20
-    },
-    "lineNo": 14,
-    "colOffset": 19
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
-    "startPos": {
-      "line": 14,
-      "column": 20
-    },
-    "endPos": {
-      "line": 14,
-      "column": 21
-    },
-    "lineNo": 14,
-    "colOffset": 20
+    "colOffset": 50
   },
   {
     "type": "NL",
     "kind": "NL",
     "value": "\\n",
     "startPos": {
+      "line": 12,
+      "column": 0
+    },
+    "endPos": {
+      "line": 12,
+      "column": 1
+    },
+    "lineNo": 12,
+    "colOffset": 0
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "squares",
+    "startPos": {
+      "line": 13,
+      "column": 0
+    },
+    "endPos": {
+      "line": 13,
+      "column": 7
+    },
+    "lineNo": 13,
+    "colOffset": 0
+  },
+  {
+    "type": "OP",
+    "kind": "EQUAL",
+    "value": "=",
+    "startPos": {
+      "line": 13,
+      "column": 8
+    },
+    "endPos": {
+      "line": 13,
+      "column": 9
+    },
+    "lineNo": 13,
+    "colOffset": 8
+  },
+  {
+    "type": "OP",
+    "kind": "LSQB",
+    "value": "[",
+    "startPos": {
+      "line": 13,
+      "column": 10
+    },
+    "endPos": {
+      "line": 13,
+      "column": 11
+    },
+    "lineNo": 13,
+    "colOffset": 10
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "n",
+    "startPos": {
+      "line": 13,
+      "column": 11
+    },
+    "endPos": {
+      "line": 13,
+      "column": 12
+    },
+    "lineNo": 13,
+    "colOffset": 11
+  },
+  {
+    "type": "OP",
+    "kind": "DOUBLESTAR",
+    "value": "**",
+    "startPos": {
+      "line": 13,
+      "column": 12
+    },
+    "endPos": {
+      "line": 13,
+      "column": 14
+    },
+    "lineNo": 13,
+    "colOffset": 12
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "2",
+    "startPos": {
+      "line": 13,
+      "column": 14
+    },
+    "endPos": {
+      "line": 13,
+      "column": 15
+    },
+    "lineNo": 13,
+    "colOffset": 14
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "for",
+    "startPos": {
+      "line": 13,
+      "column": 16
+    },
+    "endPos": {
+      "line": 13,
+      "column": 19
+    },
+    "lineNo": 13,
+    "colOffset": 16
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "n",
+    "startPos": {
+      "line": 13,
+      "column": 20
+    },
+    "endPos": {
+      "line": 13,
+      "column": 21
+    },
+    "lineNo": 13,
+    "colOffset": 20
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "in",
+    "startPos": {
+      "line": 13,
+      "column": 22
+    },
+    "endPos": {
+      "line": 13,
+      "column": 24
+    },
+    "lineNo": 13,
+    "colOffset": 22
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "numbers",
+    "startPos": {
+      "line": 13,
+      "column": 25
+    },
+    "endPos": {
+      "line": 13,
+      "column": 32
+    },
+    "lineNo": 13,
+    "colOffset": 25
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "if",
+    "startPos": {
+      "line": 13,
+      "column": 33
+    },
+    "endPos": {
+      "line": 13,
+      "column": 35
+    },
+    "lineNo": 13,
+    "colOffset": 33
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "n",
+    "startPos": {
+      "line": 13,
+      "column": 36
+    },
+    "endPos": {
+      "line": 13,
+      "column": 37
+    },
+    "lineNo": 13,
+    "colOffset": 36
+  },
+  {
+    "type": "OP",
+    "kind": "PERCENT",
+    "value": "%",
+    "startPos": {
+      "line": 13,
+      "column": 38
+    },
+    "endPos": {
+      "line": 13,
+      "column": 39
+    },
+    "lineNo": 13,
+    "colOffset": 38
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "2",
+    "startPos": {
+      "line": 13,
+      "column": 40
+    },
+    "endPos": {
+      "line": 13,
+      "column": 41
+    },
+    "lineNo": 13,
+    "colOffset": 40
+  },
+  {
+    "type": "OP",
+    "kind": "EQEQUAL",
+    "value": "==",
+    "startPos": {
+      "line": 13,
+      "column": 42
+    },
+    "endPos": {
+      "line": 13,
+      "column": 44
+    },
+    "lineNo": 13,
+    "colOffset": 42
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "0",
+    "startPos": {
+      "line": 13,
+      "column": 45
+    },
+    "endPos": {
+      "line": 13,
+      "column": 46
+    },
+    "lineNo": 13,
+    "colOffset": 45
+  },
+  {
+    "type": "OP",
+    "kind": "RSQB",
+    "value": "]",
+    "startPos": {
+      "line": 13,
+      "column": 46
+    },
+    "endPos": {
+      "line": 13,
+      "column": 47
+    },
+    "lineNo": 13,
+    "colOffset": 46
+  },
+  {
+    "type": "NEWLINE",
+    "kind": "NEWLINE",
+    "value": "\\n",
+    "startPos": {
+      "line": 13,
+      "column": 47
+    },
+    "endPos": {
+      "line": 13,
+      "column": 48
+    },
+    "lineNo": 13,
+    "colOffset": 47
+  },
+  {
+    "type": "NL",
+    "kind": "NL",
+    "value": "\\n",
+    "startPos": {
+      "line": 14,
+      "column": 0
+    },
+    "endPos": {
+      "line": 14,
+      "column": 1
+    },
+    "lineNo": 14,
+    "colOffset": 0
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "if",
+    "startPos": {
       "line": 15,
       "column": 0
     },
     "endPos": {
       "line": 15,
-      "column": 1
+      "column": 2
     },
     "lineNo": 15,
     "colOffset": 0
@@ -1733,134 +1583,224 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "while",
+    "value": "x",
     "startPos": {
-      "line": 16,
-      "column": 8
+      "line": 15,
+      "column": 3
     },
     "endPos": {
-      "line": 16,
-      "column": 13
+      "line": 15,
+      "column": 4
     },
-    "lineNo": 16,
-    "colOffset": 8
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 16,
-      "column": 14
-    },
-    "endPos": {
-      "line": 16,
-      "column": 18
-    },
-    "lineNo": 16,
-    "colOffset": 14
+    "lineNo": 15,
+    "colOffset": 3
   },
   {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "LESS",
+    "value": "<",
     "startPos": {
-      "line": 16,
-      "column": 18
+      "line": 15,
+      "column": 5
     },
     "endPos": {
-      "line": 16,
-      "column": 19
+      "line": 15,
+      "column": 6
     },
-    "lineNo": 16,
-    "colOffset": 18
+    "lineNo": 15,
+    "colOffset": 5
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "is_sleeping",
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "15",
     "startPos": {
-      "line": 16,
-      "column": 19
+      "line": 15,
+      "column": 7
     },
     "endPos": {
-      "line": 16,
-      "column": 30
+      "line": 15,
+      "column": 9
     },
-    "lineNo": 16,
-    "colOffset": 19
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 16,
-      "column": 30
-    },
-    "endPos": {
-      "line": 16,
-      "column": 31
-    },
-    "lineNo": 16,
-    "colOffset": 30
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 16,
-      "column": 31
-    },
-    "endPos": {
-      "line": 16,
-      "column": 32
-    },
-    "lineNo": 16,
-    "colOffset": 31
+    "lineNo": 15,
+    "colOffset": 7
   },
   {
     "type": "OP",
     "kind": "COLON",
     "value": ":",
     "startPos": {
-      "line": 16,
-      "column": 32
+      "line": 15,
+      "column": 9
     },
     "endPos": {
-      "line": 16,
+      "line": 15,
+      "column": 10
+    },
+    "lineNo": 15,
+    "colOffset": 9
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "print",
+    "startPos": {
+      "line": 15,
+      "column": 11
+    },
+    "endPos": {
+      "line": 15,
+      "column": 16
+    },
+    "lineNo": 15,
+    "colOffset": 11
+  },
+  {
+    "type": "OP",
+    "kind": "LPAR",
+    "value": "(",
+    "startPos": {
+      "line": 15,
+      "column": 16
+    },
+    "endPos": {
+      "line": 15,
+      "column": 17
+    },
+    "lineNo": 15,
+    "colOffset": 16
+  },
+  {
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"x < 15\"",
+    "startPos": {
+      "line": 15,
+      "column": 17
+    },
+    "endPos": {
+      "line": 15,
+      "column": 25
+    },
+    "lineNo": 15,
+    "colOffset": 17
+  },
+  {
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
+    "startPos": {
+      "line": 15,
+      "column": 25
+    },
+    "endPos": {
+      "line": 15,
+      "column": 26
+    },
+    "lineNo": 15,
+    "colOffset": 25
+  },
+  {
+    "type": "OP",
+    "kind": "SEMI",
+    "value": ";",
+    "startPos": {
+      "line": 15,
+      "column": 26
+    },
+    "endPos": {
+      "line": 15,
+      "column": 27
+    },
+    "lineNo": 15,
+    "colOffset": 26
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "x",
+    "startPos": {
+      "line": 15,
+      "column": 28
+    },
+    "endPos": {
+      "line": 15,
+      "column": 29
+    },
+    "lineNo": 15,
+    "colOffset": 28
+  },
+  {
+    "type": "OP",
+    "kind": "PLUSEQUAL",
+    "value": "+=",
+    "startPos": {
+      "line": 15,
+      "column": 30
+    },
+    "endPos": {
+      "line": 15,
+      "column": 32
+    },
+    "lineNo": 15,
+    "colOffset": 30
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "5",
+    "startPos": {
+      "line": 15,
       "column": 33
     },
-    "lineNo": 16,
-    "colOffset": 32
+    "endPos": {
+      "line": 15,
+      "column": 34
+    },
+    "lineNo": 15,
+    "colOffset": 33
   },
   {
     "type": "NEWLINE",
     "kind": "NEWLINE",
     "value": "\\n",
     "startPos": {
+      "line": 15,
+      "column": 34
+    },
+    "endPos": {
+      "line": 15,
+      "column": 35
+    },
+    "lineNo": 15,
+    "colOffset": 34
+  },
+  {
+    "type": "NL",
+    "kind": "NL",
+    "value": "\\n",
+    "startPos": {
       "line": 16,
-      "column": 33
+      "column": 0
     },
     "endPos": {
       "line": 16,
-      "column": 34
+      "column": 1
     },
     "lineNo": 16,
-    "colOffset": 33
+    "colOffset": 0
   },
   {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "            ",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "if",
     "startPos": {
       "line": 17,
       "column": 0
     },
     "endPos": {
       "line": 17,
-      "column": 12
+      "column": 2
     },
     "lineNo": 17,
     "colOffset": 0
@@ -1868,7 +1808,67 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "bear",
+    "value": "x",
+    "startPos": {
+      "line": 17,
+      "column": 3
+    },
+    "endPos": {
+      "line": 17,
+      "column": 4
+    },
+    "lineNo": 17,
+    "colOffset": 3
+  },
+  {
+    "type": "OP",
+    "kind": "EQEQUAL",
+    "value": "==",
+    "startPos": {
+      "line": 17,
+      "column": 5
+    },
+    "endPos": {
+      "line": 17,
+      "column": 7
+    },
+    "lineNo": 17,
+    "colOffset": 5
+  },
+  {
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "20",
+    "startPos": {
+      "line": 17,
+      "column": 8
+    },
+    "endPos": {
+      "line": 17,
+      "column": 10
+    },
+    "lineNo": 17,
+    "colOffset": 8
+  },
+  {
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
+    "startPos": {
+      "line": 17,
+      "column": 10
+    },
+    "endPos": {
+      "line": 17,
+      "column": 11
+    },
+    "lineNo": 17,
+    "colOffset": 10
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "pass",
     "startPos": {
       "line": 17,
       "column": 12
@@ -1881,9 +1881,9 @@ else:
     "colOffset": 12
   },
   {
-    "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "type": "NEWLINE",
+    "kind": "NEWLINE",
+    "value": "\\n",
     "startPos": {
       "line": 17,
       "column": 16
@@ -1896,106 +1896,16 @@ else:
     "colOffset": 16
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "dream",
-    "startPos": {
-      "line": 17,
-      "column": 17
-    },
-    "endPos": {
-      "line": 17,
-      "column": 22
-    },
-    "lineNo": 17,
-    "colOffset": 17
-  },
-  {
-    "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 17,
-      "column": 22
-    },
-    "endPos": {
-      "line": 17,
-      "column": 23
-    },
-    "lineNo": 17,
-    "colOffset": 22
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
-    "startPos": {
-      "line": 17,
-      "column": 23
-    },
-    "endPos": {
-      "line": 17,
-      "column": 24
-    },
-    "lineNo": 17,
-    "colOffset": 23
-  },
-  {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
+    "type": "NL",
+    "kind": "NL",
     "value": "\\n",
     "startPos": {
-      "line": 17,
-      "column": 24
-    },
-    "endPos": {
-      "line": 17,
-      "column": 25
-    },
-    "lineNo": 17,
-    "colOffset": 24
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
       "line": 18,
       "column": 0
     },
     "endPos": {
       "line": 18,
-      "column": 0
-    },
-    "lineNo": 18,
-    "colOffset": 0
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
-      "line": 18,
-      "column": 0
-    },
-    "endPos": {
-      "line": 18,
-      "column": 0
-    },
-    "lineNo": 18,
-    "colOffset": 0
-  },
-  {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
-    "startPos": {
-      "line": 18,
-      "column": 0
-    },
-    "endPos": {
-      "line": 18,
-      "column": 0
+      "column": 1
     },
     "lineNo": 18,
     "colOffset": 0
@@ -2003,16 +1913,16 @@ else:
   {
     "type": "NAME",
     "kind": "NAME",
-    "value": "else",
+    "value": "try",
     "startPos": {
-      "line": 18,
+      "line": 19,
       "column": 0
     },
     "endPos": {
-      "line": 18,
-      "column": 4
+      "line": 19,
+      "column": 3
     },
-    "lineNo": 18,
+    "lineNo": 19,
     "colOffset": 0
   },
   {
@@ -2020,110 +1930,65 @@ else:
     "kind": "COLON",
     "value": ":",
     "startPos": {
-      "line": 18,
+      "line": 19,
+      "column": 3
+    },
+    "endPos": {
+      "line": 19,
       "column": 4
     },
-    "endPos": {
-      "line": 18,
-      "column": 5
-    },
-    "lineNo": 18,
-    "colOffset": 4
+    "lineNo": 19,
+    "colOffset": 3
   },
   {
-    "type": "NEWLINE",
-    "kind": "NEWLINE",
-    "value": "\\n",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "result",
     "startPos": {
-      "line": 18,
+      "line": 19,
       "column": 5
     },
     "endPos": {
-      "line": 18,
-      "column": 6
+      "line": 19,
+      "column": 11
     },
-    "lineNo": 18,
+    "lineNo": 19,
     "colOffset": 5
   },
   {
-    "type": "INDENT",
-    "kind": "INDENT",
-    "value": "    ",
-    "startPos": {
-      "line": 19,
-      "column": 0
-    },
-    "endPos": {
-      "line": 19,
-      "column": 4
-    },
-    "lineNo": 19,
-    "colOffset": 0
-  },
-  {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "bear",
-    "startPos": {
-      "line": 19,
-      "column": 4
-    },
-    "endPos": {
-      "line": 19,
-      "column": 8
-    },
-    "lineNo": 19,
-    "colOffset": 4
-  },
-  {
     "type": "OP",
-    "kind": "DOT",
-    "value": ".",
+    "kind": "EQUAL",
+    "value": "=",
     "startPos": {
       "line": 19,
-      "column": 8
+      "column": 12
     },
     "endPos": {
       "line": 19,
-      "column": 9
+      "column": 13
     },
     "lineNo": 19,
-    "colOffset": 8
+    "colOffset": 12
   },
   {
-    "type": "NAME",
-    "kind": "NAME",
-    "value": "go_home",
+    "type": "NUMBER",
+    "kind": "NUMBER",
+    "value": "10",
     "startPos": {
       "line": 19,
-      "column": 9
+      "column": 14
     },
     "endPos": {
       "line": 19,
       "column": 16
     },
     "lineNo": 19,
-    "colOffset": 9
+    "colOffset": 14
   },
   {
     "type": "OP",
-    "kind": "LPAR",
-    "value": "(",
-    "startPos": {
-      "line": 19,
-      "column": 16
-    },
-    "endPos": {
-      "line": 19,
-      "column": 17
-    },
-    "lineNo": 19,
-    "colOffset": 16
-  },
-  {
-    "type": "OP",
-    "kind": "RPAR",
-    "value": ")",
+    "kind": "SLASH",
+    "value": "/",
     "startPos": {
       "line": 19,
       "column": 17
@@ -2136,48 +2001,168 @@ else:
     "colOffset": 17
   },
   {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "x",
+    "startPos": {
+      "line": 19,
+      "column": 19
+    },
+    "endPos": {
+      "line": 19,
+      "column": 20
+    },
+    "lineNo": 19,
+    "colOffset": 19
+  },
+  {
     "type": "NEWLINE",
     "kind": "NEWLINE",
     "value": "\\n",
     "startPos": {
       "line": 19,
-      "column": 18
+      "column": 20
     },
     "endPos": {
       "line": 19,
-      "column": 19
+      "column": 21
     },
     "lineNo": 19,
-    "colOffset": 18
+    "colOffset": 20
   },
   {
-    "type": "DEDENT",
-    "kind": "DEDENT",
-    "value": "",
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "except",
     "startPos": {
       "line": 20,
       "column": 0
     },
     "endPos": {
       "line": 20,
-      "column": 0
+      "column": 6
     },
     "lineNo": 20,
     "colOffset": 0
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "ZeroDivisionError",
+    "startPos": {
+      "line": 20,
+      "column": 7
+    },
+    "endPos": {
+      "line": 20,
+      "column": 24
+    },
+    "lineNo": 20,
+    "colOffset": 7
+  },
+  {
+    "type": "OP",
+    "kind": "COLON",
+    "value": ":",
+    "startPos": {
+      "line": 20,
+      "column": 24
+    },
+    "endPos": {
+      "line": 20,
+      "column": 25
+    },
+    "lineNo": 20,
+    "colOffset": 24
+  },
+  {
+    "type": "NAME",
+    "kind": "NAME",
+    "value": "print",
+    "startPos": {
+      "line": 20,
+      "column": 26
+    },
+    "endPos": {
+      "line": 20,
+      "column": 31
+    },
+    "lineNo": 20,
+    "colOffset": 26
+  },
+  {
+    "type": "OP",
+    "kind": "LPAR",
+    "value": "(",
+    "startPos": {
+      "line": 20,
+      "column": 31
+    },
+    "endPos": {
+      "line": 20,
+      "column": 32
+    },
+    "lineNo": 20,
+    "colOffset": 31
+  },
+  {
+    "type": "STRING",
+    "kind": "STRING",
+    "value": "\"Division by zero!\"",
+    "startPos": {
+      "line": 20,
+      "column": 32
+    },
+    "endPos": {
+      "line": 20,
+      "column": 51
+    },
+    "lineNo": 20,
+    "colOffset": 32
+  },
+  {
+    "type": "OP",
+    "kind": "RPAR",
+    "value": ")",
+    "startPos": {
+      "line": 20,
+      "column": 51
+    },
+    "endPos": {
+      "line": 20,
+      "column": 52
+    },
+    "lineNo": 20,
+    "colOffset": 51
+  },
+  {
+    "type": "NEWLINE",
+    "kind": "NEWLINE",
+    "value": "",
+    "startPos": {
+      "line": 20,
+      "column": 52
+    },
+    "endPos": {
+      "line": 20,
+      "column": 53
+    },
+    "lineNo": 20,
+    "colOffset": 52
   },
   {
     "type": "ENDMARKER",
     "kind": "ENDMARKER",
     "value": "",
     "startPos": {
-      "line": 20,
+      "line": 21,
       "column": 0
     },
     "endPos": {
-      "line": 20,
+      "line": 21,
       "column": 0
     },
-    "lineNo": 20,
+    "lineNo": 21,
     "colOffset": 0
   }
 ]

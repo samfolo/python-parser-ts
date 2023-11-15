@@ -27,6 +27,7 @@ export interface Cursor {
   isInCollection: () => boolean;
   isInBlockStatement: () => boolean;
   stageBlockStatementEntry: () => void;
+  unstageBlockStatementEntry: () => void;
   isBlockStatementEntryStaged: () => boolean;
   enterBlockStatement: () => void;
   exitBlockStatement: () => void;

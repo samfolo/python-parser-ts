@@ -206,7 +206,11 @@ export const tokenise = (input: string): Token[] => {
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
         if (cursor.isBlockStatementEntryStaged()) {
-          cursor.enterBlockStatement();
+          if (cursor.peek() === TOKENS.NEWLINE) {
+            cursor.enterBlockStatement();
+          } else {
+            cursor.unstageBlockStatementEntry();
+          }
         }
         break;
       case TOKENS.TILDE:

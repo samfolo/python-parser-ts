@@ -58,10 +58,11 @@ export const createCursor = (input: string): Cursor => {
   const isInCollection = () => collectionScope > 0;
 
   const stageBlockStatementEntry = () => (shouldEnterBlockStatement = true);
+  const unstageBlockStatementEntry = () => (shouldEnterBlockStatement = false);
   const isBlockStatementEntryStaged = () => shouldEnterBlockStatement;
   const enterBlockStatement = () => {
     inBlockStatement = true;
-    shouldEnterBlockStatement = false;
+    unstageBlockStatementEntry();
   };
   const exitBlockStatement = () => {
     indentationStack.pop();
@@ -104,6 +105,7 @@ export const createCursor = (input: string): Cursor => {
     exitCollection,
     isInCollection,
     stageBlockStatementEntry,
+    unstageBlockStatementEntry,
     isBlockStatementEntryStaged,
     enterBlockStatement,
     exitBlockStatement,
