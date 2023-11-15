@@ -17,7 +17,7 @@ export const handleWhitespace: Cursor.Action<Token[]> = (cursor) => {
     }
   }
 
-  if (isStartOfLine && cursor.isInBlockStatement() && !cursor.isInCollection()) {
+  if (isStartOfLine && cursor.isInBlockStatement() && !cursor.isInCollection() && cursor.peek() !== TOKENS.NEWLINE) {
     let tokens: Token[] = [];
 
     switch (cursor.compareLastIndentationWith(nextIndentation).scope) {
