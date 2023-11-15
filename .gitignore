@@ -128,3 +128,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Out files emitted using tools built to aid development
+test.txt
+src/tokeniser/__generator__/output.ts
