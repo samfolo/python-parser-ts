@@ -1,3 +1,4 @@
+import {writeFileSync} from 'fs';
 import {tokenise} from './tokenise';
 import {
   BOOLEAN_FIXTURES,
@@ -76,7 +77,7 @@ describe('tokenise', () => {
       {skip: true, description: 'classes', cases: CLASS_FIXTURES},
       {skip: true, description: 'comments', cases: COMMENT_FIXTURES},
       {skip: false, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},
-      {skip: true, description: 'control flows', cases: CONTROL_FLOW_FIXTURES},
+      {skip: false, description: 'control flows', cases: CONTROL_FLOW_FIXTURES},
       {skip: true, description: 'encodings', cases: ENCODING_FIXTURES},
       {skip: true, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
       {skip: true, description: 'functions', cases: FUNCTION_FIXTURES},
@@ -87,6 +88,7 @@ describe('tokenise', () => {
     ].filter(({skip}) => !skip)
   )('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {
+      writeFileSync('test.txt', JSON.stringify(tokenise(input), null, 2));
       expect(tokenise(input)).toEqual(expected);
     });
   });

@@ -3,6 +3,7 @@ import {Token} from '../types';
 export namespace Cursor {
   export type CurrentScope = 'indented' | 'dedented' | 'stable';
   export type Action<Return = void> = (cursor: Cursor) => Return;
+  export type CompareIndentationResult = {scope: CurrentScope; depth: number};
 }
 
 export interface Cursor {
@@ -17,11 +18,17 @@ export interface Cursor {
   startPos: () => Token.Position;
   endPos: () => Token.Position;
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
-  cacheWhitespace: (whitespace: number) => void;
-  compareCachedWhitespaceWith: (whitespace: number) => Cursor.CurrentScope;
+  pushIndentation: (nextIndentation: number) => void;
+  compareLastIndentationWith: (nextIndentation: number) => Cursor.CompareIndentationResult;
   pushWithNewLine: () => void;
   newLine: () => void;
   enterCollection: () => void;
   exitCollection: () => void;
   isInCollection: () => boolean;
+  isInBlockStatement: () => boolean;
+  stageBlockStatementEntry: () => void;
+  unstageBlockStatementEntry: () => void;
+  isBlockStatementEntryStaged: () => boolean;
+  enterBlockStatement: () => void;
+  exitBlockStatement: () => void;
 }

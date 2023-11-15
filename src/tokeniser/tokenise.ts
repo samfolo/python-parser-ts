@@ -205,6 +205,13 @@ export const tokenise = (input: string): Token[] => {
           break;
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
+        if (cursor.isBlockStatementEntryStaged()) {
+          if (cursor.peek() === TOKENS.NEWLINE) {
+            cursor.enterBlockStatement();
+          } else {
+            cursor.unstageBlockStatementEntry();
+          }
+        }
         break;
       case TOKENS.TILDE:
         tokens.push(createToken('OP', 'TILDE', TOKENS.TILDE, cursor.startPos(), cursor.endPos()));
@@ -240,9 +247,16 @@ export const tokenise = (input: string): Token[] => {
         break;
       case TOKENS.NEWLINE:
         tokens.push(cursor.act(handleNewline));
+
+        if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE) {
+          while (cursor.isInBlockStatement()) {
+            cursor.exitBlockStatement();
+            tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
+          }
+        }
         break;
       case TOKENS.WHITESPACE:
-        cursor.act(handleWhitespace);
+        tokens.push(...cursor.act(handleWhitespace));
         break;
       default:
         tokens.push(cursor.act(handleLiteral));
@@ -252,10 +266,16 @@ export const tokenise = (input: string): Token[] => {
     cursor.consume();
   }
 
-  if (tokens.length > 1 && tokens.at(-1)?.value !== TOKENS.NEWLINE) {
+  const lastToken = tokens.at(-1);
+  if (tokens.length > 1 && lastToken?.value !== TOKENS.NEWLINE && lastToken?.type !== 'DEDENT') {
     tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
     cursor.newLine();
     cursor.consume();
+  }
+
+  while (cursor.isInBlockStatement()) {
+    cursor.exitBlockStatement();
+    tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.startPos(), cursor.startPos()));
   }
 
   tokens.push(createToken('ENDMARKER', 'ENDMARKER', TOKENS.ENDMARKER, cursor.startPos(), cursor.startPos()));
