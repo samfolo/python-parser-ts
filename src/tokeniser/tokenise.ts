@@ -245,8 +245,9 @@ export const tokenise = (input: string): Token[] => {
         }
         tokens.push(createToken('OP', 'EQUAL', TOKENS.EQUAL, cursor.startPos(), cursor.endPos()));
         break;
-      case TOKENS.NEWLINE: {
+      case TOKENS.NEWLINE:
         tokens.push(cursor.act(handleNewline));
+
         if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE) {
           while (cursor.isInBlockStatement()) {
             cursor.exitBlockStatement();
@@ -254,7 +255,6 @@ export const tokenise = (input: string): Token[] => {
           }
         }
         break;
-      }
       case TOKENS.WHITESPACE:
         tokens.push(...cursor.act(handleWhitespace));
         break;
