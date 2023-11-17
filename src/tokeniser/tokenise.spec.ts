@@ -14,7 +14,6 @@ import {
   NAME_FIXTURES,
   NUMBER_FIXTURES,
   OPERATOR_FIXTURES,
-  SPECIAL_CHARACTER_FIXTURES,
   STRING_FIXTURES,
   TAGGED_STRING_FIXTURES,
   WHITESPACE_FIXTURES,
@@ -81,7 +80,6 @@ describe('tokenise', () => {
       {skip: false, description: 'functions', cases: FUNCTION_FIXTURES},
       {skip: false, description: 'imports', cases: IMPORT_FIXTURES},
       {skip: true, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
-      {skip: true, description: 'special characters', cases: SPECIAL_CHARACTER_FIXTURES},
       {skip: true, description: 'whitespaces', cases: WHITESPACE_FIXTURES},
     ].filter(({skip}) => !skip)
   )('$description', ({cases}) => {

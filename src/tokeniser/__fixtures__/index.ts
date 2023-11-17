@@ -14,5 +14,4 @@ export * from './functionExpressions';
 export * from './functions';
 export * from './imports';
 export * from './lineContinuations';
-export * from './specialCharacters';
 export * from './whitespaces';
