@@ -81,7 +81,7 @@ describe('tokenise', () => {
       {skip: true, description: 'encodings', cases: ENCODING_FIXTURES},
       {skip: false, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
       {skip: false, description: 'functions', cases: FUNCTION_FIXTURES},
-      {skip: true, description: 'imports', cases: IMPORT_FIXTURES},
+      {skip: false, description: 'imports', cases: IMPORT_FIXTURES},
       {skip: true, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
       {skip: true, description: 'special characters', cases: SPECIAL_CHARACTER_FIXTURES},
       {skip: true, description: 'whitespaces', cases: WHITESPACE_FIXTURES},
