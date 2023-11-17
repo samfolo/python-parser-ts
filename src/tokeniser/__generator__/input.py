@@ -1,6 +1,15 @@
-def inline_inner_function(*, a, b):
-    def inline_function(): return "Inline"
+def outer():
+    x = "local"
+    def inner():
+        nonlocal x
+        x = "nonlocal"
+    inner()
 
-    return inline_function()
+def coroutine_example():
+    value = yield
+    yield value
 
-def other_inline_function(): return "Also inline"; other_inline_function()
+x = 0
+def function_with_global():
+    global x
+    x = 10
