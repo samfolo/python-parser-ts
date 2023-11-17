@@ -10,7 +10,6 @@ export * from './classes';
 export * from './comments';
 export * from './comprehensions';
 export * from './controlFlows';
-export * from './encodings';
 export * from './functionExpressions';
 export * from './functions';
 export * from './imports';

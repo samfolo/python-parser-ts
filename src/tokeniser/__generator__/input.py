@@ -1,2 +1,3 @@
-def func():
-    import sys; sys.path.append('/path/to/module')
+# -*- coding: utf-16 -*-
+
+print("Hello, world!")
