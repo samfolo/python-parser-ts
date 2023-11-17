@@ -1,8 +1,1 @@
-@dataclass
-class MyDataClass:
-    field1: int
-    field2: str
-
-class RegularClass(MyDataClass):
-    def method(self):
-        pass
+my_list[func1(start_index) : func2(end_index)]
