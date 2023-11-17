@@ -1,1 +1,2 @@
-my_list[func1(start_index) : func2(end_index)]
+def func():
+    import sys; sys.path.append('/path/to/module')
