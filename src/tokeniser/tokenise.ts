@@ -205,7 +205,7 @@ export const tokenise = (input: string): Token[] => {
           break;
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
-        if (cursor.isBlockStatementEntryStaged()) {
+        if (cursor.isBlockStatementEntryStaged() && !cursor.isInCollection()) {
           if (cursor.peek() === TOKENS.NEWLINE) {
             cursor.enterBlockStatement();
           } else {
@@ -225,7 +225,7 @@ export const tokenise = (input: string): Token[] => {
         if (cursor.peek() === TOKENS.DOT && cursor.peek(2) === TOKENS.DOT) {
           cursor.push();
           cursor.push();
-          tokens.push(createToken('ELLIPSIS', 'ELLIPSIS', TOKENS.ELLIPSIS, cursor.startPos(), cursor.endPos()));
+          tokens.push(createToken('OP', 'ELLIPSIS', TOKENS.ELLIPSIS, cursor.startPos(), cursor.endPos()));
           break;
         }
         tokens.push(createToken('OP', 'DOT', TOKENS.DOT, cursor.startPos(), cursor.endPos()));

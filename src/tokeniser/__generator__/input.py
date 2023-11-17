@@ -1,20 +1,15 @@
-if x > 5: print("x is greater than 5")
+def outer():
+    x = "local"
+    def inner():
+        nonlocal x
+        x = "nonlocal"
+    inner()
 
-"Yes" if x > 5 else "No"
+def coroutine_example():
+    value = yield
+    yield value
 
-if num > 0: return True
-
-for i in range(3): print(i, end=' ')
-
-while count > 0: print(count); count -= 1
-
-if x > 5: print("x > 5"); if x > 8: print("x > 8")
-
-squares = [n**2 for n in numbers if n % 2 == 0]
-
-if x < 15: print("x < 15"); x += 5
-
-if x == 20: pass
-
-try: result = 10 / x
-except ZeroDivisionError: print("Division by zero!")
+x = 0
+def function_with_global():
+    global x
+    x = 10
