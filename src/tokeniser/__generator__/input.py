@@ -1,15 +1,8 @@
-def outer():
-    x = "local"
-    def inner():
-        nonlocal x
-        x = "nonlocal"
-    inner()
+@dataclass
+class MyDataClass:
+    field1: int
+    field2: str
 
-def coroutine_example():
-    value = yield
-    yield value
-
-x = 0
-def function_with_global():
-    global x
-    x = 10
+class RegularClass(MyDataClass):
+    def method(self):
+        pass
