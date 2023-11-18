@@ -2774,4 +2774,1415 @@ except ZeroDivisionError   	   			 	  :
       },
     ],
   },
+  {
+    input: `     		  "White"      	"Space"    			 	`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '     \t\t  ',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 9,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'STRING',
+        kind: 'STRING',
+        value: '"White"',
+        startPos: {
+          line: 1,
+          column: 9,
+        },
+        endPos: {
+          line: 1,
+          column: 16,
+        },
+        lineNo: 1,
+        colOffset: 9,
+      },
+      {
+        type: 'STRING',
+        kind: 'STRING',
+        value: '"Space"',
+        startPos: {
+          line: 1,
+          column: 23,
+        },
+        endPos: {
+          line: 1,
+          column: 30,
+        },
+        lineNo: 1,
+        colOffset: 23,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '',
+        startPos: {
+          line: 1,
+          column: 39,
+        },
+        endPos: {
+          line: 1,
+          column: 40,
+        },
+        lineNo: 1,
+        colOffset: 39,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: `	if True:
+		pass`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '\t',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 1,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'if',
+        startPos: {
+          line: 1,
+          column: 1,
+        },
+        endPos: {
+          line: 1,
+          column: 3,
+        },
+        lineNo: 1,
+        colOffset: 1,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'True',
+        startPos: {
+          line: 1,
+          column: 4,
+        },
+        endPos: {
+          line: 1,
+          column: 8,
+        },
+        lineNo: 1,
+        colOffset: 4,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 1,
+          column: 8,
+        },
+        endPos: {
+          line: 1,
+          column: 9,
+        },
+        lineNo: 1,
+        colOffset: 8,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 9,
+        },
+        endPos: {
+          line: 1,
+          column: 10,
+        },
+        lineNo: 1,
+        colOffset: 9,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '\t\t',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 2,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'pass',
+        startPos: {
+          line: 2,
+          column: 2,
+        },
+        endPos: {
+          line: 2,
+          column: 6,
+        },
+        lineNo: 2,
+        colOffset: 2,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 6,
+        },
+        endPos: {
+          line: 2,
+          column: 7,
+        },
+        lineNo: 2,
+        colOffset: 6,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 3,
+          column: 0,
+        },
+        endPos: {
+          line: 3,
+          column: 0,
+        },
+        lineNo: 3,
+        colOffset: 0,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 3,
+          column: 0,
+        },
+        endPos: {
+          line: 3,
+          column: 0,
+        },
+        lineNo: 3,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 3,
+          column: 0,
+        },
+        endPos: {
+          line: 3,
+          column: 0,
+        },
+        lineNo: 3,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: `        while True:
+        		if self._peek() == 0:
+        				break
+        		elif self._peek() == 10:
+        				self._read()
+        				self._read()`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '        ',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 8,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'while',
+        startPos: {
+          line: 1,
+          column: 8,
+        },
+        endPos: {
+          line: 1,
+          column: 13,
+        },
+        lineNo: 1,
+        colOffset: 8,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'True',
+        startPos: {
+          line: 1,
+          column: 14,
+        },
+        endPos: {
+          line: 1,
+          column: 18,
+        },
+        lineNo: 1,
+        colOffset: 14,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 1,
+          column: 18,
+        },
+        endPos: {
+          line: 1,
+          column: 19,
+        },
+        lineNo: 1,
+        colOffset: 18,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 19,
+        },
+        endPos: {
+          line: 1,
+          column: 20,
+        },
+        lineNo: 1,
+        colOffset: 19,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '        \t\t',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 10,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'if',
+        startPos: {
+          line: 2,
+          column: 10,
+        },
+        endPos: {
+          line: 2,
+          column: 12,
+        },
+        lineNo: 2,
+        colOffset: 10,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'self',
+        startPos: {
+          line: 2,
+          column: 13,
+        },
+        endPos: {
+          line: 2,
+          column: 17,
+        },
+        lineNo: 2,
+        colOffset: 13,
+      },
+      {
+        type: 'OP',
+        kind: 'DOT',
+        value: '.',
+        startPos: {
+          line: 2,
+          column: 17,
+        },
+        endPos: {
+          line: 2,
+          column: 18,
+        },
+        lineNo: 2,
+        colOffset: 17,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: '_peek',
+        startPos: {
+          line: 2,
+          column: 18,
+        },
+        endPos: {
+          line: 2,
+          column: 23,
+        },
+        lineNo: 2,
+        colOffset: 18,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 2,
+          column: 23,
+        },
+        endPos: {
+          line: 2,
+          column: 24,
+        },
+        lineNo: 2,
+        colOffset: 23,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 2,
+          column: 24,
+        },
+        endPos: {
+          line: 2,
+          column: 25,
+        },
+        lineNo: 2,
+        colOffset: 24,
+      },
+      {
+        type: 'OP',
+        kind: 'EQEQUAL',
+        value: '==',
+        startPos: {
+          line: 2,
+          column: 26,
+        },
+        endPos: {
+          line: 2,
+          column: 28,
+        },
+        lineNo: 2,
+        colOffset: 26,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '0',
+        startPos: {
+          line: 2,
+          column: 29,
+        },
+        endPos: {
+          line: 2,
+          column: 30,
+        },
+        lineNo: 2,
+        colOffset: 29,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 2,
+          column: 30,
+        },
+        endPos: {
+          line: 2,
+          column: 31,
+        },
+        lineNo: 2,
+        colOffset: 30,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 2,
+          column: 31,
+        },
+        endPos: {
+          line: 2,
+          column: 32,
+        },
+        lineNo: 2,
+        colOffset: 31,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '        \t\t\t\t',
+        startPos: {
+          line: 3,
+          column: 0,
+        },
+        endPos: {
+          line: 3,
+          column: 12,
+        },
+        lineNo: 3,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'break',
+        startPos: {
+          line: 3,
+          column: 12,
+        },
+        endPos: {
+          line: 3,
+          column: 17,
+        },
+        lineNo: 3,
+        colOffset: 12,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 3,
+          column: 17,
+        },
+        endPos: {
+          line: 3,
+          column: 18,
+        },
+        lineNo: 3,
+        colOffset: 17,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 4,
+          column: 10,
+        },
+        endPos: {
+          line: 4,
+          column: 10,
+        },
+        lineNo: 4,
+        colOffset: 10,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'elif',
+        startPos: {
+          line: 4,
+          column: 10,
+        },
+        endPos: {
+          line: 4,
+          column: 14,
+        },
+        lineNo: 4,
+        colOffset: 10,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'self',
+        startPos: {
+          line: 4,
+          column: 15,
+        },
+        endPos: {
+          line: 4,
+          column: 19,
+        },
+        lineNo: 4,
+        colOffset: 15,
+      },
+      {
+        type: 'OP',
+        kind: 'DOT',
+        value: '.',
+        startPos: {
+          line: 4,
+          column: 19,
+        },
+        endPos: {
+          line: 4,
+          column: 20,
+        },
+        lineNo: 4,
+        colOffset: 19,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: '_peek',
+        startPos: {
+          line: 4,
+          column: 20,
+        },
+        endPos: {
+          line: 4,
+          column: 25,
+        },
+        lineNo: 4,
+        colOffset: 20,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 4,
+          column: 25,
+        },
+        endPos: {
+          line: 4,
+          column: 26,
+        },
+        lineNo: 4,
+        colOffset: 25,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 4,
+          column: 26,
+        },
+        endPos: {
+          line: 4,
+          column: 27,
+        },
+        lineNo: 4,
+        colOffset: 26,
+      },
+      {
+        type: 'OP',
+        kind: 'EQEQUAL',
+        value: '==',
+        startPos: {
+          line: 4,
+          column: 28,
+        },
+        endPos: {
+          line: 4,
+          column: 30,
+        },
+        lineNo: 4,
+        colOffset: 28,
+      },
+      {
+        type: 'NUMBER',
+        kind: 'NUMBER',
+        value: '10',
+        startPos: {
+          line: 4,
+          column: 31,
+        },
+        endPos: {
+          line: 4,
+          column: 33,
+        },
+        lineNo: 4,
+        colOffset: 31,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 4,
+          column: 33,
+        },
+        endPos: {
+          line: 4,
+          column: 34,
+        },
+        lineNo: 4,
+        colOffset: 33,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 4,
+          column: 34,
+        },
+        endPos: {
+          line: 4,
+          column: 35,
+        },
+        lineNo: 4,
+        colOffset: 34,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '        \t\t\t\t',
+        startPos: {
+          line: 5,
+          column: 0,
+        },
+        endPos: {
+          line: 5,
+          column: 12,
+        },
+        lineNo: 5,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'self',
+        startPos: {
+          line: 5,
+          column: 12,
+        },
+        endPos: {
+          line: 5,
+          column: 16,
+        },
+        lineNo: 5,
+        colOffset: 12,
+      },
+      {
+        type: 'OP',
+        kind: 'DOT',
+        value: '.',
+        startPos: {
+          line: 5,
+          column: 16,
+        },
+        endPos: {
+          line: 5,
+          column: 17,
+        },
+        lineNo: 5,
+        colOffset: 16,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: '_read',
+        startPos: {
+          line: 5,
+          column: 17,
+        },
+        endPos: {
+          line: 5,
+          column: 22,
+        },
+        lineNo: 5,
+        colOffset: 17,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 5,
+          column: 22,
+        },
+        endPos: {
+          line: 5,
+          column: 23,
+        },
+        lineNo: 5,
+        colOffset: 22,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 5,
+          column: 23,
+        },
+        endPos: {
+          line: 5,
+          column: 24,
+        },
+        lineNo: 5,
+        colOffset: 23,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 5,
+          column: 24,
+        },
+        endPos: {
+          line: 5,
+          column: 25,
+        },
+        lineNo: 5,
+        colOffset: 24,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'self',
+        startPos: {
+          line: 6,
+          column: 12,
+        },
+        endPos: {
+          line: 6,
+          column: 16,
+        },
+        lineNo: 6,
+        colOffset: 12,
+      },
+      {
+        type: 'OP',
+        kind: 'DOT',
+        value: '.',
+        startPos: {
+          line: 6,
+          column: 16,
+        },
+        endPos: {
+          line: 6,
+          column: 17,
+        },
+        lineNo: 6,
+        colOffset: 16,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: '_read',
+        startPos: {
+          line: 6,
+          column: 17,
+        },
+        endPos: {
+          line: 6,
+          column: 22,
+        },
+        lineNo: 6,
+        colOffset: 17,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 6,
+          column: 22,
+        },
+        endPos: {
+          line: 6,
+          column: 23,
+        },
+        lineNo: 6,
+        colOffset: 22,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 6,
+          column: 23,
+        },
+        endPos: {
+          line: 6,
+          column: 24,
+        },
+        lineNo: 6,
+        colOffset: 23,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '',
+        startPos: {
+          line: 6,
+          column: 24,
+        },
+        endPos: {
+          line: 6,
+          column: 25,
+        },
+        lineNo: 6,
+        colOffset: 24,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 7,
+          column: 0,
+        },
+        endPos: {
+          line: 7,
+          column: 0,
+        },
+        lineNo: 7,
+        colOffset: 0,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 7,
+          column: 0,
+        },
+        endPos: {
+          line: 7,
+          column: 0,
+        },
+        lineNo: 7,
+        colOffset: 0,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 7,
+          column: 0,
+        },
+        endPos: {
+          line: 7,
+          column: 0,
+        },
+        lineNo: 7,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 7,
+          column: 0,
+        },
+        endPos: {
+          line: 7,
+          column: 0,
+        },
+        lineNo: 7,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: `def alternating_space_and_tab():
+	  	  if "space first":
+	  	  	  	  pass
+	  	  else:
+	  	  	  	  ...
+						`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'def',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 3,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'alternating_space_and_tab',
+        startPos: {
+          line: 1,
+          column: 4,
+        },
+        endPos: {
+          line: 1,
+          column: 29,
+        },
+        lineNo: 1,
+        colOffset: 4,
+      },
+      {
+        type: 'OP',
+        kind: 'LPAR',
+        value: '(',
+        startPos: {
+          line: 1,
+          column: 29,
+        },
+        endPos: {
+          line: 1,
+          column: 30,
+        },
+        lineNo: 1,
+        colOffset: 29,
+      },
+      {
+        type: 'OP',
+        kind: 'RPAR',
+        value: ')',
+        startPos: {
+          line: 1,
+          column: 30,
+        },
+        endPos: {
+          line: 1,
+          column: 31,
+        },
+        lineNo: 1,
+        colOffset: 30,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 1,
+          column: 31,
+        },
+        endPos: {
+          line: 1,
+          column: 32,
+        },
+        lineNo: 1,
+        colOffset: 31,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 32,
+        },
+        endPos: {
+          line: 1,
+          column: 33,
+        },
+        lineNo: 1,
+        colOffset: 32,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '\t  \t  ',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 6,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'if',
+        startPos: {
+          line: 2,
+          column: 6,
+        },
+        endPos: {
+          line: 2,
+          column: 8,
+        },
+        lineNo: 2,
+        colOffset: 6,
+      },
+      {
+        type: 'STRING',
+        kind: 'STRING',
+        value: '"space first"',
+        startPos: {
+          line: 2,
+          column: 9,
+        },
+        endPos: {
+          line: 2,
+          column: 22,
+        },
+        lineNo: 2,
+        colOffset: 9,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 2,
+          column: 22,
+        },
+        endPos: {
+          line: 2,
+          column: 23,
+        },
+        lineNo: 2,
+        colOffset: 22,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 2,
+          column: 23,
+        },
+        endPos: {
+          line: 2,
+          column: 24,
+        },
+        lineNo: 2,
+        colOffset: 23,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '\t  \t  \t  \t  ',
+        startPos: {
+          line: 3,
+          column: 0,
+        },
+        endPos: {
+          line: 3,
+          column: 12,
+        },
+        lineNo: 3,
+        colOffset: 0,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'pass',
+        startPos: {
+          line: 3,
+          column: 12,
+        },
+        endPos: {
+          line: 3,
+          column: 16,
+        },
+        lineNo: 3,
+        colOffset: 12,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 3,
+          column: 16,
+        },
+        endPos: {
+          line: 3,
+          column: 17,
+        },
+        lineNo: 3,
+        colOffset: 16,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 4,
+          column: 6,
+        },
+        endPos: {
+          line: 4,
+          column: 6,
+        },
+        lineNo: 4,
+        colOffset: 6,
+      },
+      {
+        type: 'NAME',
+        kind: 'NAME',
+        value: 'else',
+        startPos: {
+          line: 4,
+          column: 6,
+        },
+        endPos: {
+          line: 4,
+          column: 10,
+        },
+        lineNo: 4,
+        colOffset: 6,
+      },
+      {
+        type: 'OP',
+        kind: 'COLON',
+        value: ':',
+        startPos: {
+          line: 4,
+          column: 10,
+        },
+        endPos: {
+          line: 4,
+          column: 11,
+        },
+        lineNo: 4,
+        colOffset: 10,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 4,
+          column: 11,
+        },
+        endPos: {
+          line: 4,
+          column: 12,
+        },
+        lineNo: 4,
+        colOffset: 11,
+      },
+      {
+        type: 'INDENT',
+        kind: 'INDENT',
+        value: '\t  \t  \t  \t  ',
+        startPos: {
+          line: 5,
+          column: 0,
+        },
+        endPos: {
+          line: 5,
+          column: 12,
+        },
+        lineNo: 5,
+        colOffset: 0,
+      },
+      {
+        type: 'OP',
+        kind: 'ELLIPSIS',
+        value: '...',
+        startPos: {
+          line: 5,
+          column: 12,
+        },
+        endPos: {
+          line: 5,
+          column: 15,
+        },
+        lineNo: 5,
+        colOffset: 12,
+      },
+      {
+        type: 'NEWLINE',
+        kind: 'NEWLINE',
+        value: '\n',
+        startPos: {
+          line: 5,
+          column: 15,
+        },
+        endPos: {
+          line: 5,
+          column: 16,
+        },
+        lineNo: 5,
+        colOffset: 15,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 6,
+          column: 0,
+        },
+        endPos: {
+          line: 6,
+          column: 0,
+        },
+        lineNo: 6,
+        colOffset: 0,
+      },
+      {
+        type: 'DEDENT',
+        kind: 'DEDENT',
+        value: '',
+        startPos: {
+          line: 6,
+          column: 0,
+        },
+        endPos: {
+          line: 6,
+          column: 0,
+        },
+        lineNo: 6,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 6,
+          column: 0,
+        },
+        endPos: {
+          line: 6,
+          column: 0,
+        },
+        lineNo: 6,
+        colOffset: 0,
+      },
+    ],
+  },
 ];

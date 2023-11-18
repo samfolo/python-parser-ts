@@ -10,7 +10,7 @@ export const handleName: Cursor.Action<Token> = (cursor) => {
   }
 
   if (isBlockKeyword(cursor.value()) && !cursor.isInCollection()) {
-    cursor.stageBlockStatementEntry();
+    cursor.stageIndentation();
   }
 
   return createToken('NAME', 'NAME', cursor.value(), cursor.startPos(), cursor.endPos());

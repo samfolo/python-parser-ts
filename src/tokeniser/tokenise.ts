@@ -205,11 +205,11 @@ export const tokenise = (input: string): Token[] => {
           break;
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
-        if (cursor.isBlockStatementEntryStaged() && !cursor.isInCollection()) {
+        if (cursor.isIndentationStaged() && !cursor.isInCollection()) {
           if (cursor.peek() === TOKENS.NEWLINE) {
-            cursor.enterBlockStatement();
+            cursor.indent();
           } else {
-            cursor.unstageBlockStatementEntry();
+            cursor.unstageIndentation();
           }
         }
         break;
@@ -261,8 +261,8 @@ export const tokenise = (input: string): Token[] => {
         cursor.unmarkStartOfLogicalLine();
 
         if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE && cursor.peek() !== TOKENS.TAB) {
-          while (cursor.isInBlockStatement()) {
-            cursor.exitBlockStatement();
+          while (cursor.isIndented()) {
+            cursor.dedent();
             tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
           }
         }
@@ -288,8 +288,15 @@ export const tokenise = (input: string): Token[] => {
     cursor.consume();
   }
 
-  while (cursor.isInBlockStatement()) {
-    cursor.exitBlockStatement();
+  if (cursor.isOnBlankLine()) {
+    cursor.resetStartColumn();
+    cursor.resetEndColumn();
+
+    cursor.unmarkBlankLine();
+  }
+
+  while (cursor.isIndented()) {
+    cursor.dedent();
     tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.startPos(), cursor.startPos()));
   }
 

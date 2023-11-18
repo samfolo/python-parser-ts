@@ -18,6 +18,8 @@ export interface Cursor {
   startPos: () => Token.Position;
   endPos: () => Token.Position;
   isStartOfLine: () => boolean;
+  resetStartColumn: () => void;
+  resetEndColumn: () => void;
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
   pushIndentation: (nextIndentation: number) => void;
   compareLastIndentationWith: (nextIndentation: number) => Cursor.CompareIndentationResult;
@@ -26,12 +28,12 @@ export interface Cursor {
   enterCollection: () => void;
   exitCollection: () => void;
   isInCollection: () => boolean;
-  isInBlockStatement: () => boolean;
-  stageBlockStatementEntry: () => void;
-  unstageBlockStatementEntry: () => void;
-  isBlockStatementEntryStaged: () => boolean;
-  enterBlockStatement: () => void;
-  exitBlockStatement: () => void;
+  isIndented: () => boolean;
+  stageIndentation: () => void;
+  unstageIndentation: () => void;
+  isIndentationStaged: () => boolean;
+  indent: () => void;
+  dedent: () => void;
   markStartOfLogicalLine: () => void;
   unmarkStartOfLogicalLine: () => void;
   isStartOfLogicalLine: () => boolean;
