@@ -13,11 +13,14 @@ export const createCursor = (input: string): Cursor => {
   let endLine = 1;
   let endColumn = 1;
 
+  let indented = false;
+  let shouldIndent = false;
   const indentationStack: number[] = [];
 
   let collectionScope = 0;
-  let shouldEnterBlockStatement = false;
-  let inBlockStatement = false;
+
+  let startOfLogicalLine = false;
+  let onBlankLine = false;
 
   const current = (): Token.Value => input[currentPosition];
 
@@ -52,24 +55,24 @@ export const createCursor = (input: string): Cursor => {
 
   const startPos = (): Token.Position => ({line: startLine, column: startColumn});
   const endPos = (): Token.Position => ({line: endLine, column: endColumn});
+  const isStartOfLine = () => startColumn === 0;
 
   const enterCollection = () => collectionScope++;
   const exitCollection = () => (collectionScope = collectionScope > 0 ? collectionScope - 1 : 0);
   const isInCollection = () => collectionScope > 0;
 
-  const stageBlockStatementEntry = () => (shouldEnterBlockStatement = true);
-  const unstageBlockStatementEntry = () => (shouldEnterBlockStatement = false);
-  const isBlockStatementEntryStaged = () => shouldEnterBlockStatement;
-  const enterBlockStatement = () => {
-    inBlockStatement = true;
-    unstageBlockStatementEntry();
+  const stageIndentation = () => (shouldIndent = true);
+  const unstageIndentation = () => (shouldIndent = false);
+  const isIndentationStaged = () => shouldIndent;
+  const indent = () => {
+    indented = true;
+    unstageIndentation();
   };
-  const exitBlockStatement = () => {
+  const dedent = () => {
     indentationStack.pop();
-    inBlockStatement = indentationStack.length > 0;
+    indented = indentationStack.length > 0;
   };
-  const isInBlockStatement = (targetIndentation: number = 0) =>
-    inBlockStatement && (indentationStack.at(-1) ?? 0) >= targetIndentation;
+  const isIndented = (targetIndentation: number = 0) => indented && (indentationStack.at(-1) ?? 0) >= targetIndentation;
 
   const pushIndentation = (nextIndentation: number) => indentationStack.push(nextIndentation);
   const compareLastIndentationWith = (nextIndentation: number): Cursor.CompareIndentationResult => {
@@ -86,6 +89,17 @@ export const createCursor = (input: string): Cursor => {
     return {scope: 'stable', depth: 0};
   };
 
+  const isStartOfLogicalLine = () => startOfLogicalLine;
+  const markStartOfLogicalLine = () => (startOfLogicalLine = true);
+  const unmarkStartOfLogicalLine = () => (startOfLogicalLine = false);
+
+  const isOnBlankLine = () => onBlankLine;
+  const markBlankLine = () => (onBlankLine = true);
+  const unmarkBlankLine = () => (onBlankLine = false);
+
+  const resetStartColumn = () => (startColumn = 0);
+  const resetEndColumn = () => (endColumn = 0);
+
   return {
     current,
     push,
@@ -97,6 +111,7 @@ export const createCursor = (input: string): Cursor => {
     isEndOfFile,
     startPos,
     endPos,
+    isStartOfLine,
     pushIndentation,
     compareLastIndentationWith,
     newLine,
@@ -104,12 +119,20 @@ export const createCursor = (input: string): Cursor => {
     enterCollection,
     exitCollection,
     isInCollection,
-    stageBlockStatementEntry,
-    unstageBlockStatementEntry,
-    isBlockStatementEntryStaged,
-    enterBlockStatement,
-    exitBlockStatement,
-    isInBlockStatement,
+    stageIndentation,
+    unstageIndentation,
+    isIndentationStaged,
+    indent,
+    dedent,
+    isIndented,
+    isStartOfLogicalLine,
+    markStartOfLogicalLine,
+    unmarkStartOfLogicalLine,
+    isOnBlankLine,
+    markBlankLine,
+    unmarkBlankLine,
+    resetStartColumn,
+    resetEndColumn,
     act<Return = void>(cb: Cursor.Action<Return>) {
       return cb({...this, act: this.act});
     },

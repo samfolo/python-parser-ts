@@ -1,3 +1,3 @@
-a = ((1 + 2 + \
-     3) + (4 + \
-           5 + 6))
+@   my_decorator
+def my_function():
+    pass

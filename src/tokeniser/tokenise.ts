@@ -205,11 +205,11 @@ export const tokenise = (input: string): Token[] => {
           break;
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
-        if (cursor.isBlockStatementEntryStaged() && !cursor.isInCollection()) {
+        if (cursor.isIndentationStaged() && !cursor.isInCollection()) {
           if (cursor.peek() === TOKENS.NEWLINE) {
-            cursor.enterBlockStatement();
+            cursor.indent();
           } else {
-            cursor.unstageBlockStatementEntry();
+            cursor.unstageIndentation();
           }
         }
         break;
@@ -254,16 +254,23 @@ export const tokenise = (input: string): Token[] => {
         }
         break;
       case TOKENS.NEWLINE:
+        if (!cursor.isInCollection() && !cursor.isOnBlankLine() && cursor.peekBack(2) !== TOKENS.BACKSLASH) {
+          cursor.markStartOfLogicalLine();
+        }
         tokens.push(cursor.act(handleNewline));
+        cursor.unmarkStartOfLogicalLine();
 
-        if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE) {
-          while (cursor.isInBlockStatement()) {
-            cursor.exitBlockStatement();
+        if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE && cursor.peek() !== TOKENS.TAB) {
+          while (cursor.isIndented()) {
+            cursor.dedent();
             tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
           }
         }
         break;
       case TOKENS.WHITESPACE:
+        tokens.push(...cursor.act(handleWhitespace));
+        break;
+      case TOKENS.TAB:
         tokens.push(...cursor.act(handleWhitespace));
         break;
       default:
@@ -281,8 +288,14 @@ export const tokenise = (input: string): Token[] => {
     cursor.consume();
   }
 
-  while (cursor.isInBlockStatement()) {
-    cursor.exitBlockStatement();
+  if (cursor.isOnBlankLine()) {
+    cursor.resetStartColumn();
+    cursor.resetEndColumn();
+    cursor.unmarkBlankLine();
+  }
+
+  while (cursor.isIndented()) {
+    cursor.dedent();
     tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.startPos(), cursor.startPos()));
   }
 
