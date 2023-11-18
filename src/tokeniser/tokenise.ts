@@ -291,7 +291,6 @@ export const tokenise = (input: string): Token[] => {
   if (cursor.isOnBlankLine()) {
     cursor.resetStartColumn();
     cursor.resetEndColumn();
-
     cursor.unmarkBlankLine();
   }
 
