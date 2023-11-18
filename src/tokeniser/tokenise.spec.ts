@@ -79,7 +79,7 @@ describe('tokenise', () => {
       {skip: false, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
       {skip: false, description: 'functions', cases: FUNCTION_FIXTURES},
       {skip: false, description: 'imports', cases: IMPORT_FIXTURES},
-      {skip: true, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
+      {skip: false, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
       {skip: true, description: 'whitespaces', cases: WHITESPACE_FIXTURES},
     ].filter(({skip}) => !skip)
   )('$description', ({cases}) => {
