@@ -245,6 +245,14 @@ export const tokenise = (input: string): Token[] => {
         }
         tokens.push(createToken('OP', 'EQUAL', TOKENS.EQUAL, cursor.startPos(), cursor.endPos()));
         break;
+      case TOKENS.BACKSLASH:
+        if (cursor.peek() === TOKENS.NEWLINE) {
+          cursor.push();
+          cursor.newLine();
+        } else {
+          tokens.push(createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos()));
+        }
+        break;
       case TOKENS.NEWLINE:
         tokens.push(cursor.act(handleNewline));
 

@@ -1,2 +1,3 @@
-def func():
-    import sys; sys.path.append('/path/to/module')
+a = ((1 + 2 + \
+     3) + (4 + \
+           5 + 6))
