@@ -125,6 +125,7 @@ export const MISCELLANEOUS = {
   NEWLINE: '\n',
   TAB: '\t',
   BACKSLASH: '\\',
+  HASH: '#',
   BANG: '!',
   ENDMARKER: '',
   ERRORTOKEN: '',

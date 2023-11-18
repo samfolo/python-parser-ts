@@ -268,10 +268,14 @@ export const tokenise = (input: string): Token[] => {
         }
         break;
       case TOKENS.WHITESPACE:
-        tokens.push(...cursor.act(handleWhitespace));
-        break;
       case TOKENS.TAB:
         tokens.push(...cursor.act(handleWhitespace));
+        break;
+      case TOKENS.HASH:
+        while (cursor.peek() !== TOKENS.NEWLINE && !cursor.isEndOfFile()) {
+          cursor.push();
+        }
+        tokens.push(createToken('COMMENT', 'COMMENT', cursor.value(), cursor.startPos(), cursor.endPos()));
         break;
       default:
         tokens.push(cursor.act(handleLiteral));
@@ -283,7 +287,11 @@ export const tokenise = (input: string): Token[] => {
 
   const lastToken = tokens.at(-1);
   if (tokens.length > 1 && lastToken?.value !== TOKENS.NEWLINE && lastToken?.type !== 'DEDENT') {
-    tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
+    if (lastToken?.type === 'COMMENT') {
+      tokens.push(createToken('NL', 'NL', '', cursor.startPos(), cursor.startPos()));
+    } else {
+      tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));
+    }
     cursor.newLine();
     cursor.consume();
   }
