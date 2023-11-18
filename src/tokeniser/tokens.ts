@@ -123,6 +123,7 @@ export const MISCELLANEOUS = {
   RARROW: '->',
   UNDERSCORE: '_',
   NEWLINE: '\n',
+  TAB: '\t',
   BACKSLASH: '\\',
   BANG: '!',
   ENDMARKER: '',

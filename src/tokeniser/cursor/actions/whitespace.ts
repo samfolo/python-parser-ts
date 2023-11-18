@@ -4,20 +4,29 @@ import {Token} from '../../types';
 import {Cursor} from '../types';
 
 export const handleWhitespace: Cursor.Action<Token[]> = (cursor) => {
-  const isStartOfLine = cursor.startPos().column === 0;
+  const isLineContinuation = cursor.peekBack(2) === TOKENS.NEWLINE && cursor.peekBack(3) === TOKENS.BACKSLASH;
+  const whitespaceType = cursor.current() === TOKENS.TAB ? TOKENS.TAB : TOKENS.WHITESPACE;
+
   let nextIndentation = 1;
 
-  while (cursor.peek() === TOKENS.WHITESPACE) {
+  while (cursor.peek() === whitespaceType) {
     cursor.push();
     nextIndentation++;
-
-    if (cursor.isEndOfFile()) {
-      // TODO: whitespace at end of file is valid, check if it should be ignored
-      return [createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos())];
-    }
   }
 
-  if (isStartOfLine && cursor.isInBlockStatement() && !cursor.isInCollection() && cursor.peek() !== TOKENS.NEWLINE) {
+  if (cursor.isStartOfLine() && cursor.peek() === TOKENS.NEWLINE) {
+    cursor.markBlankLine();
+  } else {
+    cursor.unmarkBlankLine();
+  }
+
+  if (
+    !isLineContinuation &&
+    cursor.isStartOfLine() &&
+    cursor.isInBlockStatement() &&
+    !cursor.isInCollection() &&
+    cursor.peek() !== TOKENS.NEWLINE
+  ) {
     let tokens: Token[] = [];
 
     switch (cursor.compareLastIndentationWith(nextIndentation).scope) {

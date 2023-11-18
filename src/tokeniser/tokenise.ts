@@ -254,9 +254,13 @@ export const tokenise = (input: string): Token[] => {
         }
         break;
       case TOKENS.NEWLINE:
+        if (!cursor.isInCollection() && !cursor.isOnBlankLine() && cursor.peekBack(2) !== TOKENS.BACKSLASH) {
+          cursor.markStartOfLogicalLine();
+        }
         tokens.push(cursor.act(handleNewline));
+        cursor.unmarkStartOfLogicalLine();
 
-        if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE) {
+        if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE && cursor.peek() !== TOKENS.TAB) {
           while (cursor.isInBlockStatement()) {
             cursor.exitBlockStatement();
             tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
@@ -264,6 +268,9 @@ export const tokenise = (input: string): Token[] => {
         }
         break;
       case TOKENS.WHITESPACE:
+        tokens.push(...cursor.act(handleWhitespace));
+        break;
+      case TOKENS.TAB:
         tokens.push(...cursor.act(handleWhitespace));
         break;
       default:

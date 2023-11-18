@@ -19,6 +19,9 @@ export const createCursor = (input: string): Cursor => {
   let shouldEnterBlockStatement = false;
   let inBlockStatement = false;
 
+  let startOfLogicalLine = false;
+  let onBlankLine = false;
+
   const current = (): Token.Value => input[currentPosition];
 
   const newLine = () => {
@@ -52,6 +55,7 @@ export const createCursor = (input: string): Cursor => {
 
   const startPos = (): Token.Position => ({line: startLine, column: startColumn});
   const endPos = (): Token.Position => ({line: endLine, column: endColumn});
+  const isStartOfLine = () => startColumn === 0;
 
   const enterCollection = () => collectionScope++;
   const exitCollection = () => (collectionScope = collectionScope > 0 ? collectionScope - 1 : 0);
@@ -86,6 +90,14 @@ export const createCursor = (input: string): Cursor => {
     return {scope: 'stable', depth: 0};
   };
 
+  const isStartOfLogicalLine = () => startOfLogicalLine;
+  const markStartOfLogicalLine = () => (startOfLogicalLine = true);
+  const unmarkStartOfLogicalLine = () => (startOfLogicalLine = false);
+
+  const isOnBlankLine = () => onBlankLine;
+  const markBlankLine = () => (onBlankLine = true);
+  const unmarkBlankLine = () => (onBlankLine = false);
+
   return {
     current,
     push,
@@ -97,6 +109,7 @@ export const createCursor = (input: string): Cursor => {
     isEndOfFile,
     startPos,
     endPos,
+    isStartOfLine,
     pushIndentation,
     compareLastIndentationWith,
     newLine,
@@ -110,6 +123,12 @@ export const createCursor = (input: string): Cursor => {
     enterBlockStatement,
     exitBlockStatement,
     isInBlockStatement,
+    isStartOfLogicalLine,
+    markStartOfLogicalLine,
+    unmarkStartOfLogicalLine,
+    isOnBlankLine,
+    markBlankLine,
+    unmarkBlankLine,
     act<Return = void>(cb: Cursor.Action<Return>) {
       return cb({...this, act: this.act});
     },

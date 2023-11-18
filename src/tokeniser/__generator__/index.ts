@@ -6,10 +6,7 @@ import fs from 'fs';
 import {Token} from '../types';
 
 // Using this as a quick and dirty way to create Python fixtures which accurately represent how Python
-// might tokenize a given file.
-
-// This will be discarded once the tokenizer is complete.
-
+// might tokenize a given file. This is useful for testing the tokeniser against the Python reference.
 const cliDirname = __dirname.replace(/[ ]/, '\\ ');
 const output = execSync(`python3 -m tokenize ${cliDirname}/input.py`, {encoding: 'utf-8'});
 const exactOutput = execSync(`python3 -m tokenize -e ${cliDirname}/input.py`, {encoding: 'utf-8'});

@@ -17,6 +17,7 @@ export interface Cursor {
   isEndOfFile: () => boolean;
   startPos: () => Token.Position;
   endPos: () => Token.Position;
+  isStartOfLine: () => boolean;
   act: <Return = void>(action: Cursor.Action<Return>) => Return;
   pushIndentation: (nextIndentation: number) => void;
   compareLastIndentationWith: (nextIndentation: number) => Cursor.CompareIndentationResult;
@@ -31,4 +32,10 @@ export interface Cursor {
   isBlockStatementEntryStaged: () => boolean;
   enterBlockStatement: () => void;
   exitBlockStatement: () => void;
+  markStartOfLogicalLine: () => void;
+  unmarkStartOfLogicalLine: () => void;
+  isStartOfLogicalLine: () => boolean;
+  isOnBlankLine: () => boolean;
+  markBlankLine: () => void;
+  unmarkBlankLine: () => void;
 }
