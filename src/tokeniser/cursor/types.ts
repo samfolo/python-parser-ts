@@ -2,6 +2,7 @@ import {Token} from '../types';
 
 export namespace Cursor {
   export type CurrentScope = 'indented' | 'dedented' | 'stable';
+  export type CommentType = 'leading' | 'trailing' | 'undefined';
   export type Action<Return = void> = (cursor: Cursor) => Return;
   export type CompareIndentationResult = {scope: CurrentScope; depth: number};
 }
@@ -14,6 +15,7 @@ export interface Cursor {
   consume: () => void;
   value: () => string;
   done: () => boolean;
+  isStartOfFile: () => boolean;
   isEndOfFile: () => boolean;
   startPos: () => Token.Position;
   endPos: () => Token.Position;
@@ -40,4 +42,7 @@ export interface Cursor {
   isOnBlankLine: () => boolean;
   markBlankLine: () => void;
   unmarkBlankLine: () => void;
+  isInCommentType: (type: Cursor.CommentType) => boolean;
+  enterComment: (type: Cursor.CommentType) => void;
+  exitComment: () => void;
 }

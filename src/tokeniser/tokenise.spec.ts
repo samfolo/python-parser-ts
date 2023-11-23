@@ -73,7 +73,6 @@ describe('tokenise', () => {
       {skip: false, description: 'collections', cases: COLLECTION_FIXTURES},
       {skip: false, description: 'booleans', cases: BOOLEAN_FIXTURES},
       {skip: false, description: 'classes', cases: CLASS_FIXTURES},
-      {skip: false, description: 'comments', cases: COMMENT_FIXTURES},
       {skip: false, description: 'comprehensions', cases: COMPREHENSION_FIXTURES},
       {skip: false, description: 'control flows', cases: CONTROL_FLOW_FIXTURES},
       {skip: false, description: 'function expressions', cases: FUNCTION_EXPRESSION_FIXTURES},
@@ -81,11 +80,17 @@ describe('tokenise', () => {
       {skip: false, description: 'imports', cases: IMPORT_FIXTURES},
       {skip: false, description: 'line continuations', cases: LINE_CONTINUATION_FIXTURES},
       {skip: false, description: 'whitespaces', cases: WHITESPACE_FIXTURES},
+      {skip: false, description: 'comments', cases: COMMENT_FIXTURES},
     ].filter(({skip}) => !skip)
   )('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {
       writeFileSync('test.txt', JSON.stringify(tokenise(input), null, 2));
-      expect(tokenise(input)).toEqual(expected);
+      try {
+        expect(tokenise(input)).toEqual(expected);
+      } catch (e) {
+        console.log(input);
+        throw e;
+      }
     });
   });
 });

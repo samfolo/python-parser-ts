@@ -1,5 +1,12 @@
-import {createCursor, handleLiteral, handleNewline, handleNumber, handleString, isDigit} from './cursor';
-import {handleWhitespace} from './cursor/actions/whitespace';
+import {
+  createCursor,
+  handleLiteral,
+  handleNewline,
+  handleNumber,
+  handleString,
+  handleWhitespace,
+  isDigit,
+} from './cursor';
 import {createToken, TOKENS} from './tokens';
 import type {Token} from './types';
 
@@ -205,13 +212,6 @@ export const tokenise = (input: string): Token[] => {
           break;
         }
         tokens.push(createToken('OP', 'COLON', TOKENS.COLON, cursor.startPos(), cursor.endPos()));
-        if (cursor.isIndentationStaged() && !cursor.isInCollection()) {
-          if (cursor.peek() === TOKENS.NEWLINE) {
-            cursor.indent();
-          } else {
-            cursor.unstageIndentation();
-          }
-        }
         break;
       case TOKENS.TILDE:
         tokens.push(createToken('OP', 'TILDE', TOKENS.TILDE, cursor.startPos(), cursor.endPos()));
@@ -260,7 +260,13 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(cursor.act(handleNewline));
         cursor.unmarkStartOfLogicalLine();
 
-        if (cursor.peek() !== TOKENS.WHITESPACE && cursor.peek() !== TOKENS.NEWLINE && cursor.peek() !== TOKENS.TAB) {
+        if (
+          cursor.peek() !== TOKENS.WHITESPACE &&
+          cursor.peek() !== TOKENS.NEWLINE &&
+          cursor.peek() !== TOKENS.TAB &&
+          cursor.peek() !== TOKENS.HASH &&
+          !cursor.isEndOfFile()
+        ) {
           while (cursor.isIndented()) {
             cursor.dedent();
             tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
@@ -272,6 +278,7 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(...cursor.act(handleWhitespace));
         break;
       case TOKENS.HASH:
+        cursor.enterComment(cursor.isStartOfLine() || cursor.isOnBlankLine() ? 'leading' : 'trailing');
         while (cursor.peek() !== TOKENS.NEWLINE && !cursor.isEndOfFile()) {
           cursor.push();
         }
@@ -287,7 +294,7 @@ export const tokenise = (input: string): Token[] => {
 
   const lastToken = tokens.at(-1);
   if (tokens.length > 1 && lastToken?.value !== TOKENS.NEWLINE && lastToken?.type !== 'DEDENT') {
-    if (lastToken?.type === 'COMMENT') {
+    if (lastToken?.type === 'COMMENT' && (cursor.isOnBlankLine() || lastToken?.colOffset === 0)) {
       tokens.push(createToken('NL', 'NL', '', cursor.startPos(), cursor.startPos()));
     } else {
       tokens.push(createToken('NEWLINE', 'NEWLINE', '', cursor.startPos(), cursor.endPos()));

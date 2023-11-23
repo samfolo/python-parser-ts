@@ -2,6 +2,226 @@ import {TestCase} from './types';
 
 export const WHITESPACE_FIXTURES: TestCase[] = [
   {
+    input: ` `,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 0,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: '\n',
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'NL',
+        kind: 'NL',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 1,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: '\t',
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 1,
+          column: 0,
+        },
+        endPos: {
+          line: 1,
+          column: 0,
+        },
+        lineNo: 1,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: '\t\n',
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'NL',
+        kind: 'NL',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 1,
+        },
+        endPos: {
+          line: 1,
+          column: 2,
+        },
+        lineNo: 1,
+        colOffset: 1,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
+    input: `\t  \n`,
+    expected: [
+      {
+        type: 'ENCODING',
+        kind: 'ENCODING',
+        value: 'utf-8',
+        startPos: {
+          line: 0,
+          column: 0,
+        },
+        endPos: {
+          line: 0,
+          column: 0,
+        },
+        lineNo: 0,
+        colOffset: 0,
+      },
+      {
+        type: 'NL',
+        kind: 'NL',
+        value: '\n',
+        startPos: {
+          line: 1,
+          column: 3,
+        },
+        endPos: {
+          line: 1,
+          column: 4,
+        },
+        lineNo: 1,
+        colOffset: 3,
+      },
+      {
+        type: 'ENDMARKER',
+        kind: 'ENDMARKER',
+        value: '',
+        startPos: {
+          line: 2,
+          column: 0,
+        },
+        endPos: {
+          line: 2,
+          column: 0,
+        },
+        lineNo: 2,
+        colOffset: 0,
+      },
+    ],
+  },
+  {
     input: `x = 1    + 1      
 x ** 2  + 1`,
     expected: [

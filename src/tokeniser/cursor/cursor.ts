@@ -1,4 +1,3 @@
-import {TOKENS} from '../tokens';
 import {Token} from '../types';
 
 import {Cursor} from './types';
@@ -21,6 +20,8 @@ export const createCursor = (input: string): Cursor => {
 
   let startOfLogicalLine = false;
   let onBlankLine = false;
+
+  let commentType: Cursor.CommentType = 'undefined';
 
   const current = (): Token.Value => input[currentPosition];
 
@@ -51,6 +52,7 @@ export const createCursor = (input: string): Cursor => {
   const value = (): string => input.slice(currentPosition, readPosition);
 
   const done = () => current() === undefined;
+  const isStartOfFile = () => currentPosition === 0;
   const isEndOfFile = () => peek() === undefined;
 
   const startPos = (): Token.Position => ({line: startLine, column: startColumn});
@@ -64,6 +66,8 @@ export const createCursor = (input: string): Cursor => {
   const stageIndentation = () => (shouldIndent = true);
   const unstageIndentation = () => (shouldIndent = false);
   const isIndentationStaged = () => shouldIndent;
+
+  const isIndented = (targetIndentation: number = 0) => indented && (indentationStack.at(-1) ?? 0) >= targetIndentation;
   const indent = () => {
     indented = true;
     unstageIndentation();
@@ -72,11 +76,10 @@ export const createCursor = (input: string): Cursor => {
     indentationStack.pop();
     indented = indentationStack.length > 0;
   };
-  const isIndented = (targetIndentation: number = 0) => indented && (indentationStack.at(-1) ?? 0) >= targetIndentation;
 
   const pushIndentation = (nextIndentation: number) => indentationStack.push(nextIndentation);
   const compareLastIndentationWith = (nextIndentation: number): Cursor.CompareIndentationResult => {
-    const prevIndentation = indentationStack.at(-1) ?? 0;
+    let prevIndentation = indentationStack.at(-1) ?? 0;
 
     if (prevIndentation > nextIndentation) {
       return {scope: 'dedented', depth: prevIndentation - nextIndentation};
@@ -97,6 +100,10 @@ export const createCursor = (input: string): Cursor => {
   const markBlankLine = () => (onBlankLine = true);
   const unmarkBlankLine = () => (onBlankLine = false);
 
+  const isInCommentType = (type: Cursor.CommentType) => commentType === type;
+  const enterComment = (type: Cursor.CommentType) => (commentType = type);
+  const exitComment = () => (commentType = 'undefined');
+
   const resetStartColumn = () => (startColumn = 0);
   const resetEndColumn = () => (endColumn = 0);
 
@@ -108,6 +115,7 @@ export const createCursor = (input: string): Cursor => {
     consume,
     value,
     done,
+    isStartOfFile,
     isEndOfFile,
     startPos,
     endPos,
@@ -131,6 +139,9 @@ export const createCursor = (input: string): Cursor => {
     isOnBlankLine,
     markBlankLine,
     unmarkBlankLine,
+    isInCommentType,
+    enterComment,
+    exitComment,
     resetStartColumn,
     resetEndColumn,
     act<Return = void>(cb: Cursor.Action<Return>) {
