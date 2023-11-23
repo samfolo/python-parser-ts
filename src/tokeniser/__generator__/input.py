@@ -1,3 +1,3 @@
-@   my_decorator
-def my_function():
-    pass
+a = "This is a string" \
+# Comment right after line continuation
+" and the string continues"

@@ -4,8 +4,6 @@ import {Token} from '../../types';
 import {Cursor} from '../types';
 
 export const handleWhitespace: Cursor.Action<Token[]> = (cursor) => {
-  const isLineContinuation = cursor.peekBack(2) === TOKENS.NEWLINE && cursor.peekBack(3) === TOKENS.BACKSLASH;
-
   let nextIndentation = 1;
 
   while (cursor.peek() === TOKENS.TAB || cursor.peek() === TOKENS.WHITESPACE) {
@@ -13,26 +11,30 @@ export const handleWhitespace: Cursor.Action<Token[]> = (cursor) => {
     nextIndentation++;
   }
 
-  if (cursor.isStartOfLine() && (cursor.peek() === TOKENS.NEWLINE || cursor.isEndOfFile())) {
+  if (
+    cursor.isStartOfLine() &&
+    (cursor.peek() === TOKENS.NEWLINE || cursor.peek() === TOKENS.HASH || cursor.isEndOfFile())
+  ) {
     cursor.markBlankLine();
   } else {
     cursor.unmarkBlankLine();
   }
 
-  if (!isLineContinuation && cursor.isStartOfLine() && !cursor.isInCollection() && cursor.peek() !== TOKENS.NEWLINE) {
+  if (
+    !cursor.isOnBlankLine() &&
+    (cursor.isStartOfFile() || (!cursor.isInLineContinuation() && cursor.isStartOfLine() && !cursor.isInCollection()))
+  ) {
     let tokens: Token[] = [];
 
     switch (cursor.compareLastIndentationWith(nextIndentation).scope) {
       case 'indented':
-        cursor.indent();
-        tokens = [createToken('INDENT', 'INDENT', cursor.value(), cursor.startPos(), cursor.endPos())];
-        cursor.pushIndentation(nextIndentation);
+        if (cursor.isStartOfFile() || cursor.isIndentationStaged()) {
+          cursor.indent();
+          tokens = [createToken('INDENT', 'INDENT', cursor.value(), cursor.startPos(), cursor.endPos())];
+          cursor.pushIndentation(nextIndentation);
+        }
         break;
       case 'dedented':
-        if (cursor.isOnBlankLine()) {
-          cursor.resetEndColumn();
-        }
-
         while (cursor.compareLastIndentationWith(nextIndentation).scope === 'dedented') {
           cursor.dedent();
           tokens.push(createToken('DEDENT', 'DEDENT', '', cursor.endPos(), cursor.endPos()));
