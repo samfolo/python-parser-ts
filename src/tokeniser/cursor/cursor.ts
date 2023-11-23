@@ -80,7 +80,7 @@ export const createCursor = (input: string): Cursor => {
 
   const pushIndentation = (nextIndentation: number) => indentationStack.push(nextIndentation);
   const compareLastIndentationWith = (nextIndentation: number): Cursor.CompareIndentationResult => {
-    let prevIndentation = indentationStack.at(-1) ?? 0;
+    const prevIndentation = indentationStack.at(-1) ?? 0;
 
     if (prevIndentation > nextIndentation) {
       return {scope: 'dedented', depth: prevIndentation - nextIndentation};
