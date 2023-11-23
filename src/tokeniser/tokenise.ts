@@ -249,14 +249,18 @@ export const tokenise = (input: string): Token[] => {
         if (cursor.peek() === TOKENS.NEWLINE) {
           cursor.push();
           cursor.newLine();
+          cursor.markLineContinuation();
         } else {
           tokens.push(createToken('ERRORTOKEN', 'ERRORTOKEN', cursor.value(), cursor.startPos(), cursor.endPos()));
         }
         break;
       case TOKENS.NEWLINE:
-        if (!cursor.isInCollection() && !cursor.isOnBlankLine() && cursor.peekBack(2) !== TOKENS.BACKSLASH) {
+        cursor.unmarkLineContinuation();
+
+        if (!cursor.isInCollection() && !cursor.isOnBlankLine()) {
           cursor.markStartOfLogicalLine();
         }
+
         tokens.push(cursor.act(handleNewline));
         cursor.unmarkStartOfLogicalLine();
 
@@ -278,7 +282,9 @@ export const tokenise = (input: string): Token[] => {
         tokens.push(...cursor.act(handleWhitespace));
         break;
       case TOKENS.HASH:
-        cursor.enterComment(cursor.isStartOfLine() || cursor.isOnBlankLine() ? 'leading' : 'trailing');
+        cursor.enterComment(
+          !cursor.isInLineContinuation() && (cursor.isStartOfLine() || cursor.isOnBlankLine()) ? 'leading' : 'trailing'
+        );
         while (cursor.peek() !== TOKENS.NEWLINE && !cursor.isEndOfFile()) {
           cursor.push();
         }

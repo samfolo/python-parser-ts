@@ -85,12 +85,7 @@ describe('tokenise', () => {
   )('$description', ({cases}) => {
     it.each<TestCase>(cases)('it tokenises the input as expected (case $#)', ({input, expected}) => {
       writeFileSync('test.txt', JSON.stringify(tokenise(input), null, 2));
-      try {
-        expect(tokenise(input)).toEqual(expected);
-      } catch (e) {
-        console.log(input);
-        throw e;
-      }
+      expect(tokenise(input)).toEqual(expected);
     });
   });
 });

@@ -19,6 +19,7 @@ export const createCursor = (input: string): Cursor => {
   let collectionScope = 0;
 
   let startOfLogicalLine = false;
+  let inLineContinuation = false;
   let onBlankLine = false;
 
   let commentType: Cursor.CommentType = 'undefined';
@@ -100,6 +101,10 @@ export const createCursor = (input: string): Cursor => {
   const markBlankLine = () => (onBlankLine = true);
   const unmarkBlankLine = () => (onBlankLine = false);
 
+  const isInLineContinuation = () => inLineContinuation;
+  const markLineContinuation = () => (inLineContinuation = true);
+  const unmarkLineContinuation = () => (inLineContinuation = false);
+
   const isInCommentType = (type: Cursor.CommentType) => commentType === type;
   const enterComment = (type: Cursor.CommentType) => (commentType = type);
   const exitComment = () => (commentType = 'undefined');
@@ -139,6 +144,9 @@ export const createCursor = (input: string): Cursor => {
     isOnBlankLine,
     markBlankLine,
     unmarkBlankLine,
+    isInLineContinuation,
+    markLineContinuation,
+    unmarkLineContinuation,
     isInCommentType,
     enterComment,
     exitComment,

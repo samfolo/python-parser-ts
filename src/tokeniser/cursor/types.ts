@@ -42,6 +42,9 @@ export interface Cursor {
   isOnBlankLine: () => boolean;
   markBlankLine: () => void;
   unmarkBlankLine: () => void;
+  isInLineContinuation: () => boolean;
+  markLineContinuation: () => void;
+  unmarkLineContinuation: () => void;
   isInCommentType: (type: Cursor.CommentType) => boolean;
   enterComment: (type: Cursor.CommentType) => void;
   exitComment: () => void;

@@ -4,8 +4,6 @@ import {Token} from '../../types';
 import {Cursor} from '../types';
 
 export const handleWhitespace: Cursor.Action<Token[]> = (cursor) => {
-  const isLineContinuation = cursor.peekBack(2) === TOKENS.NEWLINE && cursor.peekBack(3) === TOKENS.BACKSLASH;
-
   let nextIndentation = 1;
 
   while (cursor.peek() === TOKENS.TAB || cursor.peek() === TOKENS.WHITESPACE) {
@@ -23,8 +21,8 @@ export const handleWhitespace: Cursor.Action<Token[]> = (cursor) => {
   }
 
   if (
-    (cursor.isStartOfFile() && !cursor.isOnBlankLine()) ||
-    (!isLineContinuation && cursor.isStartOfLine() && !cursor.isInCollection() && !cursor.isOnBlankLine())
+    !cursor.isOnBlankLine() &&
+    (cursor.isStartOfFile() || (!cursor.isInLineContinuation() && cursor.isStartOfLine() && !cursor.isInCollection()))
   ) {
     let tokens: Token[] = [];
 
